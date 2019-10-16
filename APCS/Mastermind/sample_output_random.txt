@@ -1,0 +1,32 @@
+Starting with secret 3632
+Solution space contains 1295 possibilities.
+Initial guess is 1122
+
+Tried guess 1122 against secret 3632 => 10
+Removing solutions that have no chance of being correct...
+Solution space now contains 256 possibilities.
+Selecting a random possibility: 5145
+
+Tried guess 5145 against secret 3632 => 0
+Removing solutions that have no chance of being correct...
+Solution space now contains 16 possibilities.
+Selecting a random possibility: 3323
+
+Tried guess 3323 against secret 3632 => 12
+Removing solutions that have no chance of being correct...
+Solution space now contains 2 possibilities.
+Selecting a random possibility: 3632
+
+Tried guess 3632 against secret 3632 => 40
+Solution found after 4 tries
+Done with secret 3632
+
+Codeword comparisons: 1,569
+
+----------
+Playing the game for every possible secret...
+Average number of turns was 4.6466
+Maximum number of turns over all possible secrets was 7 with secret 1111
+Codeword comparisons: 1,981,507
+Elapsed time 0.2743s, average search 0.2117ms
+Done

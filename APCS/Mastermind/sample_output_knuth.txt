@@ -1,0 +1,37 @@
+Starting with secret 3632
+Solution space contains 1295 possibilities.
+Initial guess is 1122
+
+Tried guess 1122 against secret 3632 => 10
+Removing solutions that have no chance of being correct...
+Solution space now contains 256 possibilities.
+Selecting Knuth's best guess: 1344	score: 212
+
+Tried guess 1344 against secret 3632 => 1
+Removing solutions that have no chance of being correct...
+Solution space now contains 44 possibilities.
+Selecting Knuth's best guess: 3526	score: 37
+
+Tried guess 3526 against secret 3632 => 12
+Removing solutions that have no chance of being correct...
+Solution space now contains 7 possibilities.
+Selecting Knuth's best guess: 1462	score: 6
+
+Tried guess 1462 against secret 3632 => 11
+Removing solutions that have no chance of being correct...
+Solution space now contains 1 possibilities.
+Only remainig solution must be correct: 3632
+
+Tried guess 3632 against secret 3632 => 40
+Solution found after 5 tries
+Done with secret 3632
+
+Codeword comparisons: 398,807
+
+----------
+Playing the game for every possible secret...
+Average number of turns was 4.4761
+Maximum number of turns over all possible secrets was 5 with secret 1116
+Codeword comparisons: 391,993,485
+Elapsed time 4.6187s, average search 3.5638ms
+Done
