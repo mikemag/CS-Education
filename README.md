@@ -1,4 +1,4 @@
-# CS-Education
+# CS Education
 
 This is a collection of code and resources developed while volunteering with CS students in high school. It is largely random sample programs and variations of assignments to help both the students and teachers.
 
