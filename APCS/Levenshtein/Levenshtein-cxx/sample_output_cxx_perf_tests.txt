@@ -1,0 +1,37 @@
+'editDistanceBasic': 'dog' -> 'dot' = 1
+'editDistanceBasic': 'dog' -> 'dog' = 0
+'editDistanceBasic': 'Saturday' -> 'Sunday' = 3
+'editDistanceBasic': 'sitting' -> 'kitten' = 3
+'editDistanceStaticArray': 'dog' -> 'dot' = 1
+'editDistanceStaticArray': 'dog' -> 'dog' = 0
+'editDistanceStaticArray': 'Saturday' -> 'Sunday' = 3
+'editDistanceStaticArray': 'sitting' -> 'kitten' = 3
+'editDistanceHoistedLengths': 'dog' -> 'dot' = 1
+'editDistanceHoistedLengths': 'dog' -> 'dog' = 0
+'editDistanceHoistedLengths': 'Saturday' -> 'Sunday' = 3
+'editDistanceHoistedLengths': 'sitting' -> 'kitten' = 3
+'Cheater equal lengths': 'dog' -> 'dot' = 1
+'Cheater equal lengths': 'dog' -> 'dog' = 0
+'Cheater equal lengths': 'dog' -> 'cat' = 2
+'Cheater off by one': 'dog' -> 'dogo' = 1
+'Cheater off by one': 'dog' -> 'doog' = 1
+'Cheater off by one': 'dog' -> 'adog' = 1
+'Cheater off by one': 'dog' -> 'acat' = 3
+'Cheater combined': 'dog' -> 'dot' = 1
+'Cheater combined': 'dog' -> 'dog' = 0
+'Cheater combined': 'Saturday' -> 'Sunday' = 0
+'Cheater combined': 'sitting' -> 'kitten' = 3
+
+Avg time 0.0029us -- Empty func, 'Saturday' -> 'Sunday', elapsed time 1,452.0394ms, 500,000,000 calls
+Avg time 0.0856us -- editDistanceBasic, 'Saturday' -> 'Sunday', elapsed time 2,567.8831ms, 30,000,000 calls
+Avg time 0.0824us -- editDistanceStaticArray, 'Saturday' -> 'Sunday', elapsed time 2,472.6562ms, 30,000,000 calls
+Avg time 0.0842us -- editDistanceHoistedLengths, 'Saturday' -> 'Sunday', elapsed time 2,526.7727ms, 30,000,000 calls
+Avg time 0.0137us -- Cheater equal lengths, 'Saturday' -> 'Satuxday', elapsed time 1,095.5370ms, 80,000,000 calls
+Avg time 0.0217us -- Cheater off by one, 'Saturday' -> 'Saturxday', elapsed time 1,739.2523ms, 80,000,000 calls
+Avg time 0.0241us -- Cheater combined, 'Saturxday' -> 'Saturday', elapsed time 1,927.3948ms, 80,000,000 calls
+
+Loaded 370,102 words from words_alpha.txt
+
+Sorted words in 35.89ms
+
+Done.

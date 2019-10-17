@@ -1,0 +1,852 @@
+'editDistanceBasic': 'dog' -> 'dot' = 1
+'editDistanceBasic': 'dog' -> 'dog' = 0
+'editDistanceBasic': 'Saturday' -> 'Sunday' = 3
+'editDistanceBasic': 'sitting' -> 'kitten' = 3
+'editDistanceStaticArray': 'dog' -> 'dot' = 1
+'editDistanceStaticArray': 'dog' -> 'dog' = 0
+'editDistanceStaticArray': 'Saturday' -> 'Sunday' = 3
+'editDistanceStaticArray': 'sitting' -> 'kitten' = 3
+'editDistanceHoistedLengths': 'dog' -> 'dot' = 1
+'editDistanceHoistedLengths': 'dog' -> 'dog' = 0
+'editDistanceHoistedLengths': 'Saturday' -> 'Sunday' = 3
+'editDistanceHoistedLengths': 'sitting' -> 'kitten' = 3
+'Cheater equal lengths': 'dog' -> 'dot' = 1
+'Cheater equal lengths': 'dog' -> 'dog' = 0
+'Cheater equal lengths': 'dog' -> 'cat' = 2
+'Cheater off by one': 'dog' -> 'dogo' = 1
+'Cheater off by one': 'dog' -> 'doog' = 1
+'Cheater off by one': 'dog' -> 'adog' = 1
+'Cheater off by one': 'dog' -> 'acat' = 3
+'Cheater combined': 'dog' -> 'dot' = 1
+'Cheater combined': 'dog' -> 'dog' = 0
+'Cheater combined': 'Saturday' -> 'Sunday' = 0
+'Cheater combined': 'sitting' -> 'kitten' = 3
+
+Loaded 370,102 words from words_alpha.txt
+
+Sorted words in 37.25ms
+
+Finsihed 'nasa', 2,567m/68,488m (3.75%), 100,172 neighbors
+Elapsed time 1.02s, average time 0.0092us, for 110,904,355 calls
+Estimate 10.08 minutes to go...
+
+Finsihed 'bunch', 4,370m/68,488m (6.38%), 135,329 neighbors
+Elapsed time 2.34s, average time 0.0091us, for 258,515,623 calls
+Estimate 9.69 minutes to go...
+
+Finsihed 'forte', 5,439m/68,488m (7.94%), 152,653 neighbors
+Elapsed time 3.49s, average time 0.0091us, for 384,697,123 calls
+Estimate 9.53 minutes to go...
+
+Finsihed 'licca', 6,500m/68,488m (9.49%), 165,761 neighbors
+Elapsed time 4.55s, average time 0.0091us, for 501,878,623 calls
+Estimate 9.36 minutes to go...
+
+Finsihed 'sculk', 7,901m/68,488m (11.54%), 184,838 neighbors
+Elapsed time 5.84s, average time 0.0091us, for 644,120,623 calls
+Estimate 9.15 minutes to go...
+
+Finsihed 'adenyl', 9,285m/68,488m (13.56%), 200,174 neighbors
+Elapsed time 7.10s, average time 0.0091us, for 783,549,995 calls
+Estimate 8.94 minutes to go...
+
+Finsihed 'bandit', 9,971m/68,488m (14.56%), 204,351 neighbors
+Elapsed time 8.34s, average time 0.0090us, for 924,666,995 calls
+Estimate 8.79 minutes to go...
+
+Finsihed 'cadent', 10,653m/68,488m (15.56%), 211,180 neighbors
+Elapsed time 9.54s, average time 0.0090us, for 1,061,783,995 calls
+Estimate 8.66 minutes to go...
+
+Finsihed 'cowier', 11,332m/68,488m (16.55%), 218,262 neighbors
+Elapsed time 10.70s, average time 0.0090us, for 1,194,900,995 calls
+Estimate 8.53 minutes to go...
+
+Finsihed 'earnie', 12,006m/68,488m (17.53%), 224,336 neighbors
+Elapsed time 11.84s, average time 0.0089us, for 1,324,017,995 calls
+Estimate 8.42 minutes to go...
+
+Finsihed 'frosty', 12,676m/68,488m (18.51%), 229,474 neighbors
+Elapsed time 12.95s, average time 0.0089us, for 1,449,134,995 calls
+Estimate 8.31 minutes to go...
+
+Finsihed 'hieder', 13,342m/68,488m (19.48%), 235,245 neighbors
+Elapsed time 14.01s, average time 0.0089us, for 1,570,251,995 calls
+Estimate 8.20 minutes to go...
+
+Finsihed 'kenton', 14,004m/68,488m (20.45%), 240,023 neighbors
+Elapsed time 15.09s, average time 0.0089us, for 1,687,368,995 calls
+Estimate 8.12 minutes to go...
+
+Finsihed 'mascon', 14,663m/68,488m (21.41%), 245,516 neighbors
+Elapsed time 16.10s, average time 0.0089us, for 1,800,485,995 calls
+Estimate 8.02 minutes to go...
+
+Finsihed 'peewit', 15,642m/68,488m (22.84%), 252,423 neighbors
+Elapsed time 17.55s, average time 0.0089us, for 1,962,661,495 calls
+Estimate 7.88 minutes to go...
+
+Finsihed 'rubbio', 16,613m/68,488m (24.26%), 260,910 neighbors
+Elapsed time 18.93s, average time 0.0089us, for 2,115,836,995 calls
+Estimate 7.74 minutes to go...
+
+Finsihed 'subfeu', 17,575m/68,488m (25.66%), 268,994 neighbors
+Elapsed time 20.24s, average time 0.0090us, for 2,260,012,495 calls
+Estimate 7.60 minutes to go...
+
+Finsihed 'urochs', 18,528m/68,488m (27.05%), 275,199 neighbors
+Elapsed time 21.47s, average time 0.0090us, for 2,395,187,995 calls
+Estimate 7.46 minutes to go...
+
+Finsihed 'anabong', 19,472m/68,488m (28.43%), 279,597 neighbors
+Elapsed time 23.24s, average time 0.0090us, for 2,595,706,375 calls
+Estimate 7.31 minutes to go...
+
+Finsihed 'battled', 20,096m/68,488m (29.34%), 282,479 neighbors
+Elapsed time 24.82s, average time 0.0089us, for 2,778,077,375 calls
+Estimate 7.21 minutes to go...
+
+Finsihed 'brutism', 20,716m/68,488m (30.25%), 286,306 neighbors
+Elapsed time 26.37s, average time 0.0089us, for 2,956,448,375 calls
+Estimate 7.10 minutes to go...
+
+Finsihed 'chrysis', 21,332m/68,488m (31.15%), 290,448 neighbors
+Elapsed time 27.89s, average time 0.0089us, for 3,130,819,375 calls
+Estimate 7.00 minutes to go...
+
+Finsihed 'curiums', 21,944m/68,488m (32.04%), 294,319 neighbors
+Elapsed time 29.37s, average time 0.0089us, for 3,301,190,375 calls
+Estimate 6.90 minutes to go...
+
+Finsihed 'droshky', 22,553m/68,488m (32.93%), 297,939 neighbors
+Elapsed time 30.82s, average time 0.0089us, for 3,467,561,375 calls
+Estimate 6.80 minutes to go...
+
+Finsihed 'farinas', 23,157m/68,488m (33.81%), 300,639 neighbors
+Elapsed time 32.24s, average time 0.0089us, for 3,629,932,375 calls
+Estimate 6.71 minutes to go...
+
+Finsihed 'geobios', 23,757m/68,488m (34.69%), 304,466 neighbors
+Elapsed time 33.63s, average time 0.0089us, for 3,788,303,375 calls
+Estimate 6.62 minutes to go...
+
+Finsihed 'hydrazo', 24,353m/68,488m (35.56%), 307,846 neighbors
+Elapsed time 34.97s, average time 0.0089us, for 3,942,674,375 calls
+Estimate 6.53 minutes to go...
+
+Finsihed 'jibbing', 24,945m/68,488m (36.42%), 310,768 neighbors
+Elapsed time 36.30s, average time 0.0089us, for 4,093,045,375 calls
+Estimate 6.44 minutes to go...
+
+Finsihed 'lobaria', 25,534m/68,488m (37.28%), 313,616 neighbors
+Elapsed time 37.58s, average time 0.0089us, for 4,239,416,375 calls
+Estimate 6.35 minutes to go...
+
+Finsihed 'mobship', 26,118m/68,488m (38.14%), 316,523 neighbors
+Elapsed time 38.83s, average time 0.0089us, for 4,381,787,375 calls
+Estimate 6.26 minutes to go...
+
+Finsihed 'orgiasm', 26,698m/68,488m (38.98%), 318,780 neighbors
+Elapsed time 40.06s, average time 0.0089us, for 4,520,158,375 calls
+Estimate 6.17 minutes to go...
+
+Finsihed 'pillion', 27,274m/68,488m (39.82%), 321,969 neighbors
+Elapsed time 41.25s, average time 0.0089us, for 4,654,529,375 calls
+Estimate 6.09 minutes to go...
+
+Finsihed 'racette', 27,846m/68,488m (40.66%), 324,791 neighbors
+Elapsed time 42.41s, average time 0.0089us, for 4,784,900,375 calls
+Estimate 6.00 minutes to go...
+
+Finsihed 'ruffing', 28,415m/68,488m (41.49%), 328,369 neighbors
+Elapsed time 43.55s, average time 0.0089us, for 4,911,271,375 calls
+Estimate 5.92 minutes to go...
+
+Finsihed 'silvern', 28,979m/68,488m (42.31%), 331,712 neighbors
+Elapsed time 44.66s, average time 0.0089us, for 5,033,642,375 calls
+Estimate 5.84 minutes to go...
+
+Finsihed 'striven', 29,539m/68,488m (43.13%), 335,311 neighbors
+Elapsed time 45.74s, average time 0.0089us, for 5,152,013,375 calls
+Estimate 5.76 minutes to go...
+
+Finsihed 'toddite', 30,095m/68,488m (43.94%), 337,733 neighbors
+Elapsed time 46.78s, average time 0.0089us, for 5,266,384,375 calls
+Estimate 5.68 minutes to go...
+
+Finsihed 'untight', 30,648m/68,488m (44.75%), 340,536 neighbors
+Elapsed time 47.78s, average time 0.0089us, for 5,376,755,375 calls
+Estimate 5.60 minutes to go...
+
+Finsihed 'acropore', 31,468m/68,488m (45.95%), 343,620 neighbors
+Elapsed time 49.40s, average time 0.0089us, for 5,558,415,559 calls
+Estimate 5.48 minutes to go...
+
+Finsihed 'arboured', 32,011m/68,488m (46.74%), 344,999 neighbors
+Elapsed time 51.18s, average time 0.0089us, for 5,765,590,559 calls
+Estimate 5.40 minutes to go...
+
+Finsihed 'bemadden', 32,549m/68,488m (47.52%), 346,922 neighbors
+Elapsed time 52.94s, average time 0.0089us, for 5,968,765,559 calls
+Estimate 5.31 minutes to go...
+
+Finsihed 'bullfice', 33,083m/68,488m (48.30%), 348,797 neighbors
+Elapsed time 54.64s, average time 0.0089us, for 6,167,940,559 calls
+Estimate 5.23 minutes to go...
+
+Finsihed 'chinhwan', 33,613m/68,488m (49.08%), 350,819 neighbors
+Elapsed time 56.34s, average time 0.0089us, for 6,363,115,559 calls
+Estimate 5.15 minutes to go...
+
+Finsihed 'corrente', 34,139m/68,488m (49.85%), 352,925 neighbors
+Elapsed time 57.99s, average time 0.0088us, for 6,554,290,559 calls
+Estimate 5.06 minutes to go...
+
+Finsihed 'devotary', 34,662m/68,488m (50.61%), 355,072 neighbors
+Elapsed time 59.61s, average time 0.0088us, for 6,741,465,559 calls
+Estimate 4.98 minutes to go...
+
+Finsihed 'ellebore', 35,180m/68,488m (51.37%), 356,889 neighbors
+Elapsed time 61.20s, average time 0.0088us, for 6,924,640,559 calls
+Estimate 4.91 minutes to go...
+
+Finsihed 'fellatah', 35,694m/68,488m (52.12%), 358,737 neighbors
+Elapsed time 62.75s, average time 0.0088us, for 7,103,815,559 calls
+Estimate 4.83 minutes to go...
+
+Finsihed 'galopade', 36,204m/68,488m (52.86%), 360,603 neighbors
+Elapsed time 64.26s, average time 0.0088us, for 7,278,990,559 calls
+Estimate 4.75 minutes to go...
+
+Finsihed 'harbinge', 36,710m/68,488m (53.60%), 362,184 neighbors
+Elapsed time 65.75s, average time 0.0088us, for 7,450,165,559 calls
+Estimate 4.67 minutes to go...
+
+Finsihed 'indamins', 37,213m/68,488m (54.33%), 363,903 neighbors
+Elapsed time 67.21s, average time 0.0088us, for 7,617,340,559 calls
+Estimate 4.60 minutes to go...
+
+Finsihed 'lacrimal', 37,711m/68,488m (55.06%), 365,449 neighbors
+Elapsed time 68.63s, average time 0.0088us, for 7,780,515,559 calls
+Estimate 4.52 minutes to go...
+
+Finsihed 'manorial', 38,205m/68,488m (55.78%), 367,245 neighbors
+Elapsed time 70.02s, average time 0.0088us, for 7,939,690,559 calls
+Estimate 4.45 minutes to go...
+
+Finsihed 'motorise', 38,695m/68,488m (56.50%), 368,889 neighbors
+Elapsed time 71.39s, average time 0.0088us, for 8,094,865,559 calls
+Estimate 4.38 minutes to go...
+
+Finsihed 'orphreys', 39,181m/68,488m (57.21%), 370,270 neighbors
+Elapsed time 72.74s, average time 0.0088us, for 8,246,040,559 calls
+Estimate 4.31 minutes to go...
+
+Finsihed 'pelvises', 39,664m/68,488m (57.91%), 372,460 neighbors
+Elapsed time 74.05s, average time 0.0088us, for 8,393,215,559 calls
+Estimate 4.24 minutes to go...
+
+Finsihed 'preaxiad', 40,142m/68,488m (58.61%), 374,119 neighbors
+Elapsed time 75.31s, average time 0.0088us, for 8,536,390,559 calls
+Estimate 4.17 minutes to go...
+
+Finsihed 'redating', 40,616m/68,488m (59.30%), 375,910 neighbors
+Elapsed time 76.56s, average time 0.0088us, for 8,675,565,559 calls
+Estimate 4.10 minutes to go...
+
+Finsihed 'saibling', 41,086m/68,488m (59.99%), 377,943 neighbors
+Elapsed time 77.77s, average time 0.0088us, for 8,810,740,559 calls
+Estimate 4.03 minutes to go...
+
+Finsihed 'shrublet', 41,552m/68,488m (60.67%), 379,920 neighbors
+Elapsed time 78.95s, average time 0.0088us, for 8,941,915,559 calls
+Estimate 3.96 minutes to go...
+
+Finsihed 'spooning', 42,015m/68,488m (61.35%), 381,859 neighbors
+Elapsed time 80.09s, average time 0.0088us, for 9,069,090,559 calls
+Estimate 3.90 minutes to go...
+
+Finsihed 'taltarum', 42,473m/68,488m (62.02%), 383,627 neighbors
+Elapsed time 81.21s, average time 0.0088us, for 9,192,265,559 calls
+Estimate 3.83 minutes to go...
+
+Finsihed 'trilloes', 42,927m/68,488m (62.68%), 385,113 neighbors
+Elapsed time 82.29s, average time 0.0088us, for 9,311,440,559 calls
+Estimate 3.76 minutes to go...
+
+Finsihed 'unricked', 43,377m/68,488m (63.34%), 387,783 neighbors
+Elapsed time 83.34s, average time 0.0088us, for 9,426,615,559 calls
+Estimate 3.70 minutes to go...
+
+Finsihed 'watthour', 43,823m/68,488m (63.99%), 389,516 neighbors
+Elapsed time 84.34s, average time 0.0088us, for 9,537,790,559 calls
+Estimate 3.64 minutes to go...
+
+Finsihed 'afterbody', 44,266m/68,488m (64.63%), 390,791 neighbors
+Elapsed time 85.60s, average time 0.0088us, for 9,682,351,239 calls
+Estimate 3.57 minutes to go...
+
+Finsihed 'argumenta', 44,704m/68,488m (65.27%), 391,733 neighbors
+Elapsed time 87.29s, average time 0.0088us, for 9,877,270,239 calls
+Estimate 3.50 minutes to go...
+
+Finsihed 'bescatter', 45,138m/68,488m (65.91%), 392,770 neighbors
+Elapsed time 88.92s, average time 0.0088us, for 10,068,189,239 calls
+Estimate 3.44 minutes to go...
+
+Finsihed 'calypsist', 45,568m/68,488m (66.53%), 393,795 neighbors
+Elapsed time 90.51s, average time 0.0088us, for 10,255,108,239 calls
+Estimate 3.37 minutes to go...
+
+Finsihed 'cystaster', 45,994m/68,488m (67.16%), 394,976 neighbors
+Elapsed time 92.09s, average time 0.0088us, for 10,438,027,239 calls
+Estimate 3.31 minutes to go...
+
+Finsihed 'crankling', 46,417m/68,488m (67.77%), 396,134 neighbors
+Elapsed time 93.62s, average time 0.0088us, for 10,616,946,239 calls
+Estimate 3.24 minutes to go...
+
+Finsihed 'dictatrix', 46,835m/68,488m (68.38%), 397,338 neighbors
+Elapsed time 95.13s, average time 0.0088us, for 10,791,865,239 calls
+Estimate 3.18 minutes to go...
+
+Finsihed 'empicture', 47,249m/68,488m (68.99%), 398,371 neighbors
+Elapsed time 96.60s, average time 0.0088us, for 10,962,784,239 calls
+Estimate 3.12 minutes to go...
+
+Finsihed 'feynesses', 47,659m/68,488m (69.59%), 399,603 neighbors
+Elapsed time 98.05s, average time 0.0088us, for 11,129,703,239 calls
+Estimate 3.06 minutes to go...
+
+Finsihed 'genocidal', 48,065m/68,488m (70.18%), 400,621 neighbors
+Elapsed time 99.45s, average time 0.0088us, for 11,292,622,239 calls
+Estimate 3.00 minutes to go...
+
+Finsihed 'hemogenic', 48,468m/68,488m (70.77%), 401,566 neighbors
+Elapsed time 100.82s, average time 0.0088us, for 11,451,541,239 calls
+Estimate 2.94 minutes to go...
+
+Finsihed 'inflators', 48,866m/68,488m (71.35%), 402,716 neighbors
+Elapsed time 102.16s, average time 0.0088us, for 11,606,460,239 calls
+Estimate 2.88 minutes to go...
+
+Finsihed 'landslide', 49,260m/68,488m (71.93%), 403,735 neighbors
+Elapsed time 103.48s, average time 0.0088us, for 11,757,379,239 calls
+Estimate 2.82 minutes to go...
+
+Finsihed 'mealberry', 49,650m/68,488m (72.50%), 404,763 neighbors
+Elapsed time 104.75s, average time 0.0088us, for 11,904,298,239 calls
+Estimate 2.76 minutes to go...
+
+Finsihed 'mucidness', 50,036m/68,488m (73.06%), 405,790 neighbors
+Elapsed time 106.00s, average time 0.0088us, for 12,047,217,239 calls
+Estimate 2.71 minutes to go...
+
+Finsihed 'openworks', 50,419m/68,488m (73.62%), 406,563 neighbors
+Elapsed time 107.22s, average time 0.0088us, for 12,186,136,239 calls
+Estimate 2.65 minutes to go...
+
+Finsihed 'partisans', 50,797m/68,488m (74.17%), 407,748 neighbors
+Elapsed time 108.41s, average time 0.0088us, for 12,321,055,239 calls
+Estimate 2.59 minutes to go...
+
+Finsihed 'pointways', 51,171m/68,488m (74.72%), 408,722 neighbors
+Elapsed time 109.58s, average time 0.0088us, for 12,451,974,239 calls
+Estimate 2.54 minutes to go...
+
+Finsihed 'punctuate', 51,541m/68,488m (75.26%), 409,843 neighbors
+Elapsed time 110.71s, average time 0.0088us, for 12,578,893,239 calls
+Estimate 2.49 minutes to go...
+
+Finsihed 'resolvers', 51,907m/68,488m (75.79%), 411,347 neighbors
+Elapsed time 111.80s, average time 0.0088us, for 12,701,812,239 calls
+Estimate 2.43 minutes to go...
+
+Finsihed 'seatworks', 52,270m/68,488m (76.32%), 412,360 neighbors
+Elapsed time 112.87s, average time 0.0088us, for 12,820,731,239 calls
+Estimate 2.38 minutes to go...
+
+Finsihed 'sniveling', 52,628m/68,488m (76.84%), 413,322 neighbors
+Elapsed time 113.90s, average time 0.0088us, for 12,935,650,239 calls
+Estimate 2.33 minutes to go...
+
+Finsihed 'tamanduas', 53,158m/68,488m (77.62%), 414,669 neighbors
+Elapsed time 115.38s, average time 0.0088us, for 13,100,528,739 calls
+Estimate 2.25 minutes to go...
+
+Finsihed 'uncolored', 53,678m/68,488m (78.38%), 416,000 neighbors
+Elapsed time 116.79s, average time 0.0088us, for 13,256,407,239 calls
+Estimate 2.17 minutes to go...
+
+Finsihed 'violacean', 54,190m/68,488m (79.12%), 417,964 neighbors
+Elapsed time 118.14s, average time 0.0088us, for 13,403,285,739 calls
+Estimate 2.10 minutes to go...
+
+Finsihed 'amphichrom', 54,693m/68,488m (79.86%), 419,092 neighbors
+Elapsed time 119.80s, average time 0.0088us, for 13,594,206,846 calls
+Estimate 2.03 minutes to go...
+
+Finsihed 'balconette', 55,023m/68,488m (80.34%), 419,798 neighbors
+Elapsed time 121.19s, average time 0.0088us, for 13,756,203,846 calls
+Estimate 1.98 minutes to go...
+
+Finsihed 'caedmonian', 55,349m/68,488m (80.82%), 420,521 neighbors
+Elapsed time 122.53s, average time 0.0088us, for 13,914,200,846 calls
+Estimate 1.93 minutes to go...
+
+Finsihed 'clintonite', 55,672m/68,488m (81.29%), 421,369 neighbors
+Elapsed time 123.85s, average time 0.0088us, for 14,068,197,846 calls
+Estimate 1.88 minutes to go...
+
+Finsihed 'curmudgeon', 55,990m/68,488m (81.75%), 422,201 neighbors
+Elapsed time 125.16s, average time 0.0088us, for 14,218,194,846 calls
+Estimate 1.83 minutes to go...
+
+Finsihed 'distrusted', 56,304m/68,488m (82.21%), 423,300 neighbors
+Elapsed time 126.42s, average time 0.0088us, for 14,364,191,846 calls
+Estimate 1.79 minutes to go...
+
+Finsihed 'evanescent', 56,614m/68,488m (82.66%), 424,142 neighbors
+Elapsed time 127.64s, average time 0.0088us, for 14,506,188,846 calls
+Estimate 1.74 minutes to go...
+
+Finsihed 'garnetwork', 56,920m/68,488m (83.11%), 424,907 neighbors
+Elapsed time 128.82s, average time 0.0088us, for 14,644,185,846 calls
+Estimate 1.70 minutes to go...
+
+Finsihed 'hillhousia', 57,223m/68,488m (83.55%), 425,667 neighbors
+Elapsed time 129.98s, average time 0.0088us, for 14,778,182,846 calls
+Estimate 1.65 minutes to go...
+
+Finsihed 'intermalar', 57,521m/68,488m (83.99%), 426,633 neighbors
+Elapsed time 131.10s, average time 0.0088us, for 14,908,179,846 calls
+Estimate 1.61 minutes to go...
+
+Finsihed 'longimetry', 57,815m/68,488m (84.42%), 427,366 neighbors
+Elapsed time 132.19s, average time 0.0088us, for 15,034,176,846 calls
+Estimate 1.56 minutes to go...
+
+Finsihed 'mythiciser', 58,105m/68,488m (84.84%), 428,096 neighbors
+Elapsed time 133.26s, average time 0.0088us, for 15,156,173,846 calls
+Estimate 1.52 minutes to go...
+
+Finsihed 'nutriments', 58,392m/68,488m (85.26%), 428,702 neighbors
+Elapsed time 134.29s, average time 0.0088us, for 15,274,170,846 calls
+Estimate 1.48 minutes to go...
+
+Finsihed 'pantagraph', 58,674m/68,488m (85.67%), 429,438 neighbors
+Elapsed time 135.29s, average time 0.0088us, for 15,388,167,846 calls
+Estimate 1.44 minutes to go...
+
+Finsihed 'predestiny', 59,090m/68,488m (86.28%), 430,577 neighbors
+Elapsed time 136.75s, average time 0.0088us, for 15,551,663,346 calls
+Estimate 1.38 minutes to go...
+
+Finsihed 'restringer', 59,496m/68,488m (86.87%), 432,094 neighbors
+Elapsed time 138.13s, average time 0.0088us, for 15,706,158,846 calls
+Estimate 1.32 minutes to go...
+
+Finsihed 'soberingly', 59,894m/68,488m (87.45%), 433,115 neighbors
+Elapsed time 139.43s, average time 0.0088us, for 15,851,654,346 calls
+Estimate 1.26 minutes to go...
+
+Finsihed 'tetraodont', 60,283m/68,488m (88.02%), 434,060 neighbors
+Elapsed time 140.65s, average time 0.0088us, for 15,988,149,846 calls
+Estimate 1.20 minutes to go...
+
+Finsihed 'ungenerate', 60,663m/68,488m (88.57%), 435,125 neighbors
+Elapsed time 141.82s, average time 0.0088us, for 16,115,645,346 calls
+Estimate 1.15 minutes to go...
+
+Finsihed 'windfishes', 61,034m/68,488m (89.12%), 436,119 neighbors
+Elapsed time 142.90s, average time 0.0088us, for 16,234,140,846 calls
+Estimate 1.09 minutes to go...
+
+Finsihed 'antennarius', 61,276m/68,488m (89.47%), 436,700 neighbors
+Elapsed time 143.92s, average time 0.0088us, for 16,353,021,012 calls
+Estimate 1.06 minutes to go...
+
+Finsihed 'blessedness', 61,514m/68,488m (89.82%), 437,148 neighbors
+Elapsed time 145.02s, average time 0.0088us, for 16,481,270,012 calls
+Estimate 1.02 minutes to go...
+
+Finsihed 'cyclotomies', 61,748m/68,488m (90.16%), 437,718 neighbors
+Elapsed time 146.07s, average time 0.0088us, for 16,605,519,012 calls
+Estimate 0.99 minutes to go...
+
+Finsihed 'culturology', 61,978m/68,488m (90.50%), 438,388 neighbors
+Elapsed time 147.11s, average time 0.0088us, for 16,725,768,012 calls
+Estimate 0.95 minutes to go...
+
+Finsihed 'ethanethial', 62,316m/68,488m (90.99%), 439,515 neighbors
+Elapsed time 148.59s, average time 0.0088us, for 16,898,641,512 calls
+Estimate 0.90 minutes to go...
+
+Finsihed 'hydrobromid', 62,645m/68,488m (91.47%), 440,378 neighbors
+Elapsed time 150.00s, average time 0.0088us, for 17,062,515,012 calls
+Estimate 0.86 minutes to go...
+
+Finsihed 'laryngalgia', 62,965m/68,488m (91.94%), 441,445 neighbors
+Elapsed time 151.35s, average time 0.0088us, for 17,217,388,512 calls
+Estimate 0.81 minutes to go...
+
+Finsihed 'neurotomist', 63,276m/68,488m (92.39%), 442,278 neighbors
+Elapsed time 152.62s, average time 0.0088us, for 17,363,262,012 calls
+Estimate 0.76 minutes to go...
+
+Finsihed 'partisanism', 63,577m/68,488m (92.83%), 442,976 neighbors
+Elapsed time 153.82s, average time 0.0088us, for 17,500,135,512 calls
+Estimate 0.72 minutes to go...
+
+Finsihed 'processions', 63,870m/68,488m (93.26%), 443,804 neighbors
+Elapsed time 154.96s, average time 0.0088us, for 17,628,009,012 calls
+Estimate 0.68 minutes to go...
+
+Finsihed 'scyphostoma', 64,154m/68,488m (93.67%), 444,869 neighbors
+Elapsed time 156.02s, average time 0.0088us, for 17,746,882,512 calls
+Estimate 0.64 minutes to go...
+
+Finsihed 'surianaceae', 64,429m/68,488m (94.07%), 445,602 neighbors
+Elapsed time 157.02s, average time 0.0088us, for 17,856,756,012 calls
+Estimate 0.59 minutes to go...
+
+Finsihed 'unprolonged', 64,781m/68,488m (94.59%), 446,550 neighbors
+Elapsed time 158.23s, average time 0.0088us, for 17,989,254,012 calls
+Estimate 0.54 minutes to go...
+
+Finsihed 'backcourtman', 65,118m/68,488m (95.08%), 447,357 neighbors
+Elapsed time 159.61s, average time 0.0088us, for 18,147,681,900 calls
+Estimate 0.49 minutes to go...
+
+Finsihed 'countersense', 65,359m/68,488m (95.43%), 448,061 neighbors
+Elapsed time 160.80s, average time 0.0088us, for 18,287,387,400 calls
+Estimate 0.46 minutes to go...
+
+Finsihed 'extraversion', 65,592m/68,488m (95.77%), 448,953 neighbors
+Elapsed time 161.92s, average time 0.0088us, for 18,418,092,900 calls
+Estimate 0.42 minutes to go...
+
+Finsihed 'inexactitude', 65,816m/68,488m (96.10%), 449,761 neighbors
+Elapsed time 162.97s, average time 0.0088us, for 18,539,798,400 calls
+Estimate 0.39 minutes to go...
+
+Finsihed 'nonexactable', 66,100m/68,488m (96.51%), 450,703 neighbors
+Elapsed time 164.25s, average time 0.0088us, for 18,688,072,400 calls
+Estimate 0.35 minutes to go...
+
+Finsihed 'predifferent', 66,369m/68,488m (96.91%), 451,434 neighbors
+Elapsed time 165.42s, average time 0.0088us, for 18,820,346,400 calls
+Estimate 0.31 minutes to go...
+
+Finsihed 'sphygmometer', 66,621m/68,488m (97.27%), 452,452 neighbors
+Elapsed time 166.46s, average time 0.0088us, for 18,936,620,400 calls
+Estimate 0.27 minutes to go...
+
+Finsihed 'unsignifying', 66,914m/68,488m (97.70%), 453,307 neighbors
+Elapsed time 167.58s, average time 0.0088us, for 19,059,462,900 calls
+Estimate 0.23 minutes to go...
+
+Finsihed 'comparability', 67,131m/68,488m (98.02%), 453,894 neighbors
+Elapsed time 168.63s, average time 0.0088us, for 19,180,426,548 calls
+Estimate 0.20 minutes to go...
+
+Finsihed 'horrification', 67,331m/68,488m (98.31%), 454,719 neighbors
+Elapsed time 169.66s, average time 0.0088us, for 19,301,292,548 calls
+Estimate 0.17 minutes to go...
+
+Finsihed 'oversorrowful', 67,559m/68,488m (98.64%), 455,664 neighbors
+Elapsed time 170.79s, average time 0.0088us, for 19,429,875,048 calls
+Estimate 0.14 minutes to go...
+
+Finsihed 'thermosetting', 67,800m/68,488m (99.00%), 456,782 neighbors
+Elapsed time 171.88s, average time 0.0088us, for 19,551,174,048 calls
+Estimate 0.10 minutes to go...
+
+Finsihed 'hemiparasitism', 68,035m/68,488m (99.34%), 457,837 neighbors
+Elapsed time 173.03s, average time 0.0088us, for 19,681,972,020 calls
+Estimate 0.07 minutes to go...
+
+Finsihed 'tessaraphthong', 68,244m/68,488m (99.64%), 459,019 neighbors
+Elapsed time 174.09s, average time 0.0088us, for 19,802,472,020 calls
+Estimate 0.04 minutes to go...
+
+Finsihed 'discriminatingly', 68,437m/68,488m (99.93%), 460,379 neighbors
+Elapsed time 175.11s, average time 0.0088us, for 19,916,705,754 calls
+Estimate 0.01 minutes to go...
+
+Skipped 48,537,936,811 checks
+Done.
+Elapsed time 175.40s, average loop time 0.0088us, for 19,949,993,438 calls and 461,213 total neighbors
+
+229751 total words with any neighbors
+Min/avg/max word size: 1/8.38/24
+Min/avg/max neighbor count: 1/4.01/88
+
+Find path from 'dog' to 'cat'
+Shortest path lengths: 3
+digraph dog_cat_3{concentrate=true;
+dog -> cog -> cag -> cat
+dog -> cog -> cot -> cat
+dog -> dag -> cag -> cat
+dog -> dag -> dat -> cat
+dog -> dot -> cot -> cat
+dog -> dot -> dat -> cat
+}
+Done 2.10ms, considered 1,205 words for 6 total minimum paths
+
+Find path from 'dog' to 'smart'
+Shortest path lengths: 5
+digraph dog_smart_5{concentrate=true;
+dog -> dag -> dar -> mar -> mart -> smart
+dog -> dag -> dar -> sar -> sart -> smart
+dog -> dag -> dar -> dart -> mart -> smart
+dog -> dag -> dar -> dart -> sart -> smart
+dog -> dag -> dat -> mat -> mart -> smart
+dog -> dag -> dat -> sat -> sart -> smart
+dog -> dag -> dat -> dart -> mart -> smart
+dog -> dag -> dat -> dart -> sart -> smart
+dog -> dag -> mag -> mar -> mart -> smart
+dog -> dag -> mag -> mat -> mart -> smart
+dog -> dag -> mag -> marg -> mart -> smart
+dog -> dag -> sag -> sar -> sart -> smart
+dog -> dag -> sag -> sat -> sart -> smart
+dog -> dag -> darg -> dart -> mart -> smart
+dog -> dag -> darg -> dart -> sart -> smart
+dog -> dag -> darg -> marg -> mart -> smart
+dog -> dor -> dar -> mar -> mart -> smart
+dog -> dor -> dar -> sar -> sart -> smart
+dog -> dor -> dar -> dart -> mart -> smart
+dog -> dor -> dar -> dart -> sart -> smart
+dog -> dor -> mor -> mar -> mart -> smart
+dog -> dor -> mor -> mort -> mart -> smart
+dog -> dor -> dort -> dart -> mart -> smart
+dog -> dor -> dort -> dart -> sart -> smart
+dog -> dor -> dort -> mort -> mart -> smart
+dog -> dor -> dort -> sort -> sart -> smart
+dog -> dot -> dat -> mat -> mart -> smart
+dog -> dot -> dat -> sat -> sart -> smart
+dog -> dot -> dat -> dart -> mart -> smart
+dog -> dot -> dat -> dart -> sart -> smart
+dog -> dot -> mot -> mat -> mart -> smart
+dog -> dot -> mot -> mort -> mart -> smart
+dog -> dot -> sot -> sat -> sart -> smart
+dog -> dot -> sot -> sort -> sart -> smart
+dog -> dot -> dort -> dart -> mart -> smart
+dog -> dot -> dort -> dart -> sart -> smart
+dog -> dot -> dort -> mort -> mart -> smart
+dog -> dot -> dort -> sort -> sart -> smart
+dog -> mog -> mag -> mar -> mart -> smart
+dog -> mog -> mag -> mat -> mart -> smart
+dog -> mog -> mag -> marg -> mart -> smart
+dog -> mog -> mor -> mar -> mart -> smart
+dog -> mog -> mor -> mort -> mart -> smart
+dog -> mog -> mot -> mat -> mart -> smart
+dog -> mog -> mot -> mort -> mart -> smart
+dog -> mog -> morg -> marg -> mart -> smart
+dog -> mog -> morg -> mort -> mart -> smart
+dog -> sog -> sag -> sar -> sart -> smart
+dog -> sog -> sag -> sat -> sart -> smart
+dog -> sog -> sot -> sat -> sart -> smart
+dog -> sog -> sot -> sort -> sart -> smart
+}
+Done 96.64ms, considered 117,969 words for 51 total minimum paths
+
+Find path from 'dog' to 'quack'
+Shortest path lengths: 7
+digraph dog_quack_7{concentrate=true;
+dog -> dg -> du -> qu -> qua -> quar -> quark -> quack
+dog -> dg -> du -> qu -> qua -> quaw -> quawk -> quack
+dog -> do -> du -> qu -> qua -> quar -> quark -> quack
+dog -> do -> du -> qu -> qua -> quaw -> quawk -> quack
+dog -> do -> duo -> quo -> qua -> quar -> quark -> quack
+dog -> do -> duo -> quo -> qua -> quaw -> quawk -> quack
+dog -> do -> duo -> quo -> quor -> quar -> quark -> quack
+dog -> bog -> boc -> bock -> bick -> buick -> quick -> quack
+dog -> bog -> boc -> bock -> buck -> buick -> quick -> quack
+dog -> dag -> dad -> duad -> quad -> quar -> quark -> quack
+dog -> dag -> dad -> duad -> quad -> quaw -> quawk -> quack
+dog -> dag -> dal -> dual -> qual -> quar -> quark -> quack
+dog -> dag -> dal -> dual -> qual -> quaw -> quawk -> quack
+dog -> dag -> dal -> dual -> qual -> quarl -> quark -> quack
+dog -> dag -> dan -> duan -> quan -> quar -> quark -> quack
+dog -> dag -> dan -> duan -> quan -> quaw -> quawk -> quack
+dog -> dag -> dar -> gar -> guar -> quar -> quark -> quack
+dog -> dag -> dat -> qat -> quat -> quar -> quark -> quack
+dog -> dag -> dat -> qat -> quat -> quaw -> quawk -> quack
+dog -> dag -> dat -> qat -> quat -> quart -> quark -> quack
+dog -> dag -> gag -> gar -> guar -> quar -> quark -> quack
+dog -> doa -> goa -> goar -> guar -> quar -> quark -> quack
+dog -> doa -> koa -> kua -> qua -> quar -> quark -> quack
+dog -> doa -> koa -> kua -> qua -> quaw -> quawk -> quack
+dog -> doa -> koa -> kua -> kuar -> quar -> quark -> quack
+dog -> doa -> poa -> pua -> qua -> quar -> quark -> quack
+dog -> doa -> poa -> pua -> qua -> quaw -> quawk -> quack
+dog -> doa -> toa -> tua -> qua -> quar -> quark -> quack
+dog -> doa -> toa -> tua -> qua -> quaw -> quawk -> quack
+dog -> doc -> boc -> bock -> bick -> buick -> quick -> quack
+dog -> doc -> boc -> bock -> buck -> buick -> quick -> quack
+dog -> doc -> duc -> duck -> buck -> buick -> quick -> quack
+dog -> doc -> dock -> bock -> bick -> buick -> quick -> quack
+dog -> doc -> dock -> bock -> buck -> buick -> quick -> quack
+dog -> doc -> dock -> dick -> bick -> buick -> quick -> quack
+dog -> doc -> dock -> duck -> buck -> buick -> quick -> quack
+dog -> dod -> dad -> duad -> quad -> quar -> quark -> quack
+dog -> dod -> dad -> duad -> quad -> quaw -> quawk -> quack
+dog -> dod -> dud -> duad -> quad -> quar -> quark -> quack
+dog -> dod -> dud -> duad -> quad -> quaw -> quawk -> quack
+dog -> doe -> due -> que -> qua -> quar -> quark -> quack
+dog -> doe -> due -> que -> qua -> quaw -> quawk -> quack
+dog -> doe -> due -> que -> quae -> quar -> quark -> quack
+dog -> doe -> due -> que -> quae -> quaw -> quawk -> quack
+dog -> doe -> due -> que -> quae -> quare -> quark -> quack
+dog -> dol -> dal -> dual -> qual -> quar -> quark -> quack
+dog -> dol -> dal -> dual -> qual -> quaw -> quawk -> quack
+dog -> dol -> dal -> dual -> qual -> quarl -> quark -> quack
+dog -> don -> dan -> duan -> quan -> quar -> quark -> quack
+dog -> don -> dan -> duan -> quan -> quaw -> quawk -> quack
+dog -> don -> dun -> duan -> quan -> quar -> quark -> quack
+dog -> don -> dun -> duan -> quan -> quaw -> quawk -> quack
+dog -> doo -> duo -> quo -> qua -> quar -> quark -> quack
+dog -> doo -> duo -> quo -> qua -> quaw -> quawk -> quack
+dog -> doo -> duo -> quo -> quor -> quar -> quark -> quack
+dog -> dor -> dar -> gar -> guar -> quar -> quark -> quack
+dog -> dor -> dur -> gur -> guar -> quar -> quark -> quack
+dog -> dor -> gor -> gar -> guar -> quar -> quark -> quack
+dog -> dor -> gor -> gur -> guar -> quar -> quark -> quack
+dog -> dor -> gor -> goar -> guar -> quar -> quark -> quack
+dog -> dos -> duos -> quos -> quor -> quar -> quark -> quack
+dog -> dot -> dat -> qat -> quat -> quar -> quark -> quack
+dog -> dot -> dat -> qat -> quat -> quaw -> quawk -> quack
+dog -> dot -> dat -> qat -> quat -> quart -> quark -> quack
+dog -> dug -> du -> qu -> qua -> quar -> quark -> quack
+dog -> dug -> du -> qu -> qua -> quaw -> quawk -> quack
+dog -> dug -> duc -> duck -> buck -> buick -> quick -> quack
+dog -> dug -> dud -> duad -> quad -> quar -> quark -> quack
+dog -> dug -> dud -> duad -> quad -> quaw -> quawk -> quack
+dog -> dug -> due -> que -> qua -> quar -> quark -> quack
+dog -> dug -> due -> que -> qua -> quaw -> quawk -> quack
+dog -> dug -> due -> que -> quae -> quar -> quark -> quack
+dog -> dug -> due -> que -> quae -> quaw -> quawk -> quack
+dog -> dug -> due -> que -> quae -> quare -> quark -> quack
+dog -> dug -> dui -> qui -> qua -> quar -> quark -> quack
+dog -> dug -> dui -> qui -> qua -> quaw -> quawk -> quack
+dog -> dug -> dui -> qui -> quai -> quar -> quark -> quack
+dog -> dug -> dui -> qui -> quai -> quaw -> quawk -> quack
+dog -> dug -> dui -> qui -> quia -> quica -> quick -> quack
+dog -> dug -> dui -> qui -> quin -> quink -> quick -> quack
+dog -> dug -> dun -> duan -> quan -> quar -> quark -> quack
+dog -> dug -> dun -> duan -> quan -> quaw -> quawk -> quack
+dog -> dug -> duo -> quo -> qua -> quar -> quark -> quack
+dog -> dug -> duo -> quo -> qua -> quaw -> quawk -> quack
+dog -> dug -> duo -> quo -> quor -> quar -> quark -> quack
+dog -> dug -> dur -> gur -> guar -> quar -> quark -> quack
+dog -> dug -> pug -> pua -> qua -> quar -> quark -> quack
+dog -> dug -> pug -> pua -> qua -> quaw -> quawk -> quack
+dog -> dug -> rug -> rua -> qua -> quar -> quark -> quack
+dog -> dug -> rug -> rua -> qua -> quaw -> quawk -> quack
+dog -> dug -> tug -> tua -> qua -> quar -> quark -> quack
+dog -> dug -> tug -> tua -> qua -> quaw -> quawk -> quack
+dog -> dug -> dung -> qung -> quag -> quar -> quark -> quack
+dog -> dug -> dung -> qung -> quag -> quaw -> quawk -> quack
+dog -> gog -> gag -> gar -> guar -> quar -> quark -> quack
+dog -> gog -> goa -> goar -> guar -> quar -> quark -> quack
+dog -> gog -> gor -> gar -> guar -> quar -> quark -> quack
+dog -> gog -> gor -> gur -> guar -> quar -> quark -> quack
+dog -> gog -> gor -> goar -> guar -> quar -> quark -> quack
+dog -> rog -> rug -> rua -> qua -> quar -> quark -> quack
+dog -> rog -> rug -> rua -> qua -> quaw -> quawk -> quack
+dog -> tog -> toa -> tua -> qua -> quar -> quark -> quack
+dog -> tog -> toa -> tua -> qua -> quaw -> quawk -> quack
+dog -> tog -> tug -> tua -> qua -> quar -> quark -> quack
+dog -> tog -> tug -> tua -> qua -> quaw -> quawk -> quack
+dog -> dong -> dung -> qung -> quag -> quar -> quark -> quack
+dog -> dong -> dung -> qung -> quag -> quaw -> quawk -> quack
+}
+Done 638.24ms, considered 1,189,098 words for 107 total minimum paths
+
+Find path from 'angerly' to 'invaded'
+Done 0.21ms, considered 4 words for 0 total minimum paths
+
+Find path from 'vulgates' to 'gumwood'
+Done 884.19ms, considered 2,545,869 words for 0 total minimum paths
+
+Find path from 'sweetly' to 'raddles'
+Shortest path lengths: 10
+digraph sweetly_raddles_10{concentrate=true;
+sweetly -> sweety -> sweet -> weet -> reet -> reed -> reded -> redded -> radded -> raddled -> raddles
+sweetly -> sweety -> sweet -> weet -> reet -> reed -> reded -> redded -> reddled -> raddled -> raddles
+sweetly -> sweety -> sweet -> weet -> reet -> reed -> reded -> redded -> reddled -> reddles -> raddles
+sweetly -> sweety -> sweet -> weet -> weed -> reed -> reded -> redded -> radded -> raddled -> raddles
+sweetly -> sweety -> sweet -> weet -> weed -> reed -> reded -> redded -> reddled -> raddled -> raddles
+sweetly -> sweety -> sweet -> weet -> weed -> reed -> reded -> redded -> reddled -> reddles -> raddles
+sweetly -> sweety -> sweet -> weet -> weer -> waer -> wader -> wadder -> waddler -> waddles -> raddles
+sweetly -> sweety -> sweet -> weet -> wees -> pees -> peles -> pales -> padles -> paddles -> raddles
+sweetly -> sweety -> sweet -> weet -> wees -> waes -> wades -> wadies -> waddies -> waddles -> raddles
+sweetly -> sweety -> sweet -> weet -> wees -> waes -> wales -> pales -> padles -> paddles -> raddles
+sweetly -> sweety -> sweet -> sleet -> slee -> alee -> ales -> pales -> padles -> paddles -> raddles
+sweetly -> sweety -> sweet -> sweer -> weer -> waer -> wader -> wadder -> waddler -> waddles -> raddles
+sweetly -> sweety -> weety -> weet -> reet -> reed -> reded -> redded -> radded -> raddled -> raddles
+sweetly -> sweety -> weety -> weet -> reet -> reed -> reded -> redded -> reddled -> raddled -> raddles
+sweetly -> sweety -> weety -> weet -> reet -> reed -> reded -> redded -> reddled -> reddles -> raddles
+sweetly -> sweety -> weety -> weet -> weed -> reed -> reded -> redded -> radded -> raddled -> raddles
+sweetly -> sweety -> weety -> weet -> weed -> reed -> reded -> redded -> reddled -> raddled -> raddles
+sweetly -> sweety -> weety -> weet -> weed -> reed -> reded -> redded -> reddled -> reddles -> raddles
+sweetly -> sweety -> weety -> weet -> weer -> waer -> wader -> wadder -> waddler -> waddles -> raddles
+sweetly -> sweety -> weety -> weet -> wees -> pees -> peles -> pales -> padles -> paddles -> raddles
+sweetly -> sweety -> weety -> weet -> wees -> waes -> wades -> wadies -> waddies -> waddles -> raddles
+sweetly -> sweety -> weety -> weet -> wees -> waes -> wales -> pales -> padles -> paddles -> raddles
+sweetly -> sweety -> weety -> weedy -> weed -> reed -> reded -> redded -> radded -> raddled -> raddles
+sweetly -> sweety -> weety -> weedy -> weed -> reed -> reded -> redded -> reddled -> raddled -> raddles
+sweetly -> sweety -> weety -> weedy -> weed -> reed -> reded -> redded -> reddled -> reddles -> raddles
+sweetly -> sweety -> weety -> weedy -> reedy -> reed -> reded -> redded -> radded -> raddled -> raddles
+sweetly -> sweety -> weety -> weedy -> reedy -> reed -> reded -> redded -> reddled -> raddled -> raddles
+sweetly -> sweety -> weety -> weedy -> reedy -> reed -> reded -> redded -> reddled -> reddles -> raddles
+sweetly -> sweety -> weety -> weedy -> wendy -> wandy -> waddy -> waddly -> waddle -> raddle -> raddles
+sweetly -> sweety -> weety -> weedy -> wendy -> wandy -> waddy -> waddly -> waddle -> waddles -> raddles
+sweetly -> sweety -> weety -> weets -> wees -> pees -> peles -> pales -> padles -> paddles -> raddles
+sweetly -> sweety -> weety -> weets -> wees -> waes -> wades -> wadies -> waddies -> waddles -> raddles
+sweetly -> sweety -> weety -> weets -> wees -> waes -> wales -> pales -> padles -> paddles -> raddles
+sweetly -> sweety -> weety -> weets -> welts -> pelts -> peles -> pales -> padles -> paddles -> raddles
+sweetly -> sweety -> sleety -> sleet -> slee -> alee -> ales -> pales -> padles -> paddles -> raddles
+sweetly -> sweety -> sweets -> weets -> wees -> pees -> peles -> pales -> padles -> paddles -> raddles
+sweetly -> sweety -> sweets -> weets -> wees -> waes -> wades -> wadies -> waddies -> waddles -> raddles
+sweetly -> sweety -> sweets -> weets -> wees -> waes -> wales -> pales -> padles -> paddles -> raddles
+sweetly -> sweety -> sweets -> weets -> welts -> pelts -> peles -> pales -> padles -> paddles -> raddles
+}
+Done 808.20ms, considered 1,450,174 words for 39 total minimum paths
+
+Find path from 'lenten' to 'chiffonnieres'
+Done 737.35ms, considered 1,967,180 words for 0 total minimum paths
+
+Find path from 'cradlemen' to 'discreation'
+Done 0.68ms, considered 2 words for 0 total minimum paths
+
+Find path from 'blinkingly' to 'taupou'
+Done 0.35ms, considered 45 words for 0 total minimum paths
+
+Find path from 'protanopia' to 'interiorist'
+Done 0.58ms, considered 2 words for 0 total minimum paths
+
+Find path from 'outchid' to 'paramountly'
+Done 0.43ms, considered 4 words for 0 total minimum paths
+
+Find path from 'bldr' to 'rewrote'
+Shortest path lengths: 11
+digraph bldr_rewrote_11{concentrate=true;
+bldr -> bld -> bed -> bes -> best -> besit -> bedsit -> bedsite -> bedrite -> bewrite -> rewrite -> rewrote
+bldr -> bld -> bed -> bet -> best -> besit -> bedsit -> bedsite -> bedrite -> bewrite -> rewrite -> rewrote
+bldr -> bld -> bls -> bes -> best -> besit -> bedsit -> bedsite -> bedrite -> bewrite -> rewrite -> rewrote
+bldr -> bld -> beld -> belt -> best -> besit -> bedsit -> bedsite -> bedrite -> bewrite -> rewrite -> rewrote
+}
+Done 1,021.76ms, considered 3,081,637 words for 4 total minimum paths
+
+Find path from 'evacuee' to 'fall'
+Shortest path lengths: 6
+digraph evacuee_fall_6{concentrate=true;
+evacuee -> evacue -> evalue -> value -> vale -> vall -> fall
+}
+Done 0.26ms, considered 92 words for 1 total minimum paths
+
+Total search time: 4,248.25ms
+
+Done.
