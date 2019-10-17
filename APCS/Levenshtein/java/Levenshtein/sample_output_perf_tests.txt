@@ -1,0 +1,47 @@
+'Levenshtein basic': 'dog' -> 'dot' = 1
+'Levenshtein basic': 'dog' -> 'dog' = 0
+'Levenshtein basic': 'Saturday' -> 'Sunday' = 3
+'Levenshtein basic': 'sitting' -> 'kitten' = 3
+'Levenshtein no-alloc': 'dog' -> 'dot' = 1
+'Levenshtein no-alloc': 'dog' -> 'dog' = 0
+'Levenshtein no-alloc': 'Saturday' -> 'Sunday' = 3
+'Levenshtein no-alloc': 'sitting' -> 'kitten' = 3
+'Levenshtein hoisted string lengths': 'dog' -> 'dot' = 1
+'Levenshtein hoisted string lengths': 'dog' -> 'dog' = 0
+'Levenshtein hoisted string lengths': 'Saturday' -> 'Sunday' = 3
+'Levenshtein hoisted string lengths': 'sitting' -> 'kitten' = 3
+'Levenshtein hoisted all the things': 'dog' -> 'dot' = 1
+'Levenshtein hoisted all the things': 'dog' -> 'dog' = 0
+'Levenshtein hoisted all the things': 'Saturday' -> 'Sunday' = 3
+'Levenshtein hoisted all the things': 'sitting' -> 'kitten' = 3
+'Levenshtein best': 'dog' -> 'dot' = 1
+'Levenshtein best': 'dog' -> 'dog' = 0
+'Levenshtein best': 'Saturday' -> 'Sunday' = 3
+'Levenshtein best': 'sitting' -> 'kitten' = 3
+'Cheater equal lengths': 'dog' -> 'dot' = 1
+'Cheater equal lengths': 'dog' -> 'dog' = 0
+'Cheater equal lengths': 'dog' -> 'cat' = 2
+'Cheater off by one': 'dog' -> 'dogo' = 1
+'Cheater off by one': 'dog' -> 'doog' = 1
+'Cheater off by one': 'dog' -> 'adog' = 1
+'Cheater off by one': 'dog' -> 'acat' = 3
+'Cheater combined': 'dog' -> 'dot' = 1
+'Cheater combined': 'dog' -> 'dog' = 0
+'Cheater combined': 'Saturday' -> 'Sunday' = 0
+'Cheater combined': 'sitting' -> 'kitten' = 3
+
+Avg time 0.0004us -- Empty function, 'Empty' -> 'Empty', elapsed time 1,962.9842ms, 5,000,000,000 calls
+Avg time 0.8586us -- Levenshtein basic, 'Saturday' -> 'Sunday', elapsed time 1,717.1750ms, 2,000,000 calls
+Avg time 0.2065us -- Levenshtein no-alloc, 'Saturday' -> 'Sunday', elapsed time 2,064.6879ms, 10,000,000 calls
+Avg time 0.1903us -- Levenshtein hoisted string lengths, 'Saturday' -> 'Sunday', elapsed time 1,903.4395ms, 10,000,000 calls
+Avg time 0.1715us -- Levenshtein hoisted all the things, 'Saturday' -> 'Sunday', elapsed time 1,714.9047ms, 10,000,000 calls
+Avg time 0.1742us -- Levenshtein best, 'Saturday' -> 'Sunday', elapsed time 1,741.8055ms, 10,000,000 calls
+Avg time 0.0118us -- Cheater equal lengths, 'Saturday' -> 'Satuxday', elapsed time 1,178.6798ms, 100,000,000 calls
+Avg time 0.0173us -- Cheater off by one, 'Saturday' -> 'Saturxday', elapsed time 1,726.3937ms, 100,000,000 calls
+Avg time 0.0191us -- Cheater combined, 'Saturxday' -> 'Saturday', elapsed time 1,914.0413ms, 100,000,000 calls
+
+Loaded 370,102 words from words_alpha.txt
+
+Sorted words in 78.43ms
+
+Done.

@@ -1,0 +1,578 @@
+'Levenshtein basic': 'dog' -> 'dot' = 1
+'Levenshtein basic': 'dog' -> 'dog' = 0
+'Levenshtein basic': 'Saturday' -> 'Sunday' = 3
+'Levenshtein basic': 'sitting' -> 'kitten' = 3
+'Levenshtein no-alloc': 'dog' -> 'dot' = 1
+'Levenshtein no-alloc': 'dog' -> 'dog' = 0
+'Levenshtein no-alloc': 'Saturday' -> 'Sunday' = 3
+'Levenshtein no-alloc': 'sitting' -> 'kitten' = 3
+'Levenshtein hoisted string lengths': 'dog' -> 'dot' = 1
+'Levenshtein hoisted string lengths': 'dog' -> 'dog' = 0
+'Levenshtein hoisted string lengths': 'Saturday' -> 'Sunday' = 3
+'Levenshtein hoisted string lengths': 'sitting' -> 'kitten' = 3
+'Levenshtein hoisted all the things': 'dog' -> 'dot' = 1
+'Levenshtein hoisted all the things': 'dog' -> 'dog' = 0
+'Levenshtein hoisted all the things': 'Saturday' -> 'Sunday' = 3
+'Levenshtein hoisted all the things': 'sitting' -> 'kitten' = 3
+'Levenshtein best': 'dog' -> 'dot' = 1
+'Levenshtein best': 'dog' -> 'dog' = 0
+'Levenshtein best': 'Saturday' -> 'Sunday' = 3
+'Levenshtein best': 'sitting' -> 'kitten' = 3
+'Cheater equal lengths': 'dog' -> 'dot' = 1
+'Cheater equal lengths': 'dog' -> 'dog' = 0
+'Cheater equal lengths': 'dog' -> 'cat' = 2
+'Cheater off by one': 'dog' -> 'dogo' = 1
+'Cheater off by one': 'dog' -> 'doog' = 1
+'Cheater off by one': 'dog' -> 'adog' = 1
+'Cheater off by one': 'dog' -> 'acat' = 3
+'Cheater combined': 'dog' -> 'dot' = 1
+'Cheater combined': 'dog' -> 'dog' = 0
+'Cheater combined': 'Saturday' -> 'Sunday' = 0
+'Cheater combined': 'sitting' -> 'kitten' = 3
+
+Loaded 370,102 words from words_alpha.txt
+
+Sorted words in 77.33ms
+
+Find path from 'dog' to 'cat'
+Prepare edge:    1 tasks for         1 words
+Expand edge:     1 tasks for         1 words
+Prepare edge:    1 tasks for        44 words
+Expand edge:     1 tasks for        44 words
+Prepare edge:    2 tasks for       664 words
+Expand edge:     1 tasks for     1,160 words
+Shortest path lengths: 3
+digraph dog_cat_3{concentrate=true;
+dog -> cog -> cag -> cat
+dog -> cog -> cot -> cat
+dog -> dag -> cag -> cat
+dog -> dag -> dat -> cat
+dog -> dot -> cot -> cat
+dog -> dot -> dat -> cat
+}
+Done 182.86ms, considered 1,205 words for 6 total minimum paths
+
+Find path from 'dog' to 'smart'
+Prepare edge:    no work
+Expand edge:     1 tasks for         1 words
+Prepare edge:    no work
+Expand edge:     1 tasks for        44 words
+Prepare edge:    no work
+Expand edge:     1 tasks for     1,160 words
+Prepare edge:    8 tasks for     3,867 words
+Expand edge:     4 tasks for    16,979 words
+Prepare edge:   19 tasks for     9,018 words
+Expand edge:    20 tasks for    99,785 words
+Shortest path lengths: 5
+digraph dog_smart_5{concentrate=true;
+dog -> dot -> dort -> dart -> mart -> smart
+dog -> dot -> dort -> dart -> sart -> smart
+dog -> dot -> dort -> mort -> mart -> smart
+dog -> dot -> mot -> mat -> mart -> smart
+dog -> dot -> dat -> mat -> mart -> smart
+dog -> dot -> dort -> sort -> sart -> smart
+dog -> dot -> mot -> mort -> mart -> smart
+dog -> dot -> dat -> sat -> sart -> smart
+dog -> dot -> dat -> dart -> mart -> smart
+dog -> dot -> dat -> dart -> sart -> smart
+dog -> dot -> sot -> sat -> sart -> smart
+dog -> dot -> sot -> sort -> sart -> smart
+dog -> mog -> mor -> mar -> mart -> smart
+dog -> mog -> mag -> mar -> mart -> smart
+dog -> mog -> mag -> mat -> mart -> smart
+dog -> mog -> mor -> mort -> mart -> smart
+dog -> mog -> mag -> marg -> mart -> smart
+dog -> mog -> mot -> mat -> mart -> smart
+dog -> mog -> mot -> mort -> mart -> smart
+dog -> mog -> morg -> marg -> mart -> smart
+dog -> dag -> dar -> mar -> mart -> smart
+dog -> mog -> morg -> mort -> mart -> smart
+dog -> dag -> dar -> sar -> sart -> smart
+dog -> dag -> mag -> mar -> mart -> smart
+dog -> dag -> dar -> dart -> mart -> smart
+dog -> dag -> mag -> mat -> mart -> smart
+dog -> dag -> dar -> dart -> sart -> smart
+dog -> dag -> mag -> marg -> mart -> smart
+dog -> dag -> dat -> mat -> mart -> smart
+dog -> dag -> sag -> sar -> sart -> smart
+dog -> dag -> sag -> sat -> sart -> smart
+dog -> dag -> dat -> sat -> sart -> smart
+dog -> dor -> dar -> mar -> mart -> smart
+dog -> dor -> mor -> mar -> mart -> smart
+dog -> dor -> dar -> sar -> sart -> smart
+dog -> dag -> dat -> dart -> mart -> smart
+dog -> dag -> dat -> dart -> sart -> smart
+dog -> dor -> mor -> mort -> mart -> smart
+dog -> sog -> sag -> sar -> sart -> smart
+dog -> sog -> sag -> sat -> sart -> smart
+dog -> dor -> dar -> dart -> mart -> smart
+dog -> dor -> dar -> dart -> sart -> smart
+dog -> sog -> sot -> sat -> sart -> smart
+dog -> sog -> sot -> sort -> sart -> smart
+dog -> dag -> darg -> dart -> mart -> smart
+dog -> dag -> darg -> dart -> sart -> smart
+dog -> dag -> darg -> marg -> mart -> smart
+dog -> dor -> dort -> dart -> mart -> smart
+dog -> dor -> dort -> dart -> sart -> smart
+dog -> dor -> dort -> mort -> mart -> smart
+dog -> dor -> dort -> sort -> sart -> smart
+}
+Done 1,572.88ms, considered 117,969 words for 51 total minimum paths
+
+Find path from 'dog' to 'quack'
+Prepare edge:    no work
+Expand edge:     1 tasks for         1 words
+Prepare edge:    no work
+Expand edge:     1 tasks for        44 words
+Prepare edge:    no work
+Expand edge:     1 tasks for     1,160 words
+Prepare edge:    no work
+Expand edge:     4 tasks for    16,979 words
+Prepare edge:    no work
+Expand edge:    20 tasks for    99,785 words
+Prepare edge:   29 tasks for    14,480 words
+Expand edge:    69 tasks for   343,350 words
+Prepare edge:   36 tasks for    17,630 words
+Expand edge:   146 tasks for   727,779 words
+Shortest path lengths: 7
+digraph dog_quack_7{concentrate=true;
+dog -> dos -> duos -> quos -> quor -> quar -> quark -> quack
+dog -> dg -> du -> qu -> qua -> quar -> quark -> quack
+dog -> dg -> du -> qu -> qua -> quaw -> quawk -> quack
+dog -> doa -> goa -> goar -> guar -> quar -> quark -> quack
+dog -> tog -> tug -> tua -> qua -> quar -> quark -> quack
+dog -> tog -> tug -> tua -> qua -> quaw -> quawk -> quack
+dog -> dod -> dud -> duad -> quad -> quar -> quark -> quack
+dog -> dod -> dud -> duad -> quad -> quaw -> quawk -> quack
+dog -> doc -> boc -> bock -> buck -> buick -> quick -> quack
+dog -> doc -> dock -> bock -> bick -> buick -> quick -> quack
+dog -> doc -> dock -> bock -> buck -> buick -> quick -> quack
+dog -> doc -> duc -> duck -> buck -> buick -> quick -> quack
+dog -> doc -> boc -> bock -> bick -> buick -> quick -> quack
+dog -> doa -> koa -> kua -> qua -> quar -> quark -> quack
+dog -> doa -> koa -> kua -> qua -> quaw -> quawk -> quack
+dog -> doa -> koa -> kua -> kuar -> quar -> quark -> quack
+dog -> tog -> toa -> tua -> qua -> quar -> quark -> quack
+dog -> tog -> toa -> tua -> qua -> quaw -> quawk -> quack
+dog -> doc -> dock -> duck -> buck -> buick -> quick -> quack
+dog -> doc -> dock -> dick -> bick -> buick -> quick -> quack
+dog -> doa -> poa -> pua -> qua -> quar -> quark -> quack
+dog -> doa -> poa -> pua -> qua -> quaw -> quawk -> quack
+dog -> do -> duo -> quo -> qua -> quar -> quark -> quack
+dog -> do -> duo -> quo -> qua -> quaw -> quawk -> quack
+dog -> do -> duo -> quo -> quor -> quar -> quark -> quack
+dog -> doa -> toa -> tua -> qua -> quar -> quark -> quack
+dog -> do -> du -> qu -> qua -> quar -> quark -> quack
+dog -> do -> du -> qu -> qua -> quaw -> quawk -> quack
+dog -> doa -> toa -> tua -> qua -> quaw -> quawk -> quack
+dog -> dod -> dad -> duad -> quad -> quar -> quark -> quack
+dog -> dod -> dad -> duad -> quad -> quaw -> quawk -> quack
+dog -> bog -> boc -> bock -> bick -> buick -> quick -> quack
+dog -> bog -> boc -> bock -> buck -> buick -> quick -> quack
+dog -> dug -> rug -> rua -> qua -> quar -> quark -> quack
+dog -> dug -> rug -> rua -> qua -> quaw -> quawk -> quack
+dog -> dug -> du -> qu -> qua -> quar -> quark -> quack
+dog -> dug -> du -> qu -> qua -> quaw -> quawk -> quack
+dog -> dot -> dat -> qat -> quat -> quar -> quark -> quack
+dog -> dot -> dat -> qat -> quat -> quaw -> quawk -> quack
+dog -> dot -> dat -> qat -> quat -> quart -> quark -> quack
+dog -> dong -> dung -> qung -> quag -> quar -> quark -> quack
+dog -> dong -> dung -> qung -> quag -> quaw -> quawk -> quack
+dog -> dol -> dal -> dual -> qual -> quar -> quark -> quack
+dog -> dol -> dal -> dual -> qual -> quaw -> quawk -> quack
+dog -> dol -> dal -> dual -> qual -> quarl -> quark -> quack
+dog -> dag -> dad -> duad -> quad -> quar -> quark -> quack
+dog -> dag -> dad -> duad -> quad -> quaw -> quawk -> quack
+dog -> dug -> tug -> tua -> qua -> quar -> quark -> quack
+dog -> dug -> tug -> tua -> qua -> quaw -> quawk -> quack
+dog -> dag -> dar -> gar -> guar -> quar -> quark -> quack
+dog -> doe -> due -> que -> qua -> quar -> quark -> quack
+dog -> doe -> due -> que -> qua -> quaw -> quawk -> quack
+dog -> doe -> due -> que -> quae -> quar -> quark -> quack
+dog -> doe -> due -> que -> quae -> quare -> quark -> quack
+dog -> doe -> due -> que -> quae -> quaw -> quawk -> quack
+dog -> dug -> due -> que -> qua -> quar -> quark -> quack
+dog -> dug -> due -> que -> qua -> quaw -> quawk -> quack
+dog -> dug -> due -> que -> quae -> quar -> quark -> quack
+dog -> dug -> due -> que -> quae -> quaw -> quawk -> quack
+dog -> dug -> due -> que -> quae -> quare -> quark -> quack
+dog -> dug -> dui -> qui -> quai -> quar -> quark -> quack
+dog -> dug -> dui -> qui -> quai -> quaw -> quawk -> quack
+dog -> dug -> dui -> qui -> quia -> quica -> quick -> quack
+dog -> dug -> dui -> qui -> qua -> quar -> quark -> quack
+dog -> gog -> goa -> goar -> guar -> quar -> quark -> quack
+dog -> dug -> dui -> qui -> qua -> quaw -> quawk -> quack
+dog -> dug -> duc -> duck -> buck -> buick -> quick -> quack
+dog -> don -> dun -> duan -> quan -> quaw -> quawk -> quack
+dog -> gog -> gag -> gar -> guar -> quar -> quark -> quack
+dog -> gog -> gor -> gar -> guar -> quar -> quark -> quack
+dog -> dag -> dat -> qat -> quat -> quar -> quark -> quack
+dog -> dag -> dat -> qat -> quat -> quaw -> quawk -> quack
+dog -> dag -> dat -> qat -> quat -> quart -> quark -> quack
+dog -> gog -> gor -> gur -> guar -> quar -> quark -> quack
+dog -> dug -> dui -> qui -> quin -> quink -> quick -> quack
+dog -> dug -> dun -> duan -> quan -> quar -> quark -> quack
+dog -> dug -> dung -> qung -> quag -> quar -> quark -> quack
+dog -> dug -> dung -> qung -> quag -> quaw -> quawk -> quack
+dog -> dug -> dun -> duan -> quan -> quaw -> quawk -> quack
+dog -> gog -> gor -> goar -> guar -> quar -> quark -> quack
+dog -> dug -> dud -> duad -> quad -> quar -> quark -> quack
+dog -> dug -> dud -> duad -> quad -> quaw -> quawk -> quack
+dog -> don -> dun -> duan -> quan -> quar -> quark -> quack
+dog -> dag -> gag -> gar -> guar -> quar -> quark -> quack
+dog -> dag -> dal -> dual -> qual -> quar -> quark -> quack
+dog -> dag -> dal -> dual -> qual -> quaw -> quawk -> quack
+dog -> dag -> dal -> dual -> qual -> quarl -> quark -> quack
+dog -> dug -> duo -> quo -> qua -> quar -> quark -> quack
+dog -> dug -> duo -> quo -> qua -> quaw -> quawk -> quack
+dog -> dug -> duo -> quo -> quor -> quar -> quark -> quack
+dog -> doo -> duo -> quo -> qua -> quar -> quark -> quack
+dog -> doo -> duo -> quo -> qua -> quaw -> quawk -> quack
+dog -> doo -> duo -> quo -> quor -> quar -> quark -> quack
+dog -> dug -> dur -> gur -> guar -> quar -> quark -> quack
+dog -> dor -> dar -> gar -> guar -> quar -> quark -> quack
+dog -> dag -> dan -> duan -> quan -> quar -> quark -> quack
+dog -> dag -> dan -> duan -> quan -> quaw -> quawk -> quack
+dog -> dor -> gor -> gar -> guar -> quar -> quark -> quack
+dog -> dor -> gor -> gur -> guar -> quar -> quark -> quack
+dog -> don -> dan -> duan -> quan -> quar -> quark -> quack
+dog -> don -> dan -> duan -> quan -> quaw -> quawk -> quack
+dog -> dug -> pug -> pua -> qua -> quar -> quark -> quack
+dog -> dug -> pug -> pua -> qua -> quaw -> quawk -> quack
+dog -> dor -> gor -> goar -> guar -> quar -> quark -> quack
+dog -> rog -> rug -> rua -> qua -> quar -> quark -> quack
+dog -> rog -> rug -> rua -> qua -> quaw -> quawk -> quack
+dog -> dor -> dur -> gur -> guar -> quar -> quark -> quack
+}
+Done 9,066.62ms, considered 1,189,098 words for 107 total minimum paths
+
+Find path from 'angerly' to 'invaded'
+Prepare edge:    1 tasks for         1 words
+Expand edge:     1 tasks for         1 words
+Prepare edge:    1 tasks for         1 words
+Expand edge:     1 tasks for         1 words
+Prepare edge:    1 tasks for         1 words
+Expand edge:     1 tasks for         1 words
+Prepare edge:    1 tasks for         1 words
+Expand edge:     1 tasks for         1 words
+Done 10.57ms, considered 4 words for 0 total minimum paths
+
+Find path from 'vulgates' to 'gumwood'
+Prepare edge:    1 tasks for         1 words
+Expand edge:     1 tasks for         1 words
+Prepare edge:    1 tasks for         1 words
+Expand edge:     1 tasks for         1 words
+Prepare edge:    1 tasks for         3 words
+Expand edge:     1 tasks for         3 words
+Prepare edge:    1 tasks for         6 words
+Expand edge:     1 tasks for         6 words
+Prepare edge:    1 tasks for         8 words
+Expand edge:     1 tasks for        12 words
+Prepare edge:    1 tasks for        17 words
+Expand edge:     1 tasks for        34 words
+Prepare edge:    1 tasks for        38 words
+Expand edge:     1 tasks for       118 words
+Prepare edge:    1 tasks for       122 words
+Expand edge:     1 tasks for       716 words
+Prepare edge:    1 tasks for       415 words
+Expand edge:     2 tasks for     6,203 words
+Prepare edge:    3 tasks for     1,410 words
+Expand edge:    12 tasks for    58,868 words
+Prepare edge:    8 tasks for     3,984 words
+Expand edge:    59 tasks for   292,912 words
+Prepare edge:   16 tasks for     7,925 words
+Expand edge:    97 tasks for   484,473 words
+Prepare edge:   22 tasks for    10,974 words
+Expand edge:    87 tasks for   433,450 words
+Prepare edge:   23 tasks for    11,184 words
+Expand edge:    70 tasks for   347,570 words
+Prepare edge:   18 tasks for     8,912 words
+Expand edge:    56 tasks for   277,158 words
+Prepare edge:   13 tasks for     6,174 words
+Expand edge:    41 tasks for   201,356 words
+Prepare edge:    9 tasks for     4,029 words
+Expand edge:    27 tasks for   133,380 words
+Prepare edge:    6 tasks for     2,625 words
+Expand edge:    19 tasks for    94,035 words
+Prepare edge:    4 tasks for     1,665 words
+Expand edge:    14 tasks for    65,605 words
+Prepare edge:    3 tasks for     1,045 words
+Expand edge:    10 tasks for    47,522 words
+Prepare edge:    2 tasks for       673 words
+Expand edge:     7 tasks for    33,808 words
+Prepare edge:    1 tasks for       405 words
+Expand edge:     4 tasks for    17,863 words
+Prepare edge:    1 tasks for       260 words
+Expand edge:     3 tasks for    10,208 words
+Prepare edge:    1 tasks for       168 words
+Expand edge:     2 tasks for     5,476 words
+Prepare edge:    1 tasks for       130 words
+Expand edge:     1 tasks for     3,940 words
+Prepare edge:    1 tasks for       118 words
+Expand edge:     1 tasks for     3,538 words
+Prepare edge:    1 tasks for        96 words
+Expand edge:     1 tasks for     3,990 words
+Prepare edge:    1 tasks for        88 words
+Expand edge:     1 tasks for     4,651 words
+Prepare edge:    1 tasks for        85 words
+Expand edge:     2 tasks for     5,203 words
+Prepare edge:    1 tasks for        59 words
+Expand edge:     1 tasks for     4,065 words
+Prepare edge:    1 tasks for        48 words
+Expand edge:     1 tasks for     4,013 words
+Prepare edge:    1 tasks for        26 words
+Expand edge:     1 tasks for     3,073 words
+Prepare edge:    1 tasks for        12 words
+Expand edge:     1 tasks for     1,604 words
+Prepare edge:    1 tasks for         9 words
+Expand edge:     1 tasks for       222 words
+Prepare edge:    1 tasks for        11 words
+Expand edge:     1 tasks for       282 words
+Prepare edge:    1 tasks for         7 words
+Expand edge:     1 tasks for       270 words
+Prepare edge:    1 tasks for         5 words
+Expand edge:     1 tasks for       150 words
+Prepare edge:    1 tasks for         1 words
+Expand edge:     1 tasks for        30 words
+Prepare edge:    1 tasks for         2 words
+Expand edge:     1 tasks for        60 words
+Done 35,984.11ms, considered 2,545,869 words for 0 total minimum paths
+
+Find path from 'sweetly' to 'raddles'
+Prepare edge:    no work
+Expand edge:     1 tasks for         1 words
+Prepare edge:    no work
+Expand edge:     1 tasks for         1 words
+Prepare edge:    no work
+Expand edge:     1 tasks for         9 words
+Prepare edge:    no work
+Expand edge:     1 tasks for        61 words
+Prepare edge:    no work
+Expand edge:     1 tasks for       386 words
+Prepare edge:    no work
+Expand edge:     1 tasks for     3,383 words
+Prepare edge:    no work
+Expand edge:     6 tasks for    28,148 words
+Prepare edge:    no work
+Expand edge:    39 tasks for   193,811 words
+Prepare edge:    no work
+Expand edge:   108 tasks for   537,791 words
+Prepare edge:    no work
+Expand edge:   138 tasks for   686,583 words
+Shortest path lengths: 10
+digraph sweetly_raddles_10{concentrate=true;
+sweetly -> sweety -> sweets -> weets -> wees -> waes -> wales -> pales -> padles -> paddles -> raddles
+sweetly -> sweety -> sweets -> weets -> wees -> waes -> wades -> wadies -> waddies -> waddles -> raddles
+sweetly -> sweety -> sweets -> weets -> wees -> pees -> peles -> pales -> padles -> paddles -> raddles
+sweetly -> sweety -> sweet -> sleet -> slee -> alee -> ales -> pales -> padles -> paddles -> raddles
+sweetly -> sweety -> sweets -> weets -> welts -> pelts -> peles -> pales -> padles -> paddles -> raddles
+sweetly -> sweety -> sleety -> sleet -> slee -> alee -> ales -> pales -> padles -> paddles -> raddles
+sweetly -> sweety -> weety -> weedy -> reedy -> reed -> reded -> redded -> radded -> raddled -> raddles
+sweetly -> sweety -> weety -> weedy -> reedy -> reed -> reded -> redded -> reddled -> raddled -> raddles
+sweetly -> sweety -> weety -> weedy -> reedy -> reed -> reded -> redded -> reddled -> reddles -> raddles
+sweetly -> sweety -> weety -> weedy -> weed -> reed -> reded -> redded -> radded -> raddled -> raddles
+sweetly -> sweety -> weety -> weedy -> wendy -> wandy -> waddy -> waddly -> waddle -> raddle -> raddles
+sweetly -> sweety -> weety -> weedy -> wendy -> wandy -> waddy -> waddly -> waddle -> waddles -> raddles
+sweetly -> sweety -> weety -> weedy -> weed -> reed -> reded -> redded -> reddled -> raddled -> raddles
+sweetly -> sweety -> weety -> weedy -> weed -> reed -> reded -> redded -> reddled -> reddles -> raddles
+sweetly -> sweety -> weety -> weets -> wees -> pees -> peles -> pales -> padles -> paddles -> raddles
+sweetly -> sweety -> sweet -> weet -> reet -> reed -> reded -> redded -> radded -> raddled -> raddles
+sweetly -> sweety -> sweet -> weet -> reet -> reed -> reded -> redded -> reddled -> raddled -> raddles
+sweetly -> sweety -> sweet -> weet -> reet -> reed -> reded -> redded -> reddled -> reddles -> raddles
+sweetly -> sweety -> weety -> weets -> welts -> pelts -> peles -> pales -> padles -> paddles -> raddles
+sweetly -> sweety -> weety -> weet -> reet -> reed -> reded -> redded -> radded -> raddled -> raddles
+sweetly -> sweety -> weety -> weet -> reet -> reed -> reded -> redded -> reddled -> raddled -> raddles
+sweetly -> sweety -> weety -> weet -> reet -> reed -> reded -> redded -> reddled -> reddles -> raddles
+sweetly -> sweety -> weety -> weets -> wees -> waes -> wales -> pales -> padles -> paddles -> raddles
+sweetly -> sweety -> weety -> weets -> wees -> waes -> wades -> wadies -> waddies -> waddles -> raddles
+sweetly -> sweety -> sweet -> weet -> weer -> waer -> wader -> wadder -> waddler -> waddles -> raddles
+sweetly -> sweety -> sweet -> sweer -> weer -> waer -> wader -> wadder -> waddler -> waddles -> raddles
+sweetly -> sweety -> sweet -> weet -> weed -> reed -> reded -> redded -> radded -> raddled -> raddles
+sweetly -> sweety -> sweet -> weet -> weed -> reed -> reded -> redded -> reddled -> raddled -> raddles
+sweetly -> sweety -> sweet -> weet -> weed -> reed -> reded -> redded -> reddled -> reddles -> raddles
+sweetly -> sweety -> weety -> weet -> weed -> reed -> reded -> redded -> radded -> raddled -> raddles
+sweetly -> sweety -> weety -> weet -> weed -> reed -> reded -> redded -> reddled -> raddled -> raddles
+sweetly -> sweety -> weety -> weet -> weed -> reed -> reded -> redded -> reddled -> reddles -> raddles
+sweetly -> sweety -> sweet -> weet -> wees -> pees -> peles -> pales -> padles -> paddles -> raddles
+sweetly -> sweety -> weety -> weet -> wees -> pees -> peles -> pales -> padles -> paddles -> raddles
+sweetly -> sweety -> weety -> weet -> wees -> waes -> wades -> wadies -> waddies -> waddles -> raddles
+sweetly -> sweety -> weety -> weet -> wees -> waes -> wales -> pales -> padles -> paddles -> raddles
+sweetly -> sweety -> weety -> weet -> weer -> waer -> wader -> wadder -> waddler -> waddles -> raddles
+sweetly -> sweety -> sweet -> weet -> wees -> waes -> wales -> pales -> padles -> paddles -> raddles
+sweetly -> sweety -> sweet -> weet -> wees -> waes -> wades -> wadies -> waddies -> waddles -> raddles
+}
+Done 635.46ms, considered 1,450,174 words for 39 total minimum paths
+
+Find path from 'lenten' to 'chiffonnieres'
+Prepare edge:    no work
+Expand edge:     1 tasks for         1 words
+Prepare edge:    no work
+Expand edge:     1 tasks for         2 words
+Prepare edge:    no work
+Expand edge:     1 tasks for        12 words
+Prepare edge:    no work
+Expand edge:     1 tasks for       114 words
+Prepare edge:    no work
+Expand edge:     1 tasks for     1,101 words
+Prepare edge:    no work
+Expand edge:     2 tasks for     8,507 words
+Prepare edge:    no work
+Expand edge:    11 tasks for    52,661 words
+Prepare edge:    no work
+Expand edge:    53 tasks for   263,857 words
+Prepare edge:    no work
+Expand edge:    91 tasks for   452,412 words
+Prepare edge:    no work
+Expand edge:    76 tasks for   379,886 words
+Prepare edge:    no work
+Expand edge:    54 tasks for   268,653 words
+Prepare edge:    no work
+Expand edge:    37 tasks for   183,251 words
+Prepare edge:    no work
+Expand edge:    25 tasks for   123,556 words
+Prepare edge:    no work
+Expand edge:    17 tasks for    83,726 words
+Prepare edge:    no work
+Expand edge:    11 tasks for    50,318 words
+Prepare edge:    no work
+Expand edge:     7 tasks for    32,704 words
+Prepare edge:    no work
+Expand edge:     5 tasks for    22,007 words
+Prepare edge:    no work
+Expand edge:     4 tasks for    15,620 words
+Prepare edge:    no work
+Expand edge:     2 tasks for     7,623 words
+Prepare edge:    no work
+Expand edge:     2 tasks for     5,396 words
+Prepare edge:    no work
+Expand edge:     1 tasks for     4,128 words
+Prepare edge:    no work
+Expand edge:     1 tasks for     3,523 words
+Prepare edge:    no work
+Expand edge:     1 tasks for     2,724 words
+Prepare edge:    no work
+Expand edge:     1 tasks for     1,669 words
+Prepare edge:    no work
+Expand edge:     1 tasks for     1,437 words
+Prepare edge:    no work
+Expand edge:     1 tasks for     1,246 words
+Prepare edge:    no work
+Expand edge:     1 tasks for       525 words
+Prepare edge:    no work
+Expand edge:     1 tasks for       224 words
+Prepare edge:    no work
+Expand edge:     1 tasks for       122 words
+Prepare edge:    no work
+Expand edge:     1 tasks for        67 words
+Prepare edge:    no work
+Expand edge:     1 tasks for        58 words
+Prepare edge:    no work
+Expand edge:     1 tasks for        38 words
+Prepare edge:    no work
+Expand edge:     1 tasks for         4 words
+Prepare edge:    no work
+Expand edge:     1 tasks for         8 words
+Done 735.28ms, considered 1,967,180 words for 0 total minimum paths
+
+Find path from 'cradlemen' to 'discreation'
+Prepare edge:    1 tasks for         1 words
+Expand edge:     1 tasks for         1 words
+Prepare edge:    1 tasks for         1 words
+Expand edge:     1 tasks for         1 words
+Done 6.57ms, considered 2 words for 0 total minimum paths
+
+Find path from 'blinkingly' to 'taupou'
+Prepare edge:    1 tasks for         1 words
+Expand edge:     1 tasks for         1 words
+Prepare edge:    1 tasks for         2 words
+Expand edge:     1 tasks for         2 words
+Prepare edge:    1 tasks for         3 words
+Expand edge:     1 tasks for         3 words
+Prepare edge:    1 tasks for         7 words
+Expand edge:     1 tasks for         7 words
+Prepare edge:    1 tasks for        10 words
+Expand edge:     1 tasks for        14 words
+Prepare edge:    1 tasks for         8 words
+Expand edge:     1 tasks for        11 words
+Prepare edge:    1 tasks for         5 words
+Expand edge:     1 tasks for         5 words
+Prepare edge:    1 tasks for         1 words
+Expand edge:     1 tasks for         1 words
+Prepare edge:    1 tasks for         1 words
+Expand edge:     1 tasks for         1 words
+Done 123.72ms, considered 45 words for 0 total minimum paths
+
+Find path from 'protanopia' to 'interiorist'
+Prepare edge:    1 tasks for         1 words
+Expand edge:     1 tasks for         1 words
+Prepare edge:    1 tasks for         1 words
+Expand edge:     1 tasks for         1 words
+Done 6.26ms, considered 2 words for 0 total minimum paths
+
+Find path from 'outchid' to 'paramountly'
+Prepare edge:    1 tasks for         1 words
+Expand edge:     1 tasks for         1 words
+Prepare edge:    1 tasks for         1 words
+Expand edge:     1 tasks for         1 words
+Prepare edge:    1 tasks for         2 words
+Expand edge:     1 tasks for         2 words
+Done 14.16ms, considered 4 words for 0 total minimum paths
+
+Find path from 'bldr' to 'rewrote'
+Prepare edge:    no work
+Expand edge:     1 tasks for         1 words
+Prepare edge:    no work
+Expand edge:     1 tasks for         3 words
+Prepare edge:    no work
+Expand edge:     1 tasks for        41 words
+Prepare edge:    no work
+Expand edge:     1 tasks for       854 words
+Prepare edge:    no work
+Expand edge:     3 tasks for    13,755 words
+Prepare edge:    no work
+Expand edge:    19 tasks for    91,077 words
+Prepare edge:    no work
+Expand edge:    58 tasks for   286,977 words
+Prepare edge:    no work
+Expand edge:   111 tasks for   550,206 words
+Prepare edge:    no work
+Expand edge:   149 tasks for   743,483 words
+Prepare edge:    no work
+Expand edge:   155 tasks for   770,998 words
+Prepare edge:    no work
+Expand edge:   125 tasks for   624,242 words
+Shortest path lengths: 11
+digraph bldr_rewrote_11{concentrate=true;
+bldr -> bld -> beld -> belt -> best -> besit -> bedsit -> bedsite -> bedrite -> bewrite -> rewrite -> rewrote
+bldr -> bld -> bls -> bes -> best -> besit -> bedsit -> bedsite -> bedrite -> bewrite -> rewrite -> rewrote
+bldr -> bld -> bed -> bes -> best -> besit -> bedsit -> bedsite -> bedrite -> bewrite -> rewrite -> rewrote
+bldr -> bld -> bed -> bet -> best -> besit -> bedsit -> bedsite -> bedrite -> bewrite -> rewrite -> rewrote
+}
+Done 1,146.43ms, considered 3,081,637 words for 4 total minimum paths
+
+Find path from 'evacuee' to 'fall'
+Prepare edge:    no work
+Expand edge:     1 tasks for         1 words
+Prepare edge:    no work
+Expand edge:     1 tasks for         2 words
+Prepare edge:    no work
+Expand edge:     1 tasks for         1 words
+Prepare edge:    no work
+Expand edge:     1 tasks for         4 words
+Prepare edge:    no work
+Expand edge:     1 tasks for        15 words
+Prepare edge:    no work
+Expand edge:     1 tasks for        69 words
+Shortest path lengths: 6
+digraph evacuee_fall_6{concentrate=true;
+evacuee -> evacue -> evalue -> value -> vale -> vall -> fall
+}
+Done 1.35ms, considered 92 words for 1 total minimum paths
+
+Total search time: 49,490.38ms
+
+108,495 total words with any neighbors
+Min/avg/max word size: 1/6.61/13
+Min/avg/max neighbor count: 1/6.81/88
+
+Done.
