@@ -1,0 +1,282 @@
+3
+3
+1
+1
+1
+0.020193590957205743
+0.01148725498933345
+0.11223870201501995
+0.013424341042991728
+0.013832670985721052
+Loaded 370102 words from words_alpha.txt
+
+
+Sorted words in 279.98ms
+
+Find path from 'dog' to 'cat'
+Shortest path lengths: 3
+digraph dog_cat_3{concentrate=true;
+dog  -> cog  -> cag  -> cat
+dog  -> cog  -> cot  -> cat
+dog  -> dag  -> cag  -> cat
+dog  -> dag  -> dat  -> cat
+dog  -> dot  -> cot  -> cat
+dog  -> dot  -> dat  -> cat
+}
+Done 966.41ms, considered 1,205 words for 6 total minimum paths
+
+Find path from 'dog' to 'smart'
+Shortest path lengths: 5
+digraph dog_smart_5{concentrate=true;
+dog  -> dag  -> dar  -> mar  -> mart  -> smart
+dog  -> dag  -> dar  -> sar  -> sart  -> smart
+dog  -> dag  -> dar  -> dart  -> mart  -> smart
+dog  -> dag  -> dar  -> dart  -> sart  -> smart
+dog  -> dag  -> dat  -> mat  -> mart  -> smart
+dog  -> dag  -> dat  -> sat  -> sart  -> smart
+dog  -> dag  -> dat  -> dart  -> mart  -> smart
+dog  -> dag  -> dat  -> dart  -> sart  -> smart
+dog  -> dag  -> mag  -> mar  -> mart  -> smart
+dog  -> dag  -> mag  -> mat  -> mart  -> smart
+dog  -> dag  -> mag  -> marg  -> mart  -> smart
+dog  -> dag  -> sag  -> sar  -> sart  -> smart
+dog  -> dag  -> sag  -> sat  -> sart  -> smart
+dog  -> dag  -> darg  -> dart  -> mart  -> smart
+dog  -> dag  -> darg  -> dart  -> sart  -> smart
+dog  -> dag  -> darg  -> marg  -> mart  -> smart
+dog  -> dor  -> dar  -> mar  -> mart  -> smart
+dog  -> dor  -> dar  -> sar  -> sart  -> smart
+dog  -> dor  -> dar  -> dart  -> mart  -> smart
+dog  -> dor  -> dar  -> dart  -> sart  -> smart
+dog  -> dor  -> mor  -> mar  -> mart  -> smart
+dog  -> dor  -> mor  -> mort  -> mart  -> smart
+dog  -> dor  -> dort  -> dart  -> mart  -> smart
+dog  -> dor  -> dort  -> dart  -> sart  -> smart
+dog  -> dor  -> dort  -> mort  -> mart  -> smart
+dog  -> dor  -> dort  -> sort  -> sart  -> smart
+dog  -> dot  -> dat  -> mat  -> mart  -> smart
+dog  -> dot  -> dat  -> sat  -> sart  -> smart
+dog  -> dot  -> dat  -> dart  -> mart  -> smart
+dog  -> dot  -> dat  -> dart  -> sart  -> smart
+dog  -> dot  -> mot  -> mat  -> mart  -> smart
+dog  -> dot  -> mot  -> mort  -> mart  -> smart
+dog  -> dot  -> sot  -> sat  -> sart  -> smart
+dog  -> dot  -> sot  -> sort  -> sart  -> smart
+dog  -> dot  -> dort  -> dart  -> mart  -> smart
+dog  -> dot  -> dort  -> dart  -> sart  -> smart
+dog  -> dot  -> dort  -> mort  -> mart  -> smart
+dog  -> dot  -> dort  -> sort  -> sart  -> smart
+dog  -> mog  -> mag  -> mar  -> mart  -> smart
+dog  -> mog  -> mag  -> mat  -> mart  -> smart
+dog  -> mog  -> mag  -> marg  -> mart  -> smart
+dog  -> mog  -> mor  -> mar  -> mart  -> smart
+dog  -> mog  -> mor  -> mort  -> mart  -> smart
+dog  -> mog  -> mot  -> mat  -> mart  -> smart
+dog  -> mog  -> mot  -> mort  -> mart  -> smart
+dog  -> mog  -> morg  -> marg  -> mart  -> smart
+dog  -> mog  -> morg  -> mort  -> mart  -> smart
+dog  -> sog  -> sag  -> sar  -> sart  -> smart
+dog  -> sog  -> sag  -> sat  -> sart  -> smart
+dog  -> sog  -> sot  -> sat  -> sart  -> smart
+dog  -> sog  -> sot  -> sort  -> sart  -> smart
+}
+Done 36,183.58ms, considered 117,969 words for 51 total minimum paths
+
+Find path from 'dog' to 'quack'
+Shortest path lengths: 7
+digraph dog_quack_7{concentrate=true;
+dog  -> dg  -> du  -> qu  -> qua  -> quar  -> quark  -> quack
+dog  -> dg  -> du  -> qu  -> qua  -> quaw  -> quawk  -> quack
+dog  -> do  -> du  -> qu  -> qua  -> quar  -> quark  -> quack
+dog  -> do  -> du  -> qu  -> qua  -> quaw  -> quawk  -> quack
+dog  -> do  -> duo  -> quo  -> qua  -> quar  -> quark  -> quack
+dog  -> do  -> duo  -> quo  -> qua  -> quaw  -> quawk  -> quack
+dog  -> do  -> duo  -> quo  -> quor  -> quar  -> quark  -> quack
+dog  -> bog  -> boc  -> bock  -> bick  -> buick  -> quick  -> quack
+dog  -> bog  -> boc  -> bock  -> buck  -> buick  -> quick  -> quack
+dog  -> dag  -> dad  -> duad  -> quad  -> quar  -> quark  -> quack
+dog  -> dag  -> dad  -> duad  -> quad  -> quaw  -> quawk  -> quack
+dog  -> dag  -> dal  -> dual  -> qual  -> quar  -> quark  -> quack
+dog  -> dag  -> dal  -> dual  -> qual  -> quaw  -> quawk  -> quack
+dog  -> dag  -> dal  -> dual  -> qual  -> quarl  -> quark  -> quack
+dog  -> dag  -> dan  -> duan  -> quan  -> quar  -> quark  -> quack
+dog  -> dag  -> dan  -> duan  -> quan  -> quaw  -> quawk  -> quack
+dog  -> dag  -> dar  -> gar  -> guar  -> quar  -> quark  -> quack
+dog  -> dag  -> dat  -> qat  -> quat  -> quar  -> quark  -> quack
+dog  -> dag  -> dat  -> qat  -> quat  -> quaw  -> quawk  -> quack
+dog  -> dag  -> dat  -> qat  -> quat  -> quart  -> quark  -> quack
+dog  -> dag  -> gag  -> gar  -> guar  -> quar  -> quark  -> quack
+dog  -> doa  -> goa  -> goar  -> guar  -> quar  -> quark  -> quack
+dog  -> doa  -> koa  -> kua  -> qua  -> quar  -> quark  -> quack
+dog  -> doa  -> koa  -> kua  -> qua  -> quaw  -> quawk  -> quack
+dog  -> doa  -> koa  -> kua  -> kuar  -> quar  -> quark  -> quack
+dog  -> doa  -> poa  -> pua  -> qua  -> quar  -> quark  -> quack
+dog  -> doa  -> poa  -> pua  -> qua  -> quaw  -> quawk  -> quack
+dog  -> doa  -> toa  -> tua  -> qua  -> quar  -> quark  -> quack
+dog  -> doa  -> toa  -> tua  -> qua  -> quaw  -> quawk  -> quack
+dog  -> doc  -> boc  -> bock  -> bick  -> buick  -> quick  -> quack
+dog  -> doc  -> boc  -> bock  -> buck  -> buick  -> quick  -> quack
+dog  -> doc  -> duc  -> duck  -> buck  -> buick  -> quick  -> quack
+dog  -> doc  -> dock  -> bock  -> bick  -> buick  -> quick  -> quack
+dog  -> doc  -> dock  -> bock  -> buck  -> buick  -> quick  -> quack
+dog  -> doc  -> dock  -> dick  -> bick  -> buick  -> quick  -> quack
+dog  -> doc  -> dock  -> duck  -> buck  -> buick  -> quick  -> quack
+dog  -> dod  -> dad  -> duad  -> quad  -> quar  -> quark  -> quack
+dog  -> dod  -> dad  -> duad  -> quad  -> quaw  -> quawk  -> quack
+dog  -> dod  -> dud  -> duad  -> quad  -> quar  -> quark  -> quack
+dog  -> dod  -> dud  -> duad  -> quad  -> quaw  -> quawk  -> quack
+dog  -> doe  -> due  -> que  -> qua  -> quar  -> quark  -> quack
+dog  -> doe  -> due  -> que  -> qua  -> quaw  -> quawk  -> quack
+dog  -> doe  -> due  -> que  -> quae  -> quar  -> quark  -> quack
+dog  -> doe  -> due  -> que  -> quae  -> quaw  -> quawk  -> quack
+dog  -> doe  -> due  -> que  -> quae  -> quare  -> quark  -> quack
+dog  -> dol  -> dal  -> dual  -> qual  -> quar  -> quark  -> quack
+dog  -> dol  -> dal  -> dual  -> qual  -> quaw  -> quawk  -> quack
+dog  -> dol  -> dal  -> dual  -> qual  -> quarl  -> quark  -> quack
+dog  -> don  -> dan  -> duan  -> quan  -> quar  -> quark  -> quack
+dog  -> don  -> dan  -> duan  -> quan  -> quaw  -> quawk  -> quack
+dog  -> don  -> dun  -> duan  -> quan  -> quar  -> quark  -> quack
+dog  -> don  -> dun  -> duan  -> quan  -> quaw  -> quawk  -> quack
+dog  -> doo  -> duo  -> quo  -> qua  -> quar  -> quark  -> quack
+dog  -> doo  -> duo  -> quo  -> qua  -> quaw  -> quawk  -> quack
+dog  -> doo  -> duo  -> quo  -> quor  -> quar  -> quark  -> quack
+dog  -> dor  -> dar  -> gar  -> guar  -> quar  -> quark  -> quack
+dog  -> dor  -> dur  -> gur  -> guar  -> quar  -> quark  -> quack
+dog  -> dor  -> gor  -> gar  -> guar  -> quar  -> quark  -> quack
+dog  -> dor  -> gor  -> gur  -> guar  -> quar  -> quark  -> quack
+dog  -> dor  -> gor  -> goar  -> guar  -> quar  -> quark  -> quack
+dog  -> dos  -> duos  -> quos  -> quor  -> quar  -> quark  -> quack
+dog  -> dot  -> dat  -> qat  -> quat  -> quar  -> quark  -> quack
+dog  -> dot  -> dat  -> qat  -> quat  -> quaw  -> quawk  -> quack
+dog  -> dot  -> dat  -> qat  -> quat  -> quart  -> quark  -> quack
+dog  -> dug  -> du  -> qu  -> qua  -> quar  -> quark  -> quack
+dog  -> dug  -> du  -> qu  -> qua  -> quaw  -> quawk  -> quack
+dog  -> dug  -> duc  -> duck  -> buck  -> buick  -> quick  -> quack
+dog  -> dug  -> dud  -> duad  -> quad  -> quar  -> quark  -> quack
+dog  -> dug  -> dud  -> duad  -> quad  -> quaw  -> quawk  -> quack
+dog  -> dug  -> due  -> que  -> qua  -> quar  -> quark  -> quack
+dog  -> dug  -> due  -> que  -> qua  -> quaw  -> quawk  -> quack
+dog  -> dug  -> due  -> que  -> quae  -> quar  -> quark  -> quack
+dog  -> dug  -> due  -> que  -> quae  -> quaw  -> quawk  -> quack
+dog  -> dug  -> due  -> que  -> quae  -> quare  -> quark  -> quack
+dog  -> dug  -> dui  -> qui  -> qua  -> quar  -> quark  -> quack
+dog  -> dug  -> dui  -> qui  -> qua  -> quaw  -> quawk  -> quack
+dog  -> dug  -> dui  -> qui  -> quai  -> quar  -> quark  -> quack
+dog  -> dug  -> dui  -> qui  -> quai  -> quaw  -> quawk  -> quack
+dog  -> dug  -> dui  -> qui  -> quia  -> quica  -> quick  -> quack
+dog  -> dug  -> dui  -> qui  -> quin  -> quink  -> quick  -> quack
+dog  -> dug  -> dun  -> duan  -> quan  -> quar  -> quark  -> quack
+dog  -> dug  -> dun  -> duan  -> quan  -> quaw  -> quawk  -> quack
+dog  -> dug  -> duo  -> quo  -> qua  -> quar  -> quark  -> quack
+dog  -> dug  -> duo  -> quo  -> qua  -> quaw  -> quawk  -> quack
+dog  -> dug  -> duo  -> quo  -> quor  -> quar  -> quark  -> quack
+dog  -> dug  -> dur  -> gur  -> guar  -> quar  -> quark  -> quack
+dog  -> dug  -> pug  -> pua  -> qua  -> quar  -> quark  -> quack
+dog  -> dug  -> pug  -> pua  -> qua  -> quaw  -> quawk  -> quack
+dog  -> dug  -> rug  -> rua  -> qua  -> quar  -> quark  -> quack
+dog  -> dug  -> rug  -> rua  -> qua  -> quaw  -> quawk  -> quack
+dog  -> dug  -> tug  -> tua  -> qua  -> quar  -> quark  -> quack
+dog  -> dug  -> tug  -> tua  -> qua  -> quaw  -> quawk  -> quack
+dog  -> dug  -> dung  -> qung  -> quag  -> quar  -> quark  -> quack
+dog  -> dug  -> dung  -> qung  -> quag  -> quaw  -> quawk  -> quack
+dog  -> gog  -> gag  -> gar  -> guar  -> quar  -> quark  -> quack
+dog  -> gog  -> goa  -> goar  -> guar  -> quar  -> quark  -> quack
+dog  -> gog  -> gor  -> gar  -> guar  -> quar  -> quark  -> quack
+dog  -> gog  -> gor  -> gur  -> guar  -> quar  -> quark  -> quack
+dog  -> gog  -> gor  -> goar  -> guar  -> quar  -> quark  -> quack
+dog  -> rog  -> rug  -> rua  -> qua  -> quar  -> quark  -> quack
+dog  -> rog  -> rug  -> rua  -> qua  -> quaw  -> quawk  -> quack
+dog  -> tog  -> toa  -> tua  -> qua  -> quar  -> quark  -> quack
+dog  -> tog  -> toa  -> tua  -> qua  -> quaw  -> quawk  -> quack
+dog  -> tog  -> tug  -> tua  -> qua  -> quar  -> quark  -> quack
+dog  -> tog  -> tug  -> tua  -> qua  -> quaw  -> quawk  -> quack
+dog  -> dong  -> dung  -> qung  -> quag  -> quar  -> quark  -> quack
+dog  -> dong  -> dung  -> qung  -> quag  -> quaw  -> quawk  -> quack
+}
+Done 201,508.40ms, considered 1,189,098 words for 107 total minimum paths
+
+Find path from 'angerly' to 'invaded'
+Done 30.52ms, considered 4 words for 0 total minimum paths
+
+Find path from 'vulgates' to 'gumwood'
+Done 666,031.46ms, considered 2,545,869 words for 0 total minimum paths
+
+Find path from 'sweetly' to 'raddles'
+Shortest path lengths: 10
+digraph sweetly_raddles_10{concentrate=true;
+sweetly  -> sweety  -> sweet  -> weet  -> reet  -> reed  -> reded  -> redded  -> radded  -> raddled  -> raddles
+sweetly  -> sweety  -> sweet  -> weet  -> reet  -> reed  -> reded  -> redded  -> reddled  -> raddled  -> raddles
+sweetly  -> sweety  -> sweet  -> weet  -> reet  -> reed  -> reded  -> redded  -> reddled  -> reddles  -> raddles
+sweetly  -> sweety  -> sweet  -> weet  -> weed  -> reed  -> reded  -> redded  -> radded  -> raddled  -> raddles
+sweetly  -> sweety  -> sweet  -> weet  -> weed  -> reed  -> reded  -> redded  -> reddled  -> raddled  -> raddles
+sweetly  -> sweety  -> sweet  -> weet  -> weed  -> reed  -> reded  -> redded  -> reddled  -> reddles  -> raddles
+sweetly  -> sweety  -> sweet  -> weet  -> weer  -> waer  -> wader  -> wadder  -> waddler  -> waddles  -> raddles
+sweetly  -> sweety  -> sweet  -> weet  -> wees  -> pees  -> peles  -> pales  -> padles  -> paddles  -> raddles
+sweetly  -> sweety  -> sweet  -> weet  -> wees  -> waes  -> wades  -> wadies  -> waddies  -> waddles  -> raddles
+sweetly  -> sweety  -> sweet  -> weet  -> wees  -> waes  -> wales  -> pales  -> padles  -> paddles  -> raddles
+sweetly  -> sweety  -> sweet  -> sleet  -> slee  -> alee  -> ales  -> pales  -> padles  -> paddles  -> raddles
+sweetly  -> sweety  -> sweet  -> sweer  -> weer  -> waer  -> wader  -> wadder  -> waddler  -> waddles  -> raddles
+sweetly  -> sweety  -> weety  -> weet  -> reet  -> reed  -> reded  -> redded  -> radded  -> raddled  -> raddles
+sweetly  -> sweety  -> weety  -> weet  -> reet  -> reed  -> reded  -> redded  -> reddled  -> raddled  -> raddles
+sweetly  -> sweety  -> weety  -> weet  -> reet  -> reed  -> reded  -> redded  -> reddled  -> reddles  -> raddles
+sweetly  -> sweety  -> weety  -> weet  -> weed  -> reed  -> reded  -> redded  -> radded  -> raddled  -> raddles
+sweetly  -> sweety  -> weety  -> weet  -> weed  -> reed  -> reded  -> redded  -> reddled  -> raddled  -> raddles
+sweetly  -> sweety  -> weety  -> weet  -> weed  -> reed  -> reded  -> redded  -> reddled  -> reddles  -> raddles
+sweetly  -> sweety  -> weety  -> weet  -> weer  -> waer  -> wader  -> wadder  -> waddler  -> waddles  -> raddles
+sweetly  -> sweety  -> weety  -> weet  -> wees  -> pees  -> peles  -> pales  -> padles  -> paddles  -> raddles
+sweetly  -> sweety  -> weety  -> weet  -> wees  -> waes  -> wades  -> wadies  -> waddies  -> waddles  -> raddles
+sweetly  -> sweety  -> weety  -> weet  -> wees  -> waes  -> wales  -> pales  -> padles  -> paddles  -> raddles
+sweetly  -> sweety  -> weety  -> weedy  -> weed  -> reed  -> reded  -> redded  -> radded  -> raddled  -> raddles
+sweetly  -> sweety  -> weety  -> weedy  -> weed  -> reed  -> reded  -> redded  -> reddled  -> raddled  -> raddles
+sweetly  -> sweety  -> weety  -> weedy  -> weed  -> reed  -> reded  -> redded  -> reddled  -> reddles  -> raddles
+sweetly  -> sweety  -> weety  -> weedy  -> reedy  -> reed  -> reded  -> redded  -> radded  -> raddled  -> raddles
+sweetly  -> sweety  -> weety  -> weedy  -> reedy  -> reed  -> reded  -> redded  -> reddled  -> raddled  -> raddles
+sweetly  -> sweety  -> weety  -> weedy  -> reedy  -> reed  -> reded  -> redded  -> reddled  -> reddles  -> raddles
+sweetly  -> sweety  -> weety  -> weedy  -> wendy  -> wandy  -> waddy  -> waddly  -> waddle  -> raddle  -> raddles
+sweetly  -> sweety  -> weety  -> weedy  -> wendy  -> wandy  -> waddy  -> waddly  -> waddle  -> waddles  -> raddles
+sweetly  -> sweety  -> weety  -> weets  -> wees  -> pees  -> peles  -> pales  -> padles  -> paddles  -> raddles
+sweetly  -> sweety  -> weety  -> weets  -> wees  -> waes  -> wades  -> wadies  -> waddies  -> waddles  -> raddles
+sweetly  -> sweety  -> weety  -> weets  -> wees  -> waes  -> wales  -> pales  -> padles  -> paddles  -> raddles
+sweetly  -> sweety  -> weety  -> weets  -> welts  -> pelts  -> peles  -> pales  -> padles  -> paddles  -> raddles
+sweetly  -> sweety  -> sleety  -> sleet  -> slee  -> alee  -> ales  -> pales  -> padles  -> paddles  -> raddles
+sweetly  -> sweety  -> sweets  -> weets  -> wees  -> pees  -> peles  -> pales  -> padles  -> paddles  -> raddles
+sweetly  -> sweety  -> sweets  -> weets  -> wees  -> waes  -> wades  -> wadies  -> waddies  -> waddles  -> raddles
+sweetly  -> sweety  -> sweets  -> weets  -> wees  -> waes  -> wales  -> pales  -> padles  -> paddles  -> raddles
+sweetly  -> sweety  -> sweets  -> weets  -> welts  -> pelts  -> peles  -> pales  -> padles  -> paddles  -> raddles
+}
+Done 1,446.36ms, considered 1,450,174 words for 39 total minimum paths
+
+Find path from 'lenten' to 'chiffonnieres'
+Done 1,268.55ms, considered 1,967,180 words for 0 total minimum paths
+
+Find path from 'cradlemen' to 'discreation'
+Done 30.53ms, considered 2 words for 0 total minimum paths
+
+Find path from 'blinkingly' to 'taupou'
+Done 475.39ms, considered 45 words for 0 total minimum paths
+
+Find path from 'protanopia' to 'interiorist'
+Done 24.78ms, considered 2 words for 0 total minimum paths
+
+Find path from 'outchid' to 'paramountly'
+Done 47.63ms, considered 4 words for 0 total minimum paths
+
+Find path from 'bldr' to 'rewrote'
+Shortest path lengths: 11
+digraph bldr_rewrote_11{concentrate=true;
+bldr  -> bld  -> bed  -> bes  -> best  -> besit  -> bedsit  -> bedsite  -> bedrite  -> bewrite  -> rewrite  -> rewrote
+bldr  -> bld  -> bed  -> bet  -> best  -> besit  -> bedsit  -> bedsite  -> bedrite  -> bewrite  -> rewrite  -> rewrote
+bldr  -> bld  -> bls  -> bes  -> best  -> besit  -> bedsit  -> bedsite  -> bedrite  -> bewrite  -> rewrite  -> rewrote
+bldr  -> bld  -> beld  -> belt  -> best  -> besit  -> bedsit  -> bedsite  -> bedrite  -> bewrite  -> rewrite  -> rewrote
+}
+Done 2,045.04ms, considered 3,081,637 words for 4 total minimum paths
+
+Find path from 'evacuee' to 'fall'
+Shortest path lengths: 6
+digraph evacuee_fall_6{concentrate=true;
+evacuee  -> evacue  -> evalue  -> value  -> vale  -> vall  -> fall
+}
+Done 0.81ms, considered 92 words for 1 total minimum paths
+
+Total search time: 910,060.80ms
+
