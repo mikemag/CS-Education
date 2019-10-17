@@ -1,3 +1,8 @@
+// Copyright (c) Michael M. Magruder (https://github.com/mikemag)
+//
+// This source code is licensed under the MIT license found in the
+// LICENSE file in the root directory of this source tree.
+
 // AP CS Levenshtein distance project in C++ instead of Java
 //
 // This is a companion to the Java version I implemented. It's got many of the
