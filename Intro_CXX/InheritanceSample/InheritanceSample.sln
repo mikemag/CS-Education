@@ -5,6 +5,11 @@ VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "InheritanceSample", "InheritanceSample\InheritanceSample.vcxproj", "{DFCF2F36-4D6F-4B99-9829-678CF11B512B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3D14ED2A-CBB2-4D15-8CE2-16FE43DDCC47}"
+	ProjectSection(SolutionItems) = preProject
+		InheritanceSample\README.md = InheritanceSample\README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
