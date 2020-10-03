@@ -68,4 +68,24 @@ public class Main {
         double iterNS = (end - start) / (double)iterations;
         System.out.printf("Elapsed time: %,.2fms, time per item: %.4fns\n", totalMS, iterNS);
     }
+
+    // Fun facts:
+    //
+    // The cycle time for a 1GHz CPU is 1ns. Many instructions execute in 1 cycle. So if your computer runs at
+    // 3GHz, then it can pretty much do three instructions in a single ns. (This isn't 100% true, but it's close
+    // enough for a basic understanding.)
+    //
+    // 1.016703362164 nanoseconds (by definition) – time taken by light to travel 1 foot in a vacuum.
+    //   - https://en.wikipedia.org/wiki/Nanosecond
+    //
+    // So if you have a 3GHz computer, in the time it takes for the light to reach your eyes from your laptop screen,
+    // it's already done more than 3 things.
+
+    // I ran this on my MacBook Pro (16-inch, 2019), macOS Catalina version 10.15.6 (19G2021). It has an
+    // Intel(R) Core(TM) i9-9980HK CPU @ 2.40GHz, which can boost to 5.00GHz, with 64GB RAM.
+    // OpenJDK 64-Bit Server VM (build 14.0.2+12-46, mixed mode, sharing)
+    //
+    // Elapsed time: 3,037.53ms, time per item: 0.3038ns
+    //
+    // Your mileage will vary.
  }
