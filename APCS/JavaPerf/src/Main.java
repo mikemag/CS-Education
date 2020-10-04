@@ -44,7 +44,7 @@ public class Main {
         int sum = 0;
         long s = System.nanoTime(); // Start measuring just before your loop
         for (long i = 0; i < iterations; i++) {
-             sum += add(a, b); // Call your interesting function in the loop and do something with the result
+            sum += add(a, b); // Call your interesting function in the loop and do something with the result
         }
         long e = System.nanoTime(); // Stop measuring right after the loop
         System.out.println(sum); // Do something with the result
@@ -56,16 +56,16 @@ public class Main {
     }
 
     // System.nanoTime() let's you measure how many nanoseconds (ns) elapsed. That's one billionth of a second.
-    // Very small functions will take ns or us (microseconds, one millionth of a second). Larger functions will be
-    // measured in ms (thoushands of a second).
+    // Very small functions will take ns or µs (microseconds, one millionth of a second). Larger functions will be
+    // measured in ms (thousands of a second).
     //
-    // Given a time delta in ns, you can conver to us by dividing by 1_000.0, and to ms by dividing by 1_000_000.0.
+    // Given a time delta in ns, you can convert to µs by dividing by 1_000.0, and to ms by dividing by 1_000_000.0.
     //
     // I always print the total elapsed time in ms, and for this small add() function I printed the per-iteration
     // time in ns.
     public static void printPerfResult(long iterations, long start, long end) {
         double totalMS = (end - start) / 1_000_000.0;
-        double iterNS = (end - start) / (double)iterations;
+        double iterNS = (end - start) / (double) iterations;
         System.out.printf("Elapsed time: %,.2fms, time per item: %.4fns\n", totalMS, iterNS);
     }
 
@@ -88,4 +88,4 @@ public class Main {
     // Elapsed time: 3,037.53ms, time per item: 0.3038ns
     //
     // Your mileage will vary.
- }
+}
