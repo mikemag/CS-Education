@@ -3,7 +3,10 @@
 // This source code is licensed under the MIT license found in the
 // LICENSE file in the root directory of this source tree.
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -40,6 +43,7 @@ public class LevenshteinParallel {
   // each thread. This is a "Runnable", and the run() method will be executed on a
   // different thread.
   private static class NeighborMapTask implements Runnable {
+
     private final int startIndex;
     private final int endIndex;
     private final CountDownLatch doneLatch;
@@ -100,8 +104,10 @@ public class LevenshteinParallel {
         }
       }
       doneLatch.countDown(); // Let buildFullNeighborMapParallel() know this task is done.
-      System.out.printf("%s: done with [%,d , %,d), latch is %,d\n", Thread.currentThread().getName(), startIndex,
-          endIndex, doneLatch.getCount());
+      System.out
+          .printf("%s: done with [%,d , %,d), latch is %,d\n", Thread.currentThread().getName(),
+              startIndex,
+              endIndex, doneLatch.getCount());
     }
   }
 
@@ -115,7 +121,8 @@ public class LevenshteinParallel {
 
     int taskCount = Levenshtein.words.size() / parallelBuildChunkSize + 1;
     CountDownLatch doneLatch = new CountDownLatch(taskCount);
-    System.out.printf("Spawning up %,d tasks to build the map in parallel...\n", doneLatch.getCount());
+    System.out
+        .printf("Spawning up %,d tasks to build the map in parallel...\n", doneLatch.getCount());
     int size = 0;
     for (int i = 0; i < Levenshtein.words.size(); i += parallelBuildChunkSize) {
       size = Math.min(parallelBuildChunkSize, Levenshtein.words.size() - i);
@@ -170,6 +177,7 @@ public class LevenshteinParallel {
   // We need an object to represent each search because some of our tasks need
   // share most of this state.
   public static final class LazyFindPathBFS {
+
     private static ExecutorService lazyBFSPool = null;
 
     private final String startWord;
@@ -214,7 +222,8 @@ public class LevenshteinParallel {
 
         // Prepare the new edge by lazily building any missing pieces of the neighbor
         // map in parallel.
-        uniqueWordsOnEdge.removeIf((w) -> neighbors.get(w) != null); // Filter out words with neighbors already.
+        uniqueWordsOnEdge
+            .removeIf((w) -> neighbors.get(w) != null); // Filter out words with neighbors already.
         if (uniqueWordsOnEdge.size() == 0) {
           System.out.println("Prepare edge:    no work");
         } else {
@@ -225,7 +234,8 @@ public class LevenshteinParallel {
           String[] uniqueWords = uniqueWordsOnEdge.stream().toArray(String[]::new);
           int taskCount = uniqueWords.length / lazyBFSBuildMapChunkSize + 1;
           CountDownLatch doneLatch = new CountDownLatch(taskCount);
-          System.out.printf("Prepare edge: %, 4d tasks for %, 9d words\n", taskCount, uniqueWords.length);
+          System.out
+              .printf("Prepare edge: %, 4d tasks for %, 9d words\n", taskCount, uniqueWords.length);
           int size = 0;
           for (int i = 0; i < uniqueWords.length; i += lazyBFSBuildMapChunkSize) {
             size = Math.min(lazyBFSBuildMapChunkSize, uniqueWords.length - i);
@@ -242,7 +252,8 @@ public class LevenshteinParallel {
         // our target word as we go.
         int taskCount = edgeOfExploredArea.size() / lazyBFSBuildLevelChunkSize + 1;
         CountDownLatch doneLatch = new CountDownLatch(taskCount);
-        System.out.printf("Expand edge:  %, 4d tasks for %, 9d words\n", taskCount, edgeOfExploredArea.size());
+        System.out.printf("Expand edge:  %, 4d tasks for %, 9d words\n", taskCount,
+            edgeOfExploredArea.size());
         int size = 0;
         for (int i = 0; i < edgeOfExploredArea.size(); i += size) {
           size = Math.min(lazyBFSBuildLevelChunkSize, edgeOfExploredArea.size() - i);
@@ -265,19 +276,22 @@ public class LevenshteinParallel {
         System.out.println("}");
       }
       double searchMS = (System.nanoTime() - startTime) / 1000000.0;
-      System.out.format("Done %,.2fms, considered %,d words for %,d total minimum paths\n\n", searchMS,
-          totalWords, totalMinPaths);
+      System.out
+          .format("Done %,.2fms, considered %,d words for %,d total minimum paths\n\n", searchMS,
+              totalWords, totalMinPaths);
     }
 
     // A task to build up the neighbor map for a chunk of words. This part ought to
     // look pretty similar to the regular version.
     private final class LazyBuildMapTask implements Runnable {
+
       private final String[] uniqueWords;
       private final int startIndex;
       private final int endIndex;
       private final CountDownLatch doneLatch;
 
-      public LazyBuildMapTask(String[] uniqueWords, int startIndex, int endIndex, CountDownLatch doneLatch) {
+      public LazyBuildMapTask(String[] uniqueWords, int startIndex, int endIndex,
+          CountDownLatch doneLatch) {
         this.uniqueWords = uniqueWords;
         this.startIndex = startIndex;
         this.endIndex = endIndex;
@@ -309,6 +323,7 @@ public class LevenshteinParallel {
 
     // A task to build up the new edge of the explored area, given a chunk of the current edge.
     private final class LazyBuildNextLevelTask implements Runnable {
+
       private final LazyFindPathBFS data;
       private final int startIndex;
       private final int endIndex;
@@ -338,7 +353,8 @@ public class LevenshteinParallel {
                       data.targetWord, p.size());
                 }
                 data.totalMinPaths++;
-                Levenshtein.printPath(p, w); // Print under the lock, so the output isn't interleaved.
+                Levenshtein
+                    .printPath(p, w); // Print under the lock, so the output isn't interleaved.
               }
             }
             if (!data.exploredArea.contains(w)) { // Read only

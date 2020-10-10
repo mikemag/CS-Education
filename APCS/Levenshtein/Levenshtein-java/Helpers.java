@@ -5,8 +5,11 @@
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.*;
-import java.util.function.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.function.BiFunction;
 
 // Helpers for the Levenshtein distance project.
 
@@ -43,7 +46,9 @@ public class Helpers {
   }
 
   public static class Test {
+
     public static class Args {
+
       Args(String w1, String w2, long i) {
         this.w1 = w1;
         this.w2 = w2;
@@ -64,7 +69,7 @@ public class Helpers {
 
     public String name;
     public BiFunction<String, String, Integer> func;
-    public Args tests[];
+    public Args[] tests;
     public Args perftest;
   }
 
@@ -141,8 +146,11 @@ public class Helpers {
       }
     }
 
-    System.out.format("Min/avg/max word size: %d/%.2f/%d\n", kmin, (double) ktotal / neighbors.size(), kmax);
-    System.out.format("Min/avg/max neighbor count: %d/%.2f/%d\n\n", nmin, (double) ntotal / neighbors.size(), nmax);
+    System.out
+        .format("Min/avg/max word size: %d/%.2f/%d\n", kmin, (double) ktotal / neighbors.size(),
+            kmax);
+    System.out.format("Min/avg/max neighbor count: %d/%.2f/%d\n\n", nmin,
+        (double) ntotal / neighbors.size(), nmax);
 //		Helpers.dumpArray(m);
   }
 

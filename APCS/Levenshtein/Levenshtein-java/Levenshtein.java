@@ -3,7 +3,16 @@
 // This source code is licensed under the MIT license found in the
 // LICENSE file in the root directory of this source tree.
 
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+import java.util.Scanner;
 
 // AP CS Levenshtein distance project.
 //
@@ -209,10 +218,12 @@ public class Levenshtein {
         int insertion = d[i][j - 1] + 1;
         int subsitution = d[i - 1][j - 1] + substitutionCost;
         int n = deletion;
-        if (insertion < n)
+        if (insertion < n) {
           n = insertion;
-        if (subsitution < n)
+        }
+        if (subsitution < n) {
           n = subsitution;
+        }
         d[i][j] = n;
       }
     }
@@ -421,7 +432,8 @@ public class Levenshtein {
               tandsChecks / 1000000.0, totalCompsNeeded / 1000000.0,
               (double) tandsChecks / (double) totalCompsNeeded * 100.0, totalNeighbors);
           double elapsedMS = (currentTime - startTime) / 1000000.0;
-          System.out.format("Elapsed time %,.2fs, average time %.04fus, for %,d calls\n", elapsedMS / 1000,
+          System.out.format("Elapsed time %,.2fs, average time %.04fus, for %,d calls\n",
+              elapsedMS / 1000,
               elapsedMS / totalChecks * 1000.0, totalChecks);
           long callsLeft = totalCompsNeeded - tandsChecks;
           // The ETA is rough since we're skipping an unknown number of checks per row.
@@ -500,6 +512,7 @@ public class Levenshtein {
   // Used to print the paths we discover, so we keep parent references as we
   // explore the graph.
   public static class Node {
+
     Node parent;
     String word;
 
@@ -582,8 +595,10 @@ public class Levenshtein {
       System.out.println("}");
     }
     double searchMS = (System.nanoTime() - startTime) / 1000000.0;
-    System.out.format("Done %,.2fms, considered %,d words for %,d total minimum paths\n\n", searchMS, totalWords,
-        totalMinPaths);
+    System.out
+        .format("Done %,.2fms, considered %,d words for %,d total minimum paths\n\n", searchMS,
+            totalWords,
+            totalMinPaths);
   }
 
   // A small helper to get us the neighbor list for a word, and build its
@@ -606,27 +621,29 @@ public class Levenshtein {
   public static void main(String[] args) {
     editDistanceStaticSetup(8); // Static setup large enough for all functional and perf tests.
 
-    Helpers.Test.Args commonTests[] = { new Helpers.Test.Args("dog", "dot", 1),
+    Helpers.Test.Args[] commonTests = {new Helpers.Test.Args("dog", "dot", 1),
         new Helpers.Test.Args("dog", "dog", 0), new Helpers.Test.Args("Saturday", "Sunday", 3),
-        new Helpers.Test.Args("sitting", "kitten", 3) };
-    Helpers.Test.Args equalSizeTests[] = { new Helpers.Test.Args("dog", "dot", 1),
-        new Helpers.Test.Args("dog", "dog", 0), new Helpers.Test.Args("dog", "cat", 2) };
-    Helpers.Test.Args offByOneTests[] = { new Helpers.Test.Args("dog", "dogo", 1),
+        new Helpers.Test.Args("sitting", "kitten", 3)};
+    Helpers.Test.Args[] equalSizeTests = {new Helpers.Test.Args("dog", "dot", 1),
+        new Helpers.Test.Args("dog", "dog", 0), new Helpers.Test.Args("dog", "cat", 2)};
+    Helpers.Test.Args[] offByOneTests = {new Helpers.Test.Args("dog", "dogo", 1),
         new Helpers.Test.Args("dog", "doog", 1), new Helpers.Test.Args("dog", "adog", 1),
-        new Helpers.Test.Args("dog", "acat", 3) };
-    Helpers.Test.Args cheaterCombinedTests[] = { new Helpers.Test.Args("dog", "dot", 1),
+        new Helpers.Test.Args("dog", "acat", 3)};
+    Helpers.Test.Args[] cheaterCombinedTests = {new Helpers.Test.Args("dog", "dot", 1),
         new Helpers.Test.Args("dog", "dog", 0), new Helpers.Test.Args("Saturday", "Sunday", 0),
-        new Helpers.Test.Args("sitting", "kitten", 3) };
-    Helpers.Test tests[] = new Helpers.Test[] {
+        new Helpers.Test.Args("sitting", "kitten", 3)};
+    Helpers.Test[] tests = new Helpers.Test[]{
         new Helpers.Test("Empty function", Levenshtein::emptyTestFunc, null,
             new Helpers.Test.Args("Empty", "Empty", 5000000000L)),
         new Helpers.Test("Levenshtein basic", Levenshtein::editDistanceBasic, commonTests,
             new Helpers.Test.Args("Saturday", "Sunday", 2000000)),
         new Helpers.Test("Levenshtein no-alloc", Levenshtein::editDistanceNoAlloc, commonTests,
             new Helpers.Test.Args("Saturday", "Sunday", 10000000)),
-        new Helpers.Test("Levenshtein hoisted string lengths", Levenshtein::editDistanceHoistedLengths,
+        new Helpers.Test("Levenshtein hoisted string lengths",
+            Levenshtein::editDistanceHoistedLengths,
             commonTests, new Helpers.Test.Args("Saturday", "Sunday", 10000000)),
-        new Helpers.Test("Levenshtein hoisted all the things", Levenshtein::editDistanceHoistAllTheThings,
+        new Helpers.Test("Levenshtein hoisted all the things",
+            Levenshtein::editDistanceHoistAllTheThings,
             commonTests, new Helpers.Test.Args("Saturday", "Sunday", 10000000)),
         new Helpers.Test("Levenshtein best", Levenshtein::editDistanceClassicBest, commonTests,
             new Helpers.Test.Args("Saturday", "Sunday", 10000000)),
@@ -676,7 +693,8 @@ public class Levenshtein {
         LevenshteinParallel.LazyFindPathBFS.setupThreadPool();
       }
     }
-    wordLengthStarts = buildWordLengthStarts(wordLengthLimit); // For lazy neighbor finding in all cases.
+    wordLengthStarts = buildWordLengthStarts(
+        wordLengthLimit); // For lazy neighbor finding in all cases.
 
     // These are some sample pairs used to test and time our search algorithms.
     if (runSamplePairs) {
