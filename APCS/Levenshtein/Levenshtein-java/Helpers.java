@@ -99,7 +99,7 @@ public class Helpers {
       String w2 = t.perftest.w2;
       long n = t.perftest.i;
 
-      for (int i = 0; i < 50000; i++) {
+      for (int i = 0; i < 1_000_000; i++) {
         f.apply(w1, w2); // Warm-up
       }
 
@@ -110,8 +110,8 @@ public class Helpers {
       }
 
       long e = System.nanoTime();
-      double elapsedMS = (e - s) / 1000000.0;
-      System.out.format("Avg time %,.04fus -- %s, '%s' -> '%s', elapsed time %,.4fms, %,d calls\n",
+      double elapsedMS = (e - s) / 1_000_000.0;
+      System.out.format("Avg time %,.04fµs -- %s, '%s' -> '%s', elapsed time %,.4fms, %,d calls\n",
           elapsedMS / n * 1000.0, t.name, w1, w2, elapsedMS, n);
     }
 

@@ -16,50 +16,51 @@ import java.util.Scanner;
 
 // AP CS Levenshtein distance project.
 //
-// Implementation of the project, which is to find a path between two words making a 
-// single edit at each step only using valid words. 
+// Find a path between two words by making a single character edit at each step, using only valid
+// words.
 //
-// This shows a progression thru a number of different ways to try to compute the 
-// Levenshtein distance between two words in a reasonable amount of time. It also shows
-// how to compute all shortest paths and display them.
+// This project shows a progression thru a number of different ways to try to compute the
+// Levenshtein distance between two words in a reasonable amount of time. It also shows how to
+// compute all shortest paths and display them.
 //
-// There are a few ways to do this. The most obvious one, and most often suggested, is to 
-// build up the entire neighbor map first, then let the user pick words and give them an 
-// answer. This gives them a quick answer at the expense of waiting for the entire map to
-// be built. It also highlights the algorithmic and implementation issues nicely. Thus,
-// I really like this version as an exercise.
+// There are a few ways to do this. The most obvious one, and most often suggested, is to build up
+// the entire neighbor map first, then let the user pick words and give them an answer. This gives
+// them a quick answer at the expense of waiting for the entire map to be built. It also highlights
+// the algorithmic and implementation issues nicely. Thus, I really like this version as the first
+// exercise.
 //
-// Another way is to build the map lazily, only finding the neighbors you need to consider 
-// for the given words. This works just fine, and overall is faster than building the entire
-// map up front, but it comes at the expense of making the user wait, sometimes quite a
-// while, for each answer as the map is incrementally populated while they wait. It's also 
-// easier to gloss over the issues this way ;)
+// Another way is to build the map lazily, only finding the neighbors you need to consider for the
+// given words. This works just fine, and overall is faster than building the entire map up front,
+// but it comes at the expense of making the user wait, sometimes quite a while, for each answer as
+// the map is incrementally populated while they wait. It's also easier to gloss over the issues
+// this way ;)
 //
-// I've also added a parallel version of building the entire neighbor map first, with 
-// options to tweak how much work is farmed out to each task and how many threads to use.
-// See LevenshtienParallel.java for the parallel versions.
+// I've also added a parallel version of building the entire neighbor map first, with options to
+// tweak how much work is farmed out to each task and how many threads to use. See
+// LevenshtienParallel.java for the parallel versions.
 //
-// See the top of the Levenshtein class for options you can tweak, including full vs. lazy 
-// building, parallelism, etc. There are more options over in LevenshteinParallel.java.
+// See the top of the Levenshtein class for options you can tweak, including full vs. lazy building,
+// parallelism, etc. There are more options over in LevenshteinParallel.java.
 //
-// For pre-building the map, this processes the entire 370k word dictionary in ~6 min.
-// The basic version with no improvements takes over 33 hours.
-// The parallel version takes ~80 seconds w/ 8 threads.
+// For pre-building the map, this processes the entire 370k word dictionary in ~5 min. The basic
+// version with no improvements takes over 33 hours. The parallel version takes ~30 seconds w/ 16
+// threads.
 //
-// For the lazy building tests, the normal version takes ~187s while the parallel version
-// takes ~49s.
+// For the lazy building tests, the normal version takes ~108s while the parallel version takes ~29s
+// w/ 16 threads.
 //
-// NB: there are a bunch of functions in the Helpers class just to keep this file focused 
-// on the algorithm and its variations.
+// NB: there are a bunch of functions in the Helpers class just to keep this file focused on the
+// algorithm and its variations.
 //
-// All tests and timings taken on my Mid-2012 MacBook Pro, macOS Mojave 10.14.5, 
-// 2.6 GHz Intel Core i7 (4 cores, hyperthreaded, 256 KB L2, 6 MB L3), 8 GB 1600 MHz DDR3, 
-// plugged in, run from the command line with nothing else running. 
+// Test machine: MacBook Pro (16-inch, 2019), macOS Catalina 10.15.6 (19G2021), Intel(R) Core(TM)
+// i9-9980HK CPU @ 2.40GHz (boost to 5.0GHz, 8 cores, hyperthreaded), 64 GB 2667 MHz DDR4,
+// plugged in, run from the command
+// line with nothing else running.
 //
 // $ java --version
-// java 12.0.1 2019-04-16
-// Java(TM) SE Runtime Environment (build 12.0.1+12)
-// Java HotSpot(TM) 64-Bit Server VM (build 12.0.1+12, mixed mode, sharing)
+// openjdk 14.0.2 2020-07-14
+// OpenJDK Runtime Environment (build 14.0.2+12-46)
+// OpenJDK 64-Bit Server VM (build 14.0.2+12-46, mixed mode, sharing)
 
 public class Levenshtein {
 
@@ -74,13 +75,13 @@ public class Levenshtein {
   private static final boolean parallelLazyBFS = true && !buildFullMap;
   private static final boolean letTheUserPlay = true;
 
-  // First attempt based on the pseudo code at
-  // https://en.wikipedia.org/wiki/Levenshtein_distance. This is the classic
-  // non-recursive version, implemented as obviously as possible.
+  // First attempt based on the pseudo code at https://en.wikipedia.org/wiki/Levenshtein_distance.
+  // This is the classic non-recursive version, implemented as obviously as possible.
   //
-  // This algorithm is O(n^2) in the length of the strings, and the constants in
-  // it are pretty high, too, making for an expensive function when processing a
-  // real dictionary of words.
+  // This algorithm is O(n^2) in the length of the strings, and the constants in it are pretty high,
+  // too, making for an expensive function when processing a real dictionary of words.
+  //
+  // Runtime for this is ~0.5074µs
   private static int editDistanceBasic(String w1, String w2) {
     int[][] d = new int[w1.length() + 1][w2.length() + 1];
 
@@ -107,15 +108,16 @@ public class Levenshtein {
     return d[w1.length()][w2.length()];
   }
 
-  // This version replaces allocation of a temporary array with reuse of a static
-  // array. Memory allocation is expensive relative to the rest of the function,
-  // and avoiding it cuts the execution time in half.
+  // This version replaces allocation of a temporary array with reuse of a static array. Memory
+  // allocation and the initialization is expensive relative to the rest of the function, and
+  // avoiding it cuts the execution time by 70%.
   //
-  // Since the first row and column never change, we can initialize it once as
-  // well.
+  // Since the first row and column never change, we can initialize it once as well.
   //
   // Of course, we have to allocate this static array when the program starts. See
   // editDistanceStaticSetup().
+  //
+  // Runtime for this is ~0.1540µs
   private static int editDistanceNoAlloc(String w1, String w2) {
     int[][] d = StaticDistanceArray; // Pre-allocated, pre-initialized array.
 
@@ -135,8 +137,14 @@ public class Levenshtein {
     return d[w1.length()][w2.length()];
   }
 
-  // This version explores the cost of calling String::length(). "Hoisting" the
-  // calls out of the loops to the top of the function helps a fair bit.
+  // This version explores the cost of calling String::length(). "Hoisting" the calls out of the
+  // loops to the top of the function helps a fair bit, surprisingly. It suggests the compiler isn't
+  // doing a good job of this itself, even with immutable objects like String, which is a shame.
+  //
+  // There are other micro-optimizations like this that we can play with, but none of them really
+  // give too much of a win, and all of them just make the code more and more complex.
+  //
+  // Runtime for this is ~0.1299µs
   private static int editDistanceHoistedLengths(String w1, String w2) {
     int[][] d = StaticDistanceArray; // Pre-allocated array.
     int w1l = w1.length();
@@ -158,87 +166,12 @@ public class Levenshtein {
     return d[w1l][w2l];
   }
 
-  // If hoisting the String::length() calls helped, then why not hoist everything
-  // we can as high as we can?!
-  //
-  // Pull all the w1.charAt() calls up and toss all of w1 into a statically
-  // allocated array.
-  //
-  // Sadly, this is a small win... this suggests the JVM is doing a poor job of
-  // inlining tiny functions like String::length() and String::charAt().
-  private static int editDistanceHoistAllTheThings(String w1, String w2) {
-    int[][] d = StaticDistanceArray; // Pre-allocated array.
-    int w1l = w1.length();
-    int w2l = w2.length();
-
-    for (int i = 0; i < w1l; i++) {
-      w1ca[i + 1] = w1.charAt(i);
-    }
-
-    for (int j = 1; j <= w2l; j++) {
-      char jc = w2.charAt(j - 1);
-      for (int i = 1; i <= w1l; i++) {
-        int substitutionCost = 0;
-        if (w1ca[i] != jc) {
-          substitutionCost = 1;
-        }
-
-        d[i][j] = Math.min(d[i - 1][j] + 1, // deletion
-            Math.min(d[i][j - 1] + 1, // insertion
-                d[i - 1][j - 1] + substitutionCost)); // substitution
-      }
-    }
-
-    return d[w1l][w2l];
-  }
-
-  // Given the results above, perhaps Math.min() isn't inlined. Let's implement it
-  // directly.
-  //
-  // Again, surprisingly, this yields a decent win and brings us to our best
-  // version of the classic algorithm so far.
-  private static int editDistanceClassicBest(String w1, String w2) {
-    int[][] d = StaticDistanceArray;
-    int w1l = w1.length();
-    int w2l = w2.length();
-
-    for (int i = 0; i < w1l; i++) {
-      w1ca[i + 1] = w1.charAt(i);
-    }
-
-    for (int j = 1; j <= w2l; j++) {
-      char jc = w2.charAt(j - 1);
-      for (int i = 1; i <= w1l; i++) {
-        int substitutionCost = 0;
-        if (w1ca[i] != jc) {
-          substitutionCost = 1;
-        }
-
-        int deletion = d[i - 1][j] + 1;
-        int insertion = d[i][j - 1] + 1;
-        int subsitution = d[i - 1][j - 1] + substitutionCost;
-        int n = deletion;
-        if (insertion < n) {
-          n = insertion;
-        }
-        if (subsitution < n) {
-          n = subsitution;
-        }
-        d[i][j] = n;
-      }
-    }
-
-    return d[w1l][w2l];
-  }
-
   // Static pre-allocated memory for various implementations of the edit
   // distance function.
   private static int[][] StaticDistanceArray = null;
-  private static char[] w1ca = null;
 
   private static void editDistanceStaticSetup(int wordLengthLimit) {
     StaticDistanceArray = new int[wordLengthLimit + 1][wordLengthLimit + 1];
-    w1ca = new char[wordLengthLimit + 1];
     for (int i = 1; i <= wordLengthLimit; i++) {
       StaticDistanceArray[i][0] = i;
     }
@@ -247,20 +180,19 @@ public class Levenshtein {
     }
   }
 
-  // The problem statement never said we have to actually compute the Levenshtein
-  // distance between any words. It said we have to find all words within 1
-  // distance of each other, and build a neighbors map. So why did we even
-  // implement the real thing?? :)
+  // The problem statement never said we have to actually compute the Levenshtein distance between
+  // any words. It said we have to find all words within 1 distance of each other, and build a
+  // neighbors map. That's a much easier problem, so why did we even implement the real thing?? :)
   //
-  // To start, let's assume we're given two words of equal lengths. Can we
-  // determine quickly and easily if they are distance 1 or not?
+  // To start, let's assume we're given two words of equal lengths. Can we determine quickly and
+  // easily if they are distance 1 or not?
   //
-  // Sure. Since they're the same length the only option to make them equal
-  // is substitution, thus we just need to count the number of different letters,
-  // and stop after we find more than one.
+  // Sure. Since they're the same length the only option to make them equal is substitution, thus we
+  // just need to count the number of different letters, and stop after we find more than one.
   //
-  // This is O(n) in the length of the strings, and a fraction of any of the
-  // methods above.
+  // This is O(n) in the length of the strings, and a fraction of any of the methods above.
+  //
+  // Runtime for this is ~0.0099µs
   public static int editDistanceEqual(String w1, String w2) {
     int w1l = w1.length();
     int diffs = 0;
@@ -275,21 +207,22 @@ public class Levenshtein {
     return diffs;
   }
 
-  // Next, for words to be within 1 distance they need to be within 1 character in
-  // length of each other.
+  // Next, for words of different lenghts to be within 1 edit distance they need to be within 1
+  // character in length of each other.
   //
-  // Also, substitution is no longer an option. Since they're off by one, deletion
-  // and insertion are the only options. Consider these examples, in order, to
-  // learn what the algorithm is doing.
+  // Also, substitution is no longer an option. Since they're off by one, deletion and insertion are
+  // the only options. Consider these examples, in order, to learn what the algorithm is doing.
   //
   // DOG & DOGO
   // DOG & DOOG
   // DOG & ADOG
   // DOG & ACAT
   //
-  // We'll consider the shorter word first and the longer word second, and only
-  // allow deletion in the longer word. Again, this is O(n) in the length of the
-  // strings and way faster than the real algorithm.
+  // We'll consider the shorter word first and the longer word second, and only allow deletion in
+  // the longer word. Again, this is O(n) in the length of the strings and way faster than the real
+  // algorithm.
+  //
+  // Runtime of this is ~0.0147µ
   public static int editDistanceOffByOne(String w1, String w2) {
     int diffs = 0;
     int w1l = w1.length(); // Requires w1 shorter than w2
@@ -314,19 +247,13 @@ public class Levenshtein {
     return diffs;
   }
 
-  // So let's combine the two to work with words of any length in any order,
-  // because you need this logic somewhere to make use of these.
+  // So let's combine the two to work with words of any length in any order, because you need this
+  // logic somewhere to make use of these.
   //
-  // On my Mid-2012 MacBook Pro:
-  // Avg time 0.7205us -- Levenshtein basic, 'Saturday' -> 'Sunday', elapsed time
-  // 1,441.0194ms, 2,000,000 calls
-  // Avg time 0.1905us -- Levenshtein best, 'Saturday' -> 'Sunday', elapsed time
-  // 1,905.4101ms, 10,000,000 calls
-  // Avg time 0.0209us -- Cheater combined, 'Saturxday' -> 'Saturday', elapsed
-  // time 2,093.1601ms, 100,000,000 calls
+  // Runtime for this is ~0.0153µs
   //
-  // Thus the original version is 34.47x slower than this.
-  // The best we could do with the classic algorithm is 9.11x slower than this.
+  // Thus the original version is 33.16x slower than this. The best we could do with the classic
+  // algorithm is 8.49x slower than this.
   private static int editDistanceCheater(String w1, String w2) {
     int w1l = w1.length();
     int w2l = w2.length();
@@ -344,39 +271,34 @@ public class Levenshtein {
     return ed;
   }
 
-  // This builds the neighbor map. Here are the optimizations from the obvious
-  // version:
+  // This builds the neighbor map. Here are the optimizations from the obvious version:
   //
-  // 1. Only compute half the matrix, cuts the run time in half. Being a neighbor
-  // is "commutative", i.e., order doesn't matter. If w1 is a neighbor of w2, then
-  // w2 is a neighbor to w1.
+  // 1. Only compute half the matrix, cuts the run time in half. Being a neighbor is "commutative",
+  //    i.e., order doesn't matter. If w1 is a neighbor of w2, then w2 is a neighbor to w1.
   //
   // 2. We hoist everything we can.
   //
-  // 3. We inline the "combined" cheater function to allow us to reuse the length
-  // computations.
+  // 3. We inline the "combined" cheater function to allow us to reuse the length computations.
   //
-  // 4. Sort the dictionary of words by their length. (Miyoshi's idea.) It came
-  // sorted alphabetically, so we end up sorted by length then lexically. This
-  // allows us to stop looking for neighbors when we see a string 2 or more
-  // longer. This is a multiple bonus actually and cuts the runtime by a bit
-  // more than half:
+  // 4. Sort the dictionary of words by their length. (Miyoshi's idea.) It came sorted
+  //    alphabetically, so we end up sorted by length then lexically. This allows us to stop looking
+  //    for neighbors when we see a string 2 or more longer. This is a multiple bonus actually and
+  //    cuts the runtime by a bit more than half:
   //
-  // a) We consider far fewer words than we otherwise would for a nice win.
+  //   a) We consider far fewer words than we otherwise would for a nice win.
   //
-  // b) There are cache and memory access effects we benefit from as we drag much
-  // less memory thru the cache.
+  //   b) There are cache and memory access effects we benefit from as we drag much less memory thru
+  //      the cache.
   //
-  // c) Since we do all equal sizes, then all off by ones, then stop, we get much
-  // better branch prediction.
+  //   c) Since we do all equal sizes, then all off by ones, then stop, we get much better branch
+  //      prediction.
   //
-  // Sorting by length experiment
-  // Unsorted words: Elapsed time 1,527.85s, average loop time 0.0223us, for
-  // 68,487,560,151 calls and 461,213 total neighbors
-  // Sorted words: Elapsed time 923.56s, average loop time 0.0135us, for
-  // 68,487,560,151 calls and 461,213 total neighbors
-  // Sorted words & stop early: Elapsed time 411.54s, average loop time 0.0206us,
-  // for 19,949,993,438 calls and 461,213 total neighbors
+  // Previous experiments gave the following times:
+  //   - Unsorted words:           1,527.85s (25.46min)
+  //   - Sorted words:               923.56s (15.39min)
+  //   - Sorted words & stop early:  411.54s (6.86min)
+  //
+  // Current runtime of this is ~308.11s (5.13min)
   public static ArrayList<String> words = null;
   public static HashMap<String, List<String>> neighbors = new HashMap<>();
 
@@ -400,11 +322,11 @@ public class Levenshtein {
         if (w1l == w2l) {
           ed = editDistanceEqual(w1, w2);
         } else {
-          int d = w2l - w1l;
+          int d = w2l - w1l; // Positive, since we're sorted by length
           if (d == 1) {
             ed = editDistanceOffByOne(w1, w2);
           } else {
-            // d > 1. If words is sorted by length, then everything past j is too long.
+            // d > 1. Since words is sorted by length, then everything past j is too long.
             skippedChecks += wordsLen - j;
             break;
           }
@@ -424,36 +346,32 @@ public class Levenshtein {
           nl2.add(w1);
         }
       }
-      if (i % 1000 == 0) {
+      if (i % 10_000 == 0) {
         long currentTime = System.nanoTime();
-        if (currentTime - lastTime > 1000000000) {
+        if (currentTime - lastTime > 1_000_000_000L) {
           long tandsChecks = totalChecks + skippedChecks;
           System.out.format("Finsihed '%s', %,.0fm/%,.0fm (%.2f%%), %,d neighbors\n", w1,
-              tandsChecks / 1000000.0, totalCompsNeeded / 1000000.0,
+              tandsChecks / 1_000_000.0, totalCompsNeeded / 1_000_000.0,
               (double) tandsChecks / (double) totalCompsNeeded * 100.0, totalNeighbors);
-          double elapsedMS = (currentTime - startTime) / 1000000.0;
-          System.out.format("Elapsed time %,.2fs, average time %.04fus, for %,d calls\n",
+          double elapsedMS = (currentTime - startTime) / 1_000_000.0;
+          System.out.format("Elapsed time %,.2fs, average time %.04fµs, for %,d calls\n\n",
               elapsedMS / 1000,
               elapsedMS / totalChecks * 1000.0, totalChecks);
-          long callsLeft = totalCompsNeeded - tandsChecks;
-          // The ETA is rough since we're skipping an unknown number of checks per row.
-          double etaMS = (elapsedMS / totalChecks) * callsLeft;
-          System.out.format("Estimate %,.2f minutes to go...\n\n", etaMS / 1000 / 60);
           lastTime = currentTime;
         }
       }
     }
 
-    double elapsedMS = (System.nanoTime() - startTime) / 1000000.0;
+    double elapsedMS = (System.nanoTime() - startTime) / 1_000_000.0;
     System.out.format("Skipped %,d checks\n", skippedChecks);
     System.out.format(
-        "Done.\nElapsed time %,.2fs, average loop time %.04fus, for %,d calls and %,d total neighbors\n\n",
+        "Done.\nElapsed time %,.2fs, average loop time %.04fµs, for %,d calls and %,d total neighbors\n\n",
         elapsedMS / 1000, elapsedMS / totalChecks * 1000.0, totalChecks, totalNeighbors);
   }
 
-  // This builds the neighbor map "lazily", one row at a time and on-demand. This
-  // allows us to skip building the full map in favor of only building the pieces
-  // we need to perform a given search. The map is essentially a cache.
+  // This builds the neighbor map "lazily", one row at a time and on-demand. This allows us to skip
+  // building the full map in favor of only building the pieces we need to perform a given search.
+  // The map is essentially a cache.
   public static int[] wordLengthStarts = null;
 
   public static void lazyBuildNeighborMap(String w1, List<String> nl) {
@@ -472,7 +390,7 @@ public class Levenshtein {
         } else if (d == -1) {
           ed = editDistanceOffByOne(w2, w1);
         } else if (d > 1) {
-          // If words is sorted by length, then everything past j is too long.
+          // Since words is sorted by length, then everything past j is too long.
           break;
         }
       }
@@ -482,8 +400,8 @@ public class Levenshtein {
     }
   }
 
-  // Build a map of where each group of words of a given length start.
-  // Used by lazyBuildNeighborMap() to skip the left side of the matrix.
+  // Build a map of where each group of words of a given length start. Used by
+  // lazyBuildNeighborMap() to skip the left side of the matrix.
   private static int[] buildWordLengthStarts(int wordLengthLimit) {
     int[] a = new int[wordLengthLimit];
 
@@ -509,8 +427,7 @@ public class Levenshtein {
     return a;
   }
 
-  // Used to print the paths we discover, so we keep parent references as we
-  // explore the graph.
+  // Used to print the paths we discover, so we keep parent references as we explore the graph.
   public static class Node {
 
     Node parent;
@@ -538,9 +455,8 @@ public class Levenshtein {
     return path;
   }
 
-  // Traverse the neighbor graph from w1 to w2, finding all shortest paths. Goes
-  // breadth-first. Trims out loops to make it a tree a level at a time as it
-  // goes.
+  // Traverse the neighbor graph from w1 to w2, finding all shortest paths. Goes breadth-first.
+  // Trims out loops to make it a tree a level at a time as it goes.
   private static void findPathBFS(String w1, String w2) {
     if (parallelLazyBFS) {
       new LevenshteinParallel.LazyFindPathBFS(w1, w2).findPath();
@@ -594,16 +510,15 @@ public class Levenshtein {
     if (totalMinPaths > 0) {
       System.out.println("}");
     }
-    double searchMS = (System.nanoTime() - startTime) / 1000000.0;
-    System.out
-        .format("Done %,.2fms, considered %,d words for %,d total minimum paths\n\n", searchMS,
-            totalWords,
-            totalMinPaths);
+    double searchMS = (System.nanoTime() - startTime) / 1_000_000.0;
+    System.out.format("Done %,.2fms, considered %,d words for %,d total minimum paths\n\n",
+        searchMS,
+        totalWords,
+        totalMinPaths);
   }
 
-  // A small helper to get us the neighbor list for a word, and build its
-  // neighbors lazily if necessary. Used by findPathBFS() and the user input code
-  // down in main().
+  // A small helper to get us the neighbor list for a word, and build its neighbors lazily if
+  // necessary. Used by findPathBFS() and the user input code down in main().
   private static List<String> getNeighborsWithLazyBuild(String w) {
     List<String> nl = neighbors.get(w);
     if (nl == null) {
@@ -634,25 +549,20 @@ public class Levenshtein {
         new Helpers.Test.Args("sitting", "kitten", 3)};
     Helpers.Test[] tests = new Helpers.Test[]{
         new Helpers.Test("Empty function", Levenshtein::emptyTestFunc, null,
-            new Helpers.Test.Args("Empty", "Empty", 5000000000L)),
+            new Helpers.Test.Args("Empty", "Empty", 10_000_000_000L)),
         new Helpers.Test("Levenshtein basic", Levenshtein::editDistanceBasic, commonTests,
-            new Helpers.Test.Args("Saturday", "Sunday", 2000000)),
+            new Helpers.Test.Args("Saturday", "Sunday", 4_000_000)),
         new Helpers.Test("Levenshtein no-alloc", Levenshtein::editDistanceNoAlloc, commonTests,
-            new Helpers.Test.Args("Saturday", "Sunday", 10000000)),
+            new Helpers.Test.Args("Saturday", "Sunday", 20_000_000)),
         new Helpers.Test("Levenshtein hoisted string lengths",
             Levenshtein::editDistanceHoistedLengths,
-            commonTests, new Helpers.Test.Args("Saturday", "Sunday", 10000000)),
-        new Helpers.Test("Levenshtein hoisted all the things",
-            Levenshtein::editDistanceHoistAllTheThings,
-            commonTests, new Helpers.Test.Args("Saturday", "Sunday", 10000000)),
-        new Helpers.Test("Levenshtein best", Levenshtein::editDistanceClassicBest, commonTests,
-            new Helpers.Test.Args("Saturday", "Sunday", 10000000)),
+            commonTests, new Helpers.Test.Args("Saturday", "Sunday", 20_000_000)),
         new Helpers.Test("Cheater equal lengths", Levenshtein::editDistanceEqual, equalSizeTests,
-            new Helpers.Test.Args("Saturday", "Satuxday", 100000000)),
+            new Helpers.Test.Args("Saturday", "Satuxday", 200_000_000)),
         new Helpers.Test("Cheater off by one", Levenshtein::editDistanceOffByOne, offByOneTests,
-            new Helpers.Test.Args("Saturday", "Saturxday", 100000000)),
+            new Helpers.Test.Args("Saturday", "Saturxday", 200_000_000)),
         new Helpers.Test("Cheater combined", Levenshtein::editDistanceCheater, cheaterCombinedTests,
-            new Helpers.Test.Args("Saturxday", "Saturday", 100000000)),
+            new Helpers.Test.Args("Saturxday", "Saturday", 200_000_000)),
 
     };
 
@@ -676,11 +586,10 @@ public class Levenshtein {
         return a.length() - b.length();
       }
     });
-    double sortMS = (System.nanoTime() - startTime) / 1000000.0;
+    double sortMS = (System.nanoTime() - startTime) / 1_000_000.0;
     System.out.format("Sorted words in %,.2fms\n\n", sortMS);
 
-    // Build the full neighbor map all at once (serial or parallel), or set up for
-    // lazy work.
+    // Build the full neighbor map all at once (serial or parallel), or set up for lazy work.
     if (buildFullMap) {
       if (parallelFullBuild) {
         LevenshteinParallel.buildFullNeighborMapParallel();
@@ -716,6 +625,7 @@ public class Levenshtein {
       findPathBFS("outchid", "paramountly");
       findPathBFS("bldr", "rewrote");
       findPathBFS("evacuee", "fall");
+      findPathBFS("monkey", "business");
 
       double searchMS = (System.nanoTime() - searchStartTime) / 1000000.0;
       System.out.format("Total search time: %,.2fms\n\n", searchMS);
