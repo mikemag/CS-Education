@@ -229,6 +229,25 @@ public class Mastermind {
 
   public static void main(String[] args) {
     try {
+      // Test cases from Miyoshi
+      Codeword testSecret = new Codeword(new byte[]{6, 6, 8, 4});
+      boolean success = true;
+      success &= (testSecret.check(new Codeword(new byte[]{0, 0, 0, 0})) == 00);
+      success &= (testSecret.check(new Codeword(new byte[]{6, 6, 6, 6})) == 20);
+      success &= (testSecret.check(new Codeword(new byte[]{0, 1, 2, 3})) == 00);
+      success &= (testSecret.check(new Codeword(new byte[]{4, 5, 6, 7})) == 02);
+      success &= (testSecret.check(new Codeword(new byte[]{4, 5, 8, 9})) == 11);
+      success &= (testSecret.check(new Codeword(new byte[]{6, 7, 0, 0})) == 10);
+      success &= (testSecret.check(new Codeword(new byte[]{0, 7, 9, 8})) == 01);
+      success &= (testSecret.check(new Codeword(new byte[]{6, 4, 8, 4})) == 30);
+      success &= (testSecret.check(new Codeword(new byte[]{6, 4, 8, 0})) == 21);
+      success &= (testSecret.check(new Codeword(new byte[]{6, 8, 8, 4})) == 30);
+      success &= (testSecret.check(new Codeword(new byte[]{6, 6, 8, 4})) == 40);
+      if (!success) {
+        System.out.println("Whoa, some codeword tests failed!");
+        System.exit(-1);
+      }
+
       if (pinCount == 4 && colorCount >= 6) {
         System.out.println("Run the example from Knuth's paper to compare with his results.");
         checkCounter = 0;
