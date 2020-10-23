@@ -56,7 +56,7 @@ public class Mastermind {
   // thru all of them.
   private static final Algo algo = Algo.Knuth;
 
-  private static long checkCounter = 0;
+  private static long scoreCounter = 0;
   private static final Random rand = new Random();
 
   // Make a list of all codewords for a given number of "colors". Colors are represented by the
@@ -129,8 +129,8 @@ public class Mastermind {
       int highestHitCount = 0;
       boolean isPossbileSolution = false;
       for (int j = 0; j < possibleSolutions.size(); j++) {
-        int r = g.check(possibleSolutions.get(j));
-        checkCounter++;
+        int r = g.score(possibleSolutions.get(j));
+        scoreCounter++;
         hitCounts[r / 10][r % 10]++;
         if (r == Codeword.winningScore) {
           isPossbileSolution = true; // Remember if this guess is in the set of possible solutions
@@ -180,8 +180,8 @@ public class Mastermind {
     int turns = 0;
 
     while (true) {
-      int r = secret.check(guess); // Is our guess the winner?
-      checkCounter++;
+      int r = secret.score(guess); // Is our guess the winner?
+      scoreCounter++;
       p.println("\nTried guess " + guess + " against secret " + secret + " => " + r);
       turns++;
 
@@ -200,8 +200,8 @@ public class Mastermind {
       p.println("Removing solutions that have no chance of being correct...");
       final Codeword g = guess;
       possibleSolutions.removeIf(c -> {
-        checkCounter++;
-        return c.check(g) != r;
+        scoreCounter++;
+        return c.score(g) != r;
       });
       p.format("Solution space now contains %d possibilities.\n", possibleSolutions.size());
 
@@ -233,17 +233,17 @@ public class Mastermind {
         // Test cases from Miyoshi
         Codeword testSecret = new Codeword(new byte[]{6, 6, 8, 4});
         boolean success = true;
-        success &= (testSecret.check(new Codeword(new byte[]{0, 0, 0, 0})) == 00);
-        success &= (testSecret.check(new Codeword(new byte[]{6, 6, 6, 6})) == 20);
-        success &= (testSecret.check(new Codeword(new byte[]{0, 1, 2, 3})) == 00);
-        success &= (testSecret.check(new Codeword(new byte[]{4, 5, 6, 7})) == 02);
-        success &= (testSecret.check(new Codeword(new byte[]{4, 5, 8, 9})) == 11);
-        success &= (testSecret.check(new Codeword(new byte[]{6, 7, 0, 0})) == 10);
-        success &= (testSecret.check(new Codeword(new byte[]{0, 7, 9, 8})) == 01);
-        success &= (testSecret.check(new Codeword(new byte[]{6, 4, 8, 4})) == 30);
-        success &= (testSecret.check(new Codeword(new byte[]{6, 4, 8, 0})) == 21);
-        success &= (testSecret.check(new Codeword(new byte[]{6, 8, 8, 4})) == 30);
-        success &= (testSecret.check(new Codeword(new byte[]{6, 6, 8, 4})) == 40);
+        success &= (testSecret.score(new Codeword(new byte[]{0, 0, 0, 0})) == 00);
+        success &= (testSecret.score(new Codeword(new byte[]{6, 6, 6, 6})) == 20);
+        success &= (testSecret.score(new Codeword(new byte[]{0, 1, 2, 3})) == 00);
+        success &= (testSecret.score(new Codeword(new byte[]{4, 5, 6, 7})) == 02);
+        success &= (testSecret.score(new Codeword(new byte[]{4, 5, 8, 9})) == 11);
+        success &= (testSecret.score(new Codeword(new byte[]{6, 7, 0, 0})) == 10);
+        success &= (testSecret.score(new Codeword(new byte[]{0, 7, 9, 8})) == 01);
+        success &= (testSecret.score(new Codeword(new byte[]{6, 4, 8, 4})) == 30);
+        success &= (testSecret.score(new Codeword(new byte[]{6, 4, 8, 0})) == 21);
+        success &= (testSecret.score(new Codeword(new byte[]{6, 8, 8, 4})) == 30);
+        success &= (testSecret.score(new Codeword(new byte[]{6, 6, 8, 4})) == 40);
         if (success) {
           System.out.println("Tests pass");
         } else {
@@ -254,9 +254,9 @@ public class Mastermind {
 
       if (pinCount == 4 && colorCount == 6) {
         System.out.println("Run the example from Knuth's paper to compare with his results.");
-        checkCounter = 0;
+        scoreCounter = 0;
         findSecret(new Codeword(new byte[]{3, 6, 3, 2}), System.out);
-        System.out.format("Codeword comparisons: %,d\n\n", checkCounter);
+        System.out.format("Codeword comparisons: %,d\n\n", scoreCounter);
       }
 
       // Run thru all possible secret codewords and keep track of the maximum number of turns it
@@ -266,7 +266,7 @@ public class Mastermind {
       int maxTurns = 0;
       int totalTurns = 0;
       Codeword maxSecret = null;
-      checkCounter = 0;
+      scoreCounter = 0;
       long s = System.nanoTime();
 
       for (Codeword secret : allCodewords) {
@@ -284,7 +284,7 @@ public class Mastermind {
       System.out.println(
           "Maximum number of turns over all possible secrets was " + maxTurns + " with secret "
               + maxSecret);
-      System.out.format("Codeword comparisons: %,d\n", checkCounter);
+      System.out.format("Codeword comparisons: %,d\n", scoreCounter);
       double elapsed = (e - s) / 1_000_000.0;
       System.out.format("Elapsed time %.4fs, average search %.04fms\n", elapsed / 1000,
           elapsed / allCodewords.size());
