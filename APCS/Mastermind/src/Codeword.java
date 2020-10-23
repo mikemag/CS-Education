@@ -75,10 +75,10 @@ public class Codeword {
 
       for (int i = 0; i < Mastermind.pinCount; i++) {
         if (guess.digits[i] != digits[i] && (colorCounts & (0xFL << (guess.digits[i] * 4))) > 0) {
-            w++;
-            colorCounts -= 1L << (guess.digits[i] * 4);
-          }
+          w++;
+          colorCounts -= 1L << (guess.digits[i] * 4);
         }
+      }
       result = (byte) (b * 10 + w);
       if (scoreMap != null) {
         scoreMap[cacheKey][guess.cacheKey] = result;
