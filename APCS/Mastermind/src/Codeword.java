@@ -23,7 +23,7 @@ public class Codeword {
   //
   // However, this simple scheme falls apart for codewords above 5 pins, as the memory requirements
   // exceed what's reasonable. So we only use it for small pin games.
-  private static final byte[][] checkMap;
+  private static byte[][] checkMap = null;
 
   static {
     if (Mastermind.pinCount <= 5) {
@@ -51,17 +51,18 @@ public class Codeword {
     if (result < 0) {
       int b = 0;
       int w = 0;
-      boolean[] used = new boolean[Mastermind.pinCount];
+      int used = 0; // 32 bit flags, rather than heap-allocating an array of booleans
 
       for (int i = 0; i < Mastermind.pinCount; i++) {
         if (guess.digits[i] == digits[i]) {
           b++;
-          used[i] = true;
+          used |= 1 << i;
         } else {
           for (int j = 0; j < Mastermind.pinCount; j++) {
-            if (!used[j] && guess.digits[i] == digits[j] && guess.digits[j] != digits[j]) {
+            if ((used & 1 << j) == 0 && guess.digits[i] == digits[j]
+                && guess.digits[j] != digits[j]) {
               w++;
-              used[j] = true;
+              used |= 1 << j;
               break;
             }
           }
