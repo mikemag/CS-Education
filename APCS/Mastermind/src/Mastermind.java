@@ -244,6 +244,12 @@ public class Mastermind {
         success &= (testSecret.score(new Codeword(new byte[]{6, 4, 8, 0})) == 21);
         success &= (testSecret.score(new Codeword(new byte[]{6, 8, 8, 4})) == 30);
         success &= (testSecret.score(new Codeword(new byte[]{6, 6, 8, 4})) == 40);
+
+        // Three extra tests to detect subtly broken scoring functions.
+        success &= (testSecret.score(new Codeword(new byte[]{8, 4, 6, 8})) == 03);
+        success &= (testSecret.score(new Codeword(new byte[]{8, 8, 6, 6})) == 03);
+        success &= (testSecret.score(new Codeword(new byte[]{8, 4, 6, 6})) == 04);
+
         if (success) {
           System.out.println("Tests pass");
         } else {
