@@ -60,7 +60,7 @@ public class Mastermind {
   private static final Random rand = new Random();
 
   // Make a list of all codewords for a given number of "colors". Colors are represented by the
-  // digits 1 thru n. This figured out how many codewords there are, which is colorCount ^ pinCount,
+  // digits 1 thru n. This figures out how many codewords there are, which is colorCount ^ pinCount,
   // then converts the base-10 number of each codeword to it's base-colorCount representation.
   private static ArrayList<Codeword> allCodewords = null;
 
