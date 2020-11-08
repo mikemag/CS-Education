@@ -161,17 +161,30 @@ public class Mastermind {
     return bestGuess;
   }
 
+  // This is the gameplay strategy we build up as we play. There are a lot of common plays, and this
+  // allows us to reuse them almost instantly for greatly increased speed.
+  private static Strategy gameStrategy = null;
+
   // Play the game to find the given secret codeword and return how many turns it took.
   private static int findSecret(Codeword secret, PrintStream p) throws Exception {
-    ArrayList<Codeword> possibleSolutions = makeAllCodewords();
+    ArrayList<Codeword> possibleSolutions;
     ArrayList<Codeword> allCodewords = null;
-    if (algo == Algo.Knuth) {
-      allCodewords = new ArrayList<>(possibleSolutions);
+    Codeword guess;
+
+    if (gameStrategy == null) {
+      possibleSolutions = makeAllCodewords();
+      if (algo == Algo.Knuth) {
+        allCodewords = new ArrayList<>(possibleSolutions);
+      }
+
+      // Start w/ Knuth's first guess for all algorithms.
+      gameStrategy = new Strategy(getKnuthInitialGuess(), possibleSolutions, allCodewords);
     }
 
-    // Start w/ Knuth's first guess for all algorithms.
-    Codeword guess = getKnuthInitialGuess();
-    possibleSolutions.remove(guess);
+    Strategy strategy = gameStrategy;
+    guess = strategy.getGuess();
+    possibleSolutions = strategy.getPossibleSolutions();
+    allCodewords = strategy.getUnguessedCodewords();
 
     p.println("Starting with secret " + secret);
     p.format("Solution space contains %d possibilities.\n", possibleSolutions.size());
@@ -189,6 +202,19 @@ public class Mastermind {
         p.format("Solution found after %d tries\n", turns);
         break;
       }
+
+      // Try to pull the next move from the strategy we're building, and use that when available.
+      Strategy nextMove = strategy.getNextMove(r);
+      if (nextMove != null) {
+        strategy = nextMove;
+        guess = strategy.getGuess();
+        p.println("Using next guess from strategy: " + guess);
+        p.format("Solution space now contains %d possibilities.\n",
+            strategy.getPossibleSolutions().size() + 1);
+        continue;
+      }
+
+      possibleSolutions = new ArrayList<>(strategy.getPossibleSolutions());
 
       // "5. Otherwise, remove from S any code that would not give the same response if it (the
       // guess) were the code (secret)." -- from the description of Knuth's algorithm at
@@ -218,8 +244,13 @@ public class Mastermind {
         guess = possibleSolutions.remove(rand.nextInt(possibleSolutions.size()));
         p.println("Selecting a random possibility: " + guess);
       } else if (algo == Algo.Knuth) {
+        allCodewords = new ArrayList<>(strategy.getUnguessedCodewords());
         guess = findKnuthGuess(guess, allCodewords, possibleSolutions, p);
+        possibleSolutions.remove(guess);
       }
+
+      strategy = strategy.addMove(r, guess, possibleSolutions, allCodewords);
+//      System.out.printf("%x", turns);
     }
 
     p.println("Done with secret " + secret + "\n");
@@ -263,6 +294,13 @@ public class Mastermind {
         scoreCounter = 0;
         findSecret(new Codeword(new byte[]{3, 6, 3, 2}), System.out);
         System.out.format("Codeword comparisons: %,d\n\n", scoreCounter);
+
+        System.out.println("**************");
+        scoreCounter = 0;
+        findSecret(new Codeword(new byte[]{3, 6, 3, 2}), System.out);
+        System.out.format("Codeword comparisons: %,d\n\n", scoreCounter);
+
+//        System.exit(-1); // mmmfixme: temp
       }
 
       // Run thru all possible secret codewords and keep track of the maximum number of turns it
@@ -275,14 +313,23 @@ public class Mastermind {
       scoreCounter = 0;
       long s = System.nanoTime();
 
+//      int lb = 0;
+//      int pctb = allCodewords.size() / 100;
       for (Codeword secret : allCodewords) {
+//        System.out.print(".");
         int turns = findSecret(secret, new PrintStream(OutputStream.nullOutputStream()));
         totalTurns += turns;
         if (turns > maxTurns) {
           maxTurns = turns;
           maxSecret = secret;
         }
+//        if (++lb % 40 == 0) {
+//          System.out.println();
+//        } else if (lb % pctb == 0) {
+//          System.out.printf("\n%.2f%%\n", (float)lb / allCodewords.size() * 100.0);
+//        }
       }
+//      System.out.println();
 
       long e = System.nanoTime();
       double averageTurns = (double) totalTurns / allCodewords.size();
