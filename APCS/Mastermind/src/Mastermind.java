@@ -250,7 +250,6 @@ public class Mastermind {
       }
 
       strategy = strategy.addMove(r, guess, possibleSolutions, allCodewords);
-//      System.out.printf("%x", turns);
     }
 
     p.println("Done with secret " + secret + "\n");
@@ -294,14 +293,10 @@ public class Mastermind {
         scoreCounter = 0;
         findSecret(new Codeword(new byte[]{3, 6, 3, 2}), System.out);
         System.out.format("Codeword comparisons: %,d\n\n", scoreCounter);
-
-        System.out.println("**************");
-        scoreCounter = 0;
-        findSecret(new Codeword(new byte[]{3, 6, 3, 2}), System.out);
-        System.out.format("Codeword comparisons: %,d\n\n", scoreCounter);
-
-//        System.exit(-1); // mmmfixme: temp
       }
+
+      // Reset the game strategy so we start fresh after testing.
+      gameStrategy = null;
 
       // Run thru all possible secret codewords and keep track of the maximum number of turns it
       // takes to find them.
@@ -313,23 +308,14 @@ public class Mastermind {
       scoreCounter = 0;
       long s = System.nanoTime();
 
-//      int lb = 0;
-//      int pctb = allCodewords.size() / 100;
       for (Codeword secret : allCodewords) {
-//        System.out.print(".");
         int turns = findSecret(secret, new PrintStream(OutputStream.nullOutputStream()));
         totalTurns += turns;
         if (turns > maxTurns) {
           maxTurns = turns;
           maxSecret = secret;
         }
-//        if (++lb % 40 == 0) {
-//          System.out.println();
-//        } else if (lb % pctb == 0) {
-//          System.out.printf("\n%.2f%%\n", (float)lb / allCodewords.size() * 100.0);
-//        }
       }
-//      System.out.println();
 
       long e = System.nanoTime();
       double averageTurns = (double) totalTurns / allCodewords.size();
