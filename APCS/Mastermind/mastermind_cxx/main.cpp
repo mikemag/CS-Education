@@ -10,15 +10,15 @@ using namespace std;
 
 enum Algo {
   // Pick the first of the remaining choices.
-  // 6/4 game, ~2m comps, 5.0216 avg turns, 8 turns max, ~0.15s
+  // 6/4 game, ~2m comps, 5.0216 avg turns, 8 turns max
   FirstOne,
 
   // Pick any of the remaining choices.
-  // ~2m comps, ~4.6-4.7 avg turns, 7 turns max, ~0.15s
+  // ~2m comps, ~4.6-4.7 avg turns, 7 turns max
   Random,
 
   // Pick the one that will eliminate the most remaining choices.
-  // ~392m comps, 4.4761 avg turns, 5 turns max, ~1.85s
+  // ~392m comps, 4.4761 avg turns, 5 turns max
   Knuth
 };
 
@@ -118,7 +118,7 @@ class Codeword {
   // we consume colors in O(p) time and count white hits. This is quite efficient for a rather simple scoring method,
   // with the only real complexity being the packing of pins and colors to reduce space used.
   //
-  // Elapsed time 4.4948s, average search 3.4682msXS
+  // Elapsed time 4.4948s, average search 3.4682ms
   Score scoreSimpleLoops(const Codeword guess) const {
     uint8_t b = 0;
     uint8_t w = 0;
