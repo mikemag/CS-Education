@@ -33,6 +33,8 @@ public class MastermindTester {
       byte[] secretDigits = codeStringToBytes(codeword1);
       byte[] guessDigits = codeStringToBytes(codeword2);
 
+      // Note: this algorithm is weird and broken on purpose. Don't spend much time, if any,
+      // studying it. Replace it with your own!!
       int b = 0;
       int w = 0;
       int used = 0;
