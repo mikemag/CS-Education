@@ -5,6 +5,7 @@
 #include <chrono>
 #include <random>
 #include <immintrin.h> // For SSE/AVX support
+#include <unordered_map>
 
 using namespace std;
 
@@ -37,8 +38,6 @@ class Score {
     result = (b << 4u) | w;
   }
 
-  uint8_t b() const { return result >> 4u; }
-  uint8_t w() const noexcept { return result & 0xFu; }
   bool isInvalid() const { return result == 0xFFu; }
 
   bool operator==(const Score &other) const { return result == other.result; }
@@ -51,6 +50,11 @@ class Score {
     stream.copyfmt(state);
     return stream;
   }
+};
+
+template<>
+struct std::hash<Score> {
+  std::size_t operator()(const Score &s) const { return std::hash<int>()(s.result); }
 };
 
 // Class to hold a codeword for the Mastermind game.
@@ -313,6 +317,59 @@ ostream &operator<<(ostream &stream, const Score &r) {
   return r.dump(stream);
 }
 
+// Gameplay Strategy
+//
+// This is used to build a tree of plays to make based on previous plays and results. All games
+// start with the same guess, which makes the root of the tree. The score received is used to find
+// what to play next via the nextMoves map. If there is no entry in the map, then the gameplay
+// engine will do whatever work is necessary (possibly large) to find the next play, then add it to
+// the tree. As games are played, the tree gets filled in and playtime decreases.
+class Strategy {
+ private:
+  // The strategy is made up of the next guess to play, and a map of where to go based on the result
+  // of that play.
+  Codeword guess;
+  unordered_map<Score, shared_ptr<Strategy>> nextMoves;
+
+  // These extra members are to allow us to build the strategy lazily, as we play games using any
+  // algorithm. nb: these are copies.
+  vector<Codeword> possibleSolutions;
+  vector<Codeword> unguessedCodewords;
+
+ public:
+  Strategy(Codeword guess, vector<Codeword> &possibleSolutions,
+           vector<Codeword> &unguessedCodewords) {
+    this->guess = guess;
+    this->possibleSolutions = std::move(possibleSolutions);
+    this->unguessedCodewords = std::move(unguessedCodewords);
+  }
+
+  shared_ptr<Strategy> addMove(Score score,
+                               Codeword nextGuess,
+                               vector<Codeword> &possibleSolutions,
+                               vector<Codeword> &unguessedCodewords) {
+    auto n = make_shared<Strategy>(nextGuess, possibleSolutions, unguessedCodewords);
+    nextMoves[score] = n;
+    return n;
+  }
+
+  shared_ptr<Strategy> getNextMove(Score score) {
+    return nextMoves[score];
+  }
+
+  Codeword getGuess() {
+    return guess;
+  }
+
+  vector<Codeword> &getPossibleSolutions() {
+    return possibleSolutions;
+  }
+
+  vector<Codeword> &getUnguessedCodewords() {
+    return unguessedCodewords;
+  }
+};
+
 // Storage for the hit count data for findKnuthGuess, kept static and reused for an easy way to have them zero'd for
 // each use. Also flat and sparse, but that's okay, it's faster to use it in the inner loop than using a 2D array.
 static int altHitCounts[(Codeword::pinCount << 4u) + 1];
@@ -327,16 +384,16 @@ static void initHitCounts() {
 // possibilities on the next round, favoring, but not requiring, any choice which may still be the
 // final answer.
 static Codeword findKnuthGuess(const Codeword lastGuess,
-                               unique_ptr<vector<Codeword>> &allCodewords,
+                               vector<Codeword> &allCodewords,
                                vector<Codeword> &possibleSolutions,
                                bool log) {
   // Pull out the last guess from the list of all remaining candidates.
-  allCodewords->erase(remove(allCodewords->begin(), allCodewords->end(), lastGuess), allCodewords->end());
+  allCodewords.erase(remove(allCodewords.begin(), allCodewords.end(), lastGuess), allCodewords.end());
 
   Codeword bestGuess;
   size_t bestScore = 0;
   bool bestIsPossibleSolution = false;
-  for (const auto g : *allCodewords) {
+  for (const auto g : allCodewords) {
     // Compute a score for this guess based on how many possible solutions it will remove.
     int highestHitCount = 0;
     bool isPossibleSolution = false;
@@ -389,21 +446,31 @@ static Codeword getKnuthInitialGuess() {
 static std::random_device randDevice;
 static std::mt19937 randGenerator(randDevice());
 
+// This is the gameplay strategy we build up as we play. There are a lot of common plays, and this
+// allows us to reuse them almost instantly for greatly increased speed.
+static shared_ptr<Strategy> gameStrategy = nullptr;
+
 // Play the game to find the given secret codeword and return how many turns it took.
 static uint findSecret(const Codeword secret, bool log = true) {
-  vector<Codeword> possibleSolutions(Codeword::allCodewords);
-  unique_ptr<vector<Codeword>> allCodewords;
-  if (algo == Algo::Knuth) {
-    allCodewords = make_unique<vector<Codeword>>(vector<Codeword>(Codeword::allCodewords));
+  vector<Codeword> possibleSolutions;
+  vector<Codeword> allCodewords;
+
+  if (gameStrategy == nullptr) {
+    possibleSolutions = Codeword::allCodewords;
+    if (algo == Algo::Knuth) {
+      allCodewords = Codeword::allCodewords;
+    }
+
+    // Start w/ Knuth's first guess for all algorithms.
+    gameStrategy = make_shared<Strategy>(getKnuthInitialGuess(), possibleSolutions, allCodewords);
   }
 
-  // Start w/ Knuth's first guess for all algorithms.
-  Codeword guess = getKnuthInitialGuess();
-  possibleSolutions.erase(remove(possibleSolutions.begin(), possibleSolutions.end(), guess), possibleSolutions.end());
+  shared_ptr<Strategy> strategy = gameStrategy;
+  Codeword guess = strategy->getGuess();
 
   if (log) {
     cout << "Starting with secret " << secret << endl;
-    cout << "Solution space contains " << possibleSolutions.size() << " possibilities." << endl;
+    cout << "Solution space contains " << strategy->getPossibleSolutions().size() << " possibilities." << endl;
     cout << "Initial guess is " << guess << endl;
   }
 
@@ -422,6 +489,20 @@ static uint findSecret(const Codeword secret, bool log = true) {
       }
       break;
     }
+
+    // Try to pull the next move from the strategy we're building, and use that when available.
+    shared_ptr<Strategy> nextMove = strategy->getNextMove(r);
+    if (nextMove != nullptr) {
+      strategy = nextMove;
+      guess = strategy->getGuess();
+      if (log) {
+        cout << "Using next guess from strategy: " << guess << endl;
+        cout << "Solution space now contains " << strategy->getPossibleSolutions().size() << " possibilities." << endl;
+      }
+      continue;
+    }
+
+    possibleSolutions = vector<Codeword>(strategy->getPossibleSolutions());
 
     // "5. Otherwise, remove from S any code that would not give the same response if it (the
     // guess) were the code (secret)." -- from the description of Knuth's algorithm at
@@ -457,7 +538,7 @@ static uint findSecret(const Codeword secret, bool log = true) {
         cout << "Selecting the first possibility blindly: " << guess << endl;
       }
     } else if (algo == Algo::Random) {
-      std::uniform_int_distribution<> distrib(0, possibleSolutions.size());
+      std::uniform_int_distribution<> distrib(0, possibleSolutions.size() - 1);
       guess = possibleSolutions[distrib(randGenerator)];
       possibleSolutions.erase(remove(possibleSolutions.begin(), possibleSolutions.end(), guess),
                               possibleSolutions.end());
@@ -465,8 +546,11 @@ static uint findSecret(const Codeword secret, bool log = true) {
         cout << "Selecting a random possibility: " << guess << endl;
       }
     } else if (algo == Algo::Knuth) {
+      allCodewords = vector<Codeword>(strategy->getUnguessedCodewords());
       guess = findKnuthGuess(guess, allCodewords, possibleSolutions, log);
     }
+
+    strategy = strategy->addMove(r, guess, possibleSolutions, allCodewords);
   }
 
   if (log) {
@@ -516,6 +600,9 @@ int main() {
     findSecret(Codeword::findByValue(0x3632));
     printf("\nCodeword comparisons: %llu\n\n", Codeword::scoreCounter);
   }
+
+  // Reset the game strategy so we start fresh after testing.
+  gameStrategy = nullptr;
 
   // Run thru all possible secret codewords and keep track of the maximum number of turns it
   // takes to find them.
