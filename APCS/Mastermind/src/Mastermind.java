@@ -331,6 +331,8 @@ public class Mastermind {
       System.out.println("Exception: " + e);
     }
 
+    Strategy.dump(gameStrategy);
+
     System.out.println("Done");
   }
 }

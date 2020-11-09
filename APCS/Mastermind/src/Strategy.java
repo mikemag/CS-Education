@@ -3,8 +3,11 @@
 // This source code is licensed under the MIT license found in the
 // LICENSE file in the root directory of this source tree.
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 // Gameplay Strategy
 //
@@ -53,5 +56,58 @@ public class Strategy {
 
   public ArrayList<Codeword> getUnguessedCodewords() {
     return unguessedCodewords;
+  }
+
+  // Output the strategy for visualization with GraphViz. Copy-and-paste the output file to sites
+  // like https://dreampuf.github.io/GraphvizOnline or http://www.webgraphviz.com/. Or install
+  // GraphViz locally and run with the following command:
+  //
+  //   twopi -Tjpg mastermind_strategy_4p6c.gv > mastermind_strategy_4p6c.jpg
+  //
+  // Parameters for the graph are currently set to convey the point while being reasonably readable
+  // in a large JPG.
+  public static void dump(Strategy root) {
+    String filename = String
+        .format("mastermind_strategy_%dp%dc.gv", Mastermind.pinCount, Mastermind.colorCount);
+    System.out.println("\nWriting strategy to " + filename);
+    try {
+      FileWriter fw = new FileWriter(filename);
+      fw.write(String.format("digraph Mastermind_Strategy_%dp%dc{\n", Mastermind.pinCount,
+          Mastermind.colorCount));
+      fw.write("size=\"40,40\"\n"); // Good size for jpgs
+      fw.write("overlap=true\n"); // scale is cool, but the result is unreadable
+      fw.write("ranksep=5\n");
+      fw.write("node [shape=plaintext]\n");
+      root.dumpRoot(fw);
+      fw.write("}");
+      fw.close();
+    } catch (Exception e) {
+      System.out.println(e);
+    }
+  }
+
+  private void dumpRoot(FileWriter fw) throws IOException {
+    fw.write("root=" + hashCode() + "\n");
+    fw.write(String.format("%s [label=\"%s - %d\",shape=circle,color=red]\n", hashCode(), guess,
+        possibleSolutions.size()));
+    dumpChildren(fw);
+  }
+
+  private void dump(FileWriter fw) throws IOException {
+    if (possibleSolutions.size() > 0) {
+      fw.write(String
+          .format("%s [label=\"%s - %d\"]\n", hashCode(), guess, possibleSolutions.size() + 1));
+    } else {
+      fw.write(String.format("%s [label=\"%s\",fontcolor=green,style=bold]\n", hashCode(), guess));
+    }
+    dumpChildren(fw);
+  }
+
+  private void dumpChildren(FileWriter fw) throws IOException {
+    for (Map.Entry<Integer, Strategy> m : nextMoves.entrySet()) {
+      m.getValue().dump(fw);
+      fw.write(String
+          .format("%s -> %s [label=\"%02d\"]\n", hashCode(), m.getValue().hashCode(), m.getKey()));
+    }
   }
 }
