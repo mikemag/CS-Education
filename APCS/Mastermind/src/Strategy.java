@@ -6,8 +6,8 @@
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 // Gameplay Strategy
 //
@@ -21,23 +21,23 @@ public class Strategy {
   // The strategy is made up of the next guess to play, and a map of where to go based on the result
   // of that play.
   private final Codeword guess;
-  private final HashMap<Integer, Strategy> nextMoves = new HashMap<>();
+  private final TreeMap<Integer, Strategy> nextMoves = new TreeMap<>();
 
   // These extra members are to allow us to build the strategy lazily, as we play games using any
-  // algorithm.
+  // algorithm. Some of these are for specific algorithms only.
   private final ArrayList<Codeword> possibleSolutions;
-  private final ArrayList<Codeword> unguessedCodewords;
+  private final ArrayList<Codeword> remainingCodewords;
 
   public Strategy(Codeword guess, ArrayList<Codeword> possibleSolutions,
-      ArrayList<Codeword> unguessedCodewords) {
+      ArrayList<Codeword> remainingCodewords) {
     this.guess = guess;
     this.possibleSolutions = possibleSolutions;
-    this.unguessedCodewords = unguessedCodewords;
+    this.remainingCodewords = remainingCodewords;
   }
 
   public Strategy addMove(int score, Codeword nextGuess, ArrayList<Codeword> possibleSolutions,
-      ArrayList<Codeword> unguessedCodewords) {
-    Strategy n = new Strategy(nextGuess, possibleSolutions, unguessedCodewords);
+      ArrayList<Codeword> remainingCodewords) {
+    Strategy n = new Strategy(nextGuess, possibleSolutions, remainingCodewords);
     nextMoves.put(score, n);
     return n;
   }
@@ -54,8 +54,8 @@ public class Strategy {
     return possibleSolutions;
   }
 
-  public ArrayList<Codeword> getUnguessedCodewords() {
-    return unguessedCodewords;
+  public ArrayList<Codeword> getRemainingCodewords() {
+    return remainingCodewords;
   }
 
   // Output the strategy for visualization with GraphViz. Copy-and-paste the output file to sites
@@ -77,6 +77,7 @@ public class Strategy {
       fw.write("size=\"40,40\"\n"); // Good size for jpgs
       fw.write("overlap=true\n"); // scale is cool, but the result is unreadable
       fw.write("ranksep=5\n");
+      fw.write("ordering=out\n");
       fw.write("node [shape=plaintext]\n");
       root.dumpRoot(fw);
       fw.write("}");
@@ -104,7 +105,7 @@ public class Strategy {
   }
 
   private void dumpChildren(FileWriter fw) throws IOException {
-    for (Map.Entry<Integer, Strategy> m : nextMoves.entrySet()) {
+    for (Map.Entry<Integer, Strategy> m : nextMoves.descendingMap().entrySet()) {
       m.getValue().dump(fw);
       fw.write(String
           .format("%s -> %s [label=\"%02d\"]\n", hashCode(), m.getValue().hashCode(), m.getKey()));

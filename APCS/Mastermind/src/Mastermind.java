@@ -113,16 +113,13 @@ public class Mastermind {
   // final answer.
   private static final int[][] hitCounts = new int[pinCount + 1][pinCount + 1];
 
-  private static Codeword findKnuthGuess(Codeword lastGuess, ArrayList<Codeword> allCodewords,
+  private static Codeword findKnuthGuess(ArrayList<Codeword> remainingCodewords,
       ArrayList<Codeword> possibleSolutions, PrintStream p) {
-
-    // Pull out the last guess from the list of all remaining candidates.
-    allCodewords.remove(lastGuess);
 
     Codeword bestGuess = null;
     int bestScore = 0;
     boolean bestIsPossibleSolution = false;
-    for (Codeword g : allCodewords) {
+    for (Codeword g : remainingCodewords) {
       // Compute a score for this guess based on how many possible solutions it will remove.
       int highestHitCount = 0;
       boolean isPossbileSolution = false;
@@ -167,25 +164,24 @@ public class Mastermind {
   // Play the game to find the given secret codeword and return how many turns it took.
   private static int findSecret(Codeword secret, PrintStream p) throws Exception {
     ArrayList<Codeword> possibleSolutions;
-    ArrayList<Codeword> unguessedCodewords = null;
-    Codeword guess;
+    ArrayList<Codeword> remainingCodewords = null; // For Algo.Knuth
 
     // Note: if we're not building a global gameplay strategy as we go, then we start each game
     // fresh with a new set of codewords.
     if (gameStrategy == null || !useStrategy) {
       possibleSolutions = makeAllCodewords();
       if (algo == Algo.Knuth) {
-        unguessedCodewords = new ArrayList<>(possibleSolutions);
+        remainingCodewords = new ArrayList<>(possibleSolutions);
       }
 
       // Start w/ Knuth's first guess for all algorithms.
-      gameStrategy = new Strategy(getKnuthInitialGuess(), possibleSolutions, unguessedCodewords);
+      gameStrategy = new Strategy(getKnuthInitialGuess(), possibleSolutions, remainingCodewords);
     }
 
     Strategy strategy = gameStrategy;
-    guess = strategy.getGuess();
+    Codeword guess = strategy.getGuess();
     possibleSolutions = strategy.getPossibleSolutions();
-    unguessedCodewords = strategy.getUnguessedCodewords();
+    remainingCodewords = strategy.getRemainingCodewords();
 
     p.println("Starting with secret " + secret);
     p.format("Solution space contains %d possibilities.\n", possibleSolutions.size());
@@ -216,9 +212,14 @@ public class Mastermind {
           continue;
         }
 
-        // The possible solutions set in the current strategy node is a starting point for multiple
-        // next moves, thus we copy it to ensure it remains a stable starting point for other moves.
+        // The strategy holds data structures needed by various algorithms which are used as a
+        // starting point for multiple next moves. Thus we copy them to ensure they remains a stable
+        // starting point for other moves.
         possibleSolutions = new ArrayList<>(strategy.getPossibleSolutions());
+
+        if (algo == Algo.Knuth) {
+          remainingCodewords = new ArrayList<>(strategy.getRemainingCodewords());
+        }
       }
 
       // "5. Otherwise, remove from S any code that would not give the same response if it (the
@@ -249,17 +250,15 @@ public class Mastermind {
         guess = possibleSolutions.remove(rand.nextInt(possibleSolutions.size()));
         p.println("Selecting a random possibility: " + guess);
       } else if (algo == Algo.Knuth) {
-        if (useStrategy) {
-          // Just like the possible solutions, we have to copy the unguessed codewords set so the
-          // original can be used for other moves later.
-          unguessedCodewords = new ArrayList<>(strategy.getUnguessedCodewords());
-        }
-        guess = findKnuthGuess(guess, unguessedCodewords, possibleSolutions, p);
+        // Pull out the last guess from the list of all remaining candidates.
+        remainingCodewords.remove(guess);
+
+        guess = findKnuthGuess(remainingCodewords, possibleSolutions, p);
         possibleSolutions.remove(guess);
       }
 
       if (useStrategy) {
-        strategy = strategy.addMove(r, guess, possibleSolutions, unguessedCodewords);
+        strategy = strategy.addMove(r, guess, possibleSolutions, remainingCodewords);
       }
     }
 
