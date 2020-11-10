@@ -122,14 +122,12 @@ public class Mastermind {
     Codeword bestGuess = null;
     int bestScore = 0;
     boolean bestIsPossibleSolution = false;
-    for (int i = 0; i < allCodewords.size(); i++) {
-      Codeword g = allCodewords.get(i);
-
+    for (Codeword g : allCodewords) {
       // Compute a score for this guess based on how many possible solutions it will remove.
       int highestHitCount = 0;
       boolean isPossbileSolution = false;
-      for (int j = 0; j < possibleSolutions.size(); j++) {
-        int r = g.score(possibleSolutions.get(j));
+      for (Codeword possibleSolution : possibleSolutions) {
+        int r = g.score(possibleSolution);
         scoreCounter++;
         hitCounts[r / 10][r % 10]++;
         if (r == Codeword.winningScore) {
@@ -162,29 +160,32 @@ public class Mastermind {
   }
 
   // This is the gameplay strategy we build up as we play. There are a lot of common plays, and this
-  // allows us to reuse them almost instantly for greatly increased speed.
+  // allows us to reuse them almost instantly for greatly increased speed. This is optional.
+  private static final boolean useStrategy = true;
   private static Strategy gameStrategy = null;
 
   // Play the game to find the given secret codeword and return how many turns it took.
   private static int findSecret(Codeword secret, PrintStream p) throws Exception {
     ArrayList<Codeword> possibleSolutions;
-    ArrayList<Codeword> allCodewords = null;
+    ArrayList<Codeword> unguessedCodewords = null;
     Codeword guess;
 
-    if (gameStrategy == null) {
+    // Note: if we're not building a global gameplay strategy as we go, then we start each game
+    // fresh with a new set of codewords.
+    if (gameStrategy == null || !useStrategy) {
       possibleSolutions = makeAllCodewords();
       if (algo == Algo.Knuth) {
-        allCodewords = new ArrayList<>(possibleSolutions);
+        unguessedCodewords = new ArrayList<>(possibleSolutions);
       }
 
       // Start w/ Knuth's first guess for all algorithms.
-      gameStrategy = new Strategy(getKnuthInitialGuess(), possibleSolutions, allCodewords);
+      gameStrategy = new Strategy(getKnuthInitialGuess(), possibleSolutions, unguessedCodewords);
     }
 
     Strategy strategy = gameStrategy;
     guess = strategy.getGuess();
     possibleSolutions = strategy.getPossibleSolutions();
-    allCodewords = strategy.getUnguessedCodewords();
+    unguessedCodewords = strategy.getUnguessedCodewords();
 
     p.println("Starting with secret " + secret);
     p.format("Solution space contains %d possibilities.\n", possibleSolutions.size());
@@ -204,17 +205,21 @@ public class Mastermind {
       }
 
       // Try to pull the next move from the strategy we're building, and use that when available.
-      Strategy nextMove = strategy.getNextMove(r);
-      if (nextMove != null) {
-        strategy = nextMove;
-        guess = strategy.getGuess();
-        p.println("Using next guess from strategy: " + guess);
-        p.format("Solution space now contains %d possibilities.\n",
-            strategy.getPossibleSolutions().size() + 1);
-        continue;
-      }
+      if (useStrategy) {
+        Strategy nextMove = strategy.getNextMove(r);
+        if (nextMove != null) {
+          strategy = nextMove;
+          guess = strategy.getGuess();
+          p.println("Using next guess from strategy: " + guess);
+          p.format("Solution space now contains %d possibilities.\n",
+              strategy.getPossibleSolutions().size() + 1);
+          continue;
+        }
 
-      possibleSolutions = new ArrayList<>(strategy.getPossibleSolutions());
+        // The possible solutions set in the current strategy node is a starting point for multiple
+        // next moves, thus we copy it to ensure it remains a stable starting point for other moves.
+        possibleSolutions = new ArrayList<>(strategy.getPossibleSolutions());
+      }
 
       // "5. Otherwise, remove from S any code that would not give the same response if it (the
       // guess) were the code (secret)." -- from the description of Knuth's algorithm at
@@ -244,12 +249,18 @@ public class Mastermind {
         guess = possibleSolutions.remove(rand.nextInt(possibleSolutions.size()));
         p.println("Selecting a random possibility: " + guess);
       } else if (algo == Algo.Knuth) {
-        allCodewords = new ArrayList<>(strategy.getUnguessedCodewords());
-        guess = findKnuthGuess(guess, allCodewords, possibleSolutions, p);
+        if (useStrategy) {
+          // Just like the possible solutions, we have to copy the unguessed codewords set so the
+          // original can be used for other moves later.
+          unguessedCodewords = new ArrayList<>(strategy.getUnguessedCodewords());
+        }
+        guess = findKnuthGuess(guess, unguessedCodewords, possibleSolutions, p);
         possibleSolutions.remove(guess);
       }
 
-      strategy = strategy.addMove(r, guess, possibleSolutions, allCodewords);
+      if (useStrategy) {
+        strategy = strategy.addMove(r, guess, possibleSolutions, unguessedCodewords);
+      }
     }
 
     p.println("Done with secret " + secret + "\n");
