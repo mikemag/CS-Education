@@ -6,6 +6,8 @@
 #include <random>
 #include <immintrin.h> // For SSE/AVX support
 #include <unordered_map>
+#include <sstream>
+#include <fstream>
 
 using namespace std;
 
@@ -335,21 +337,21 @@ class Strategy {
   // These extra members are to allow us to build the strategy lazily, as we play games using any
   // algorithm. nb: these are copies.
   vector<Codeword> possibleSolutions;
-  vector<Codeword> unguessedCodewords;
+  vector<Codeword> remainingCodewords;
 
  public:
   Strategy(Codeword guess, vector<Codeword> &possibleSolutions,
-           vector<Codeword> &unguessedCodewords) {
+           vector<Codeword> &remainingCodewords) {
     this->guess = guess;
-    this->possibleSolutions = std::move(possibleSolutions);
-    this->unguessedCodewords = std::move(unguessedCodewords);
+    this->possibleSolutions = possibleSolutions;
+    this->remainingCodewords = remainingCodewords;
   }
 
   shared_ptr<Strategy> addMove(Score score,
                                Codeword nextGuess,
                                vector<Codeword> &possibleSolutions,
-                               vector<Codeword> &unguessedCodewords) {
-    auto n = make_shared<Strategy>(nextGuess, possibleSolutions, unguessedCodewords);
+                               vector<Codeword> &remainingCodewords) {
+    auto n = make_shared<Strategy>(nextGuess, possibleSolutions, remainingCodewords);
     nextMoves[score] = n;
     return n;
   }
@@ -366,8 +368,59 @@ class Strategy {
     return possibleSolutions;
   }
 
-  vector<Codeword> &getUnguessedCodewords() {
-    return unguessedCodewords;
+  vector<Codeword> &getRemainingCodewords() {
+    return remainingCodewords;
+  }
+
+  // Output the strategy for visualization with GraphViz. Copy-and-paste the output file to sites
+  // like https://dreampuf.github.io/GraphvizOnline or http://www.webgraphviz.com/. Or install
+  // GraphViz locally and run with the following command:
+  //
+  //   twopi -Tjpg mastermind_strategy_4p6c.gv > mastermind_strategy_4p6c.jpg
+  //
+  // Parameters for the graph are currently set to convey the point while being reasonably readable
+  // in a large JPG.
+  void dump() {
+    ostringstream fnStream;
+    fnStream << "mastermind_strategy_" << Codeword::pinCount << "p" << Codeword::colorCount << "c.gv";
+    string filename = fnStream.str();
+
+    cout << "\nWriting strategy to " << filename << endl;
+    ofstream graphStream(filename);
+    graphStream << "digraph Mastermind_Strategy_" << Codeword::pinCount << "p" << Codeword::colorCount << "c";
+    graphStream << " {" << endl;
+    graphStream << "size=\"40,40\"" << endl; // Good size for jpgs
+    graphStream << "overlap=true" << endl; // scale is cool, but the result is unreadable
+    graphStream << "ranksep=5" << endl;
+    graphStream << "ordering=out" << endl;
+    graphStream << "node [shape=plaintext]" << endl;
+    dumpRoot(graphStream);
+    graphStream << "}" << endl;
+    graphStream.close();
+  }
+
+  void dumpRoot(ofstream &graphStream) {
+    graphStream << "root=" << (uint64_t) this << endl;
+    graphStream << (uint64_t) this << " [label=\"" << guess << " - " << possibleSolutions.size() <<
+                "\",shape=circle,color=red]" << endl;
+    dumpChildren(graphStream);
+  }
+
+  void dump(ofstream &graphStream) {
+    if (!possibleSolutions.empty()) {
+      graphStream << (uint64_t) this << " [label=\"" << guess << " - " << possibleSolutions.size() << "\"]" << endl;
+    } else {
+      graphStream << (uint64_t) this << " [label=\"" << guess << "\",fontcolor=green,style=bold]" << endl;
+    }
+    dumpChildren(graphStream);
+  }
+
+  void dumpChildren(ofstream &graphStream) {
+    for (const auto &m : nextMoves) {
+      m.second->dump(graphStream);
+      graphStream << (uint64_t) this << " -> " << (uint64_t) (m.second.get()) << " [label=\"" << m.first << "\"]"
+                  << endl;
+    }
   }
 };
 
@@ -384,21 +437,17 @@ static void initHitCounts() {
 // The core of Knuth's algorithm: find the remaining solution which will eliminate the most
 // possibilities on the next round, favoring, but not requiring, any choice which may still be the
 // final answer.
-static Codeword findKnuthGuess(const Codeword lastGuess,
-                               vector<Codeword> &allCodewords,
-                               vector<Codeword> &possibleSolutions,
+static Codeword findKnuthGuess(const vector<Codeword> &remainingCodewords,
+                               const vector<Codeword> &possibleSolutions,
                                bool log) {
-  // Pull out the last guess from the list of all remaining candidates.
-  allCodewords.erase(remove(allCodewords.begin(), allCodewords.end(), lastGuess), allCodewords.end());
-
   Codeword bestGuess;
   size_t bestScore = 0;
   bool bestIsPossibleSolution = false;
-  for (const auto g : allCodewords) {
+  for (const auto &g : remainingCodewords) {
     // Compute a score for this guess based on how many possible solutions it will remove.
     int highestHitCount = 0;
     bool isPossibleSolution = false;
-    for (const auto p : possibleSolutions) {
+    for (const auto &p : possibleSolutions) {
       Score r = g.score(p);
       altHitCounts[r.result]++;
       if (r == Codeword::winningScore) {
@@ -450,20 +499,21 @@ static std::mt19937 randGenerator(randDevice());
 // This is the gameplay strategy we build up as we play. There are a lot of common plays, and this
 // allows us to reuse them almost instantly for greatly increased speed.
 static shared_ptr<Strategy> gameStrategy = nullptr;
+static constexpr bool useStrategy = true;
 
 // Play the game to find the given secret codeword and return how many turns it took.
 static uint findSecret(const Codeword secret, bool log = true) {
   vector<Codeword> possibleSolutions;
-  vector<Codeword> allCodewords;
+  vector<Codeword> remainingCodewords;
 
-  if (gameStrategy == nullptr) {
+  if (gameStrategy == nullptr || !useStrategy) {
     possibleSolutions = Codeword::allCodewords;
     if (algo == Algo::Knuth) {
-      allCodewords = Codeword::allCodewords;
+      remainingCodewords = Codeword::allCodewords;
     }
 
     // Start w/ Knuth's first guess for all algorithms.
-    gameStrategy = make_shared<Strategy>(getKnuthInitialGuess(), possibleSolutions, allCodewords);
+    gameStrategy = make_shared<Strategy>(getKnuthInitialGuess(), possibleSolutions, remainingCodewords);
   }
 
   shared_ptr<Strategy> strategy = gameStrategy;
@@ -491,19 +541,29 @@ static uint findSecret(const Codeword secret, bool log = true) {
       break;
     }
 
-    // Try to pull the next move from the strategy we're building, and use that when available.
-    shared_ptr<Strategy> nextMove = strategy->getNextMove(r);
-    if (nextMove != nullptr) {
-      strategy = nextMove;
-      guess = strategy->getGuess();
-      if (log) {
-        cout << "Using next guess from strategy: " << guess << endl;
-        cout << "Solution space now contains " << strategy->getPossibleSolutions().size() << " possibilities." << endl;
+    if (useStrategy) {
+      // Try to pull the next move from the strategy we're building, and use that when available.
+      shared_ptr<Strategy> nextMove = strategy->getNextMove(r);
+      if (nextMove != nullptr) {
+        strategy = nextMove;
+        guess = strategy->getGuess();
+        if (log) {
+          cout << "Using next guess from strategy: " << guess << endl;
+          cout << "Solution space now contains " << strategy->getPossibleSolutions().size() << " possibilities."
+               << endl;
+        }
+        continue;
       }
-      continue;
-    }
 
-    possibleSolutions = vector<Codeword>(strategy->getPossibleSolutions());
+      // The strategy holds data structures needed by various algorithms which are used as a
+      // starting point for multiple next moves. Thus we copy them to ensure they remains a stable
+      // starting point for other moves.
+      possibleSolutions = vector<Codeword>(strategy->getPossibleSolutions());
+
+      if (algo == Algo::Knuth) {
+        remainingCodewords = vector<Codeword>(strategy->getRemainingCodewords());
+      }
+    }
 
     // "5. Otherwise, remove from S any code that would not give the same response if it (the
     // guess) were the code (secret)." -- from the description of Knuth's algorithm at
@@ -547,11 +607,16 @@ static uint findSecret(const Codeword secret, bool log = true) {
         cout << "Selecting a random possibility: " << guess << endl;
       }
     } else if (algo == Algo::Knuth) {
-      allCodewords = vector<Codeword>(strategy->getUnguessedCodewords());
-      guess = findKnuthGuess(guess, allCodewords, possibleSolutions, log);
+      // Pull out the last guess from the list of all remaining candidates.
+      remainingCodewords.erase(remove(remainingCodewords.begin(), remainingCodewords.end(), guess),
+                               remainingCodewords.end());
+
+      guess = findKnuthGuess(remainingCodewords, possibleSolutions, log);
     }
 
-    strategy = strategy->addMove(r, guess, possibleSolutions, allCodewords);
+    if (useStrategy) {
+      strategy = strategy->addMove(r, guess, possibleSolutions, remainingCodewords);
+    }
   }
 
   if (log) {
@@ -631,6 +696,9 @@ int main() {
   chrono::duration<float, milli> elapsedMS = endTime - startTime;
   printf("Elapsed time %.4fs, average search %.04fms\n", elapsedMS.count() / 1000,
          elapsedMS.count() / Codeword::allCodewords.size());
+
+  gameStrategy->dump();
+
   cout << "Done" << endl;
   return 0;
 }
