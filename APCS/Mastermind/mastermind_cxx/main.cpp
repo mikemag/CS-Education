@@ -121,6 +121,7 @@ class Codeword {
   // This is a relatively simple O(2p) scoring method. First we count black hits and unused colors in O(p) time, then
   // we consume colors in O(p) time and count white hits. This is quite efficient for a rather simple scoring method,
   // with the only real complexity being the packing of pins and colors to reduce space used.
+  // https://godbolt.org/z/sEEjcY
   //
   // Elapsed time 4.4948s, average search 3.4682ms
   Score scoreSimpleLoops(const Codeword guess) const {
@@ -160,7 +161,7 @@ class Codeword {
   // Find black hits with xor, which leaves zero nibbles on matches, then count the zeros in the result. This is a
   // variation on determining if a word has a zero byte from https://graphics.stanford.edu/~seander/bithacks.html. This
   // part ends with using std::popcount() to count the zero nibbles, and when compiled with C++ 20 and -march=native we
-  // get a single popcountl instruction generated. Codegen example: https://godbolt.org/z/Ebbxeb
+  // get a single popcountl instruction generated. Codegen example: https://godbolt.org/z/MofY33
   //
   // Next, Codewords now carry their color counts with them, and we can run over them and add up total hits per Knuth by
   // aggregating min color counts between the secret and guess.
@@ -197,7 +198,7 @@ class Codeword {
   // vector op, then use a fixed sequence of shuffles and adds to sum the minimums. Overall perf is very sensitive to
   // alignment of the colorCounts. Unaligned fields will make this slower than the scalar version. The auto-vectorizer
   // is also pretty sensitive to how the code is structured, and the code it generates for adding up the minimums is
-  // pretty large and sub-optimal.
+  // pretty large and sub-optimal. https://godbolt.org/z/arcE5e
   //
   // Elapsed time 2.2948s, average search 1.7707ms
   Score scoreCountingAutoVec(const Codeword guess) const {
@@ -218,7 +219,7 @@ class Codeword {
   }
 
   // This uses the full counting method from Knuth, but computing the sum of all hits is vectorized by-hand. This is
-  // O(1) for both parts, guaranteed no matter what the compiler decides to do.
+  // O(1) for both parts, guaranteed no matter what the compiler decides to do. https://godbolt.org/z/KvPf1Y
   //
   // See scoreCountingScalar() for an explanation of how hits are computed.
   //
