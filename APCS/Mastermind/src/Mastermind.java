@@ -32,8 +32,8 @@ import java.util.Random;
 
 public class Mastermind {
 
-  public static final int colorCount = 6; // 1-9, 6 is classic
-  public static final int pinCount = 4; // 1-9, 4 is classic
+  public static final int colorCount = 6; // 1-15, 6 is classic
+  public static final int pinCount = 4; // 1-15, 4 is classic
 
   // Timings taken on a MacBook Pro (16-inch, 2019), macOS Catalina 10.15.6 (19G2021), Intel(R)
   // Core(TM) i9-9980HK CPU @ 2.40GHz (boost to 5.0GHz), openjdk 14.0.2 2020-07-14
@@ -126,7 +126,7 @@ public class Mastermind {
       for (Codeword possibleSolution : possibleSolutions) {
         int r = g.score(possibleSolution);
         scoreCounter++;
-        hitCounts[r / 10][r % 10]++;
+        hitCounts[r >> 4][r & 0xF]++;
         if (r == Codeword.winningScore) {
           isPossbileSolution = true; // Remember if this guess is in the set of possible solutions
         }
@@ -190,9 +190,10 @@ public class Mastermind {
     int turns = 0;
 
     while (true) {
-      int r = secret.score(guess); // Is our guess the winner?
+      byte r = secret.score(guess); // Is our guess the winner?
       scoreCounter++;
-      p.println("\nTried guess " + guess + " against secret " + secret + " => " + r);
+      p.println(
+          "\nTried guess " + guess + " against secret " + secret + " => " + Integer.toHexString(r));
       turns++;
 
       if (r == Codeword.winningScore) {
@@ -273,22 +274,22 @@ public class Mastermind {
         // Test cases from Miyoshi
         Codeword testSecret = new Codeword(new byte[]{6, 6, 8, 4});
         boolean success = true;
-        success &= (testSecret.score(new Codeword(new byte[]{0, 0, 0, 0})) == 00);
-        success &= (testSecret.score(new Codeword(new byte[]{6, 6, 6, 6})) == 20);
-        success &= (testSecret.score(new Codeword(new byte[]{0, 1, 2, 3})) == 00);
-        success &= (testSecret.score(new Codeword(new byte[]{4, 5, 6, 7})) == 02);
-        success &= (testSecret.score(new Codeword(new byte[]{4, 5, 8, 9})) == 11);
-        success &= (testSecret.score(new Codeword(new byte[]{6, 7, 0, 0})) == 10);
-        success &= (testSecret.score(new Codeword(new byte[]{0, 7, 9, 8})) == 01);
-        success &= (testSecret.score(new Codeword(new byte[]{6, 4, 8, 4})) == 30);
-        success &= (testSecret.score(new Codeword(new byte[]{6, 4, 8, 0})) == 21);
-        success &= (testSecret.score(new Codeword(new byte[]{6, 8, 8, 4})) == 30);
-        success &= (testSecret.score(new Codeword(new byte[]{6, 6, 8, 4})) == 40);
+        success &= (testSecret.score(new Codeword(new byte[]{0, 0, 0, 0})) == 0x00);
+        success &= (testSecret.score(new Codeword(new byte[]{6, 6, 6, 6})) == 0x20);
+        success &= (testSecret.score(new Codeword(new byte[]{0, 1, 2, 3})) == 0x00);
+        success &= (testSecret.score(new Codeword(new byte[]{4, 5, 6, 7})) == 0x02);
+        success &= (testSecret.score(new Codeword(new byte[]{4, 5, 8, 9})) == 0x11);
+        success &= (testSecret.score(new Codeword(new byte[]{6, 7, 0, 0})) == 0x10);
+        success &= (testSecret.score(new Codeword(new byte[]{0, 7, 9, 8})) == 0x01);
+        success &= (testSecret.score(new Codeword(new byte[]{6, 4, 8, 4})) == 0x30);
+        success &= (testSecret.score(new Codeword(new byte[]{6, 4, 8, 0})) == 0x21);
+        success &= (testSecret.score(new Codeword(new byte[]{6, 8, 8, 4})) == 0x30);
+        success &= (testSecret.score(new Codeword(new byte[]{6, 6, 8, 4})) == 0x40);
 
         // Three extra tests to detect subtly broken scoring functions.
-        success &= (testSecret.score(new Codeword(new byte[]{8, 4, 6, 8})) == 03);
-        success &= (testSecret.score(new Codeword(new byte[]{8, 8, 6, 6})) == 03);
-        success &= (testSecret.score(new Codeword(new byte[]{8, 4, 6, 6})) == 04);
+        success &= (testSecret.score(new Codeword(new byte[]{8, 4, 6, 8})) == 0x03);
+        success &= (testSecret.score(new Codeword(new byte[]{8, 8, 6, 6})) == 0x03);
+        success &= (testSecret.score(new Codeword(new byte[]{8, 4, 6, 6})) == 0x04);
 
         if (success) {
           System.out.println("Tests pass");
@@ -310,8 +311,11 @@ public class Mastermind {
 
       // Run thru all possible secret codewords and keep track of the maximum number of turns it
       // takes to find them.
-      System.out.println("Playing the game for every possible secret...");
+      System.out
+          .printf("Playing %d pins %d colors game for every possible secret with algorithm %s...\n",
+              pinCount, colorCount, algo);
       ArrayList<Codeword> allCodewords = makeAllCodewords();
+      System.out.printf("Total codewords: %,d\n", allCodewords.size());
       int maxTurns = 0;
       int totalTurns = 0;
       Codeword maxSecret = null;

@@ -678,6 +678,7 @@ int main() {
   // Run thru all possible secret codewords and keep track of the maximum number of turns it
   // takes to find them.
   printf("Playing %d pins %d colors game for every possible secret...\n", Codeword::pinCount, Codeword::colorCount);
+  printf("Total codewords: %lu\n", Codeword::allCodewords.size());
   int maxTurns = 0;
   int totalTurns = 0;
   Codeword maxSecret;
