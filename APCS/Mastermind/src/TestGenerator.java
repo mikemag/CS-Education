@@ -65,8 +65,8 @@ public class TestGenerator {
         Codeword ca = new Codeword(generateCodeword(i, pinCount, colorCount));
         for (int j = 0; j < totalWords; j++) {
           Codeword cb = new Codeword(generateCodeword(j, pinCount, colorCount));
-          int r1 = ca.score(cb);
-          fw.write(String.format("%s,%s,%d,%d\n", ca, cb, r1 / 10, r1 % 10));
+          byte r1 = ca.score(cb);
+          fw.write(String.format("%s,%s,%d,%d\n", ca, cb, r1 >> 4, r1 & 0xF));
           total++;
         }
       }
