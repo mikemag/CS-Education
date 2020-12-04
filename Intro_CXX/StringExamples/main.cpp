@@ -31,7 +31,8 @@ int main() {
   // You can build strings just like using cout for printing output!!
   stringstream ss;
   ss << "My health: " << 42 << ", damage: " << 20.20;
-  cout << ss.str() << endl;  // My health: 42, damage: 20.2
+  s = ss.str();
+  cout << s << endl;  // My health: 42, damage: 20.2
 
 
   // Convert a string to all lower case, requires #include <algorithm>
