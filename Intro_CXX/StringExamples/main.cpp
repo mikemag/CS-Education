@@ -159,5 +159,30 @@ int main() {
   s.resize(s.find('.') + 1 + 6, '0');  // Ensure 6 positions beyond the decimal point.
   cout << "[" << s << "]\n";  // [42.123000]
 
+
+  // Split a string into two parts, using a comma as the separator
+  s = "part one,part two";
+  cout << "[" << s << "]\n";
+  int indexOfComma = s.find(',');
+  if (indexOfComma == string::npos) {
+    cout << "No comma!!" << endl;
+  } else {
+    string part1 = s.substr(0, indexOfComma);
+    string part2 = s.substr(indexOfComma + 1);
+    cout << "[" << part1 << "] [" << part2 << "]\n";  // [part one] [part two]
+  }
+
+
+  // Split a string into two parts, using a comma as the separator, using getline() as if the string is a stream.
+  // Try removing the comma from s to see what happens!!
+  s = "part one,part two";
+  cout << "[" << s << "]\n";
+  stringstream stringAsStream(s);
+  string part1;
+  getline(stringAsStream, part1, ',');
+  string part2;
+  getline(stringAsStream, part2);
+  cout << "[" << part1 << "] [" << part2 << "]\n";  // [part one] [part two]
+
   return 0;
 }
