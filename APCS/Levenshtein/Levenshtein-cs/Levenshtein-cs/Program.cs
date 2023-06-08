@@ -195,7 +195,7 @@ namespace LevNew
             // Load our dictionary of English words. Dictionary from https://github.com/dwyl/english-words
             const string dictionaryFilename = "../../../words_alpha.txt";
             _words = File.ReadAllLines(dictionaryFilename);
-            Console.WriteLine("Loaded {0} words from {1}\n\n", _words.Length, dictionaryFilename);
+            Console.WriteLine("Loaded {0} words from {1}\n", _words.Length, dictionaryFilename);
 
             // Sort the dictionary by word length
             Array.Sort(_words, (x, y) => x.Length.CompareTo(y.Length));
