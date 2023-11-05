@@ -1,37 +1,41 @@
+Tests pass
+Run the example from Knuth's paper to compare with his results.
 Starting with secret 3632
-Solution space contains 1295 possibilities.
+Solution space contains 1296 possibilities.
 Initial guess is 1122
 
 Tried guess 1122 against secret 3632 => 10
 Removing solutions that have no chance of being correct...
 Solution space now contains 256 possibilities.
-Selecting Knuth's best guess: 1344	score: 212
+Selecting Knuth's best guess: 1344	worst case PS size: 44
 
 Tried guess 1344 against secret 3632 => 1
 Removing solutions that have no chance of being correct...
 Solution space now contains 44 possibilities.
-Selecting Knuth's best guess: 3526	score: 37
+Selecting Knuth's best guess: 3526	worst case PS size: 7
 
 Tried guess 3526 against secret 3632 => 12
 Removing solutions that have no chance of being correct...
 Solution space now contains 7 possibilities.
-Selecting Knuth's best guess: 1462	score: 6
+Selecting Knuth's best guess: 1462	worst case PS size: 1
 
 Tried guess 1462 against secret 3632 => 11
 Removing solutions that have no chance of being correct...
 Solution space now contains 1 possibilities.
-Only remainig solution must be correct: 3632
+Only remaining possibility must be correct: 3632
 
 Tried guess 3632 against secret 3632 => 40
 Solution found after 5 tries
 Done with secret 3632
 
-Codeword comparisons: 398,807
+Codeword comparisons: 399,480
 
-----------
-Playing the game for every possible secret...
+Playing 4 pins 6 colors game for every possible secret with algorithm Knuth...
+Total codewords: 1,296
 Average number of turns was 4.4761
 Maximum number of turns over all possible secrets was 5 with secret 1116
-Codeword comparisons: 391,993,485
-Elapsed time 4.6187s, average search 3.5638ms
+Codeword comparisons: 4,248,326
+Elapsed time 0.3195s, average search 0.2465ms
+
+Writing strategy to mastermind_strategy_4p6c.gv
 Done

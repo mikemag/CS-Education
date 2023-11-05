@@ -16,7 +16,7 @@ import java.util.Random;
 // This will play the game for every possible secret and tell us the average and maximum number of 
 // tries needed across all of them.
 //
-// Move results are in the form of a two digit number. The first digit is the number of colors in
+// Move results are in the form of a two-digit number. The first digit is the number of colors in
 // the guess which are correct, and in the correct position. The second digit is the number of
 // colors in the guess which are correct, but in the wrong position.
 //
@@ -32,35 +32,35 @@ import java.util.Random;
 
 public class Mastermind {
 
-  public static final int colorCount = 6; // 1-15, 6 is classic
   public static final int pinCount = 4; // 1-15, 4 is classic
+  public static final int colorCount = 6; // 1-15, 6 is classic
 
-  // Timings taken on a MacBook Pro (16-inch, 2019), macOS Catalina 10.15.6 (19G2021), Intel(R)
+  // Timings taken on a MacBook Pro (16-inch, 2019), macOS Ventura 13.6 (22G120), Intel(R)
   // Core(TM) i9-9980HK CPU @ 2.40GHz (boost to 5.0GHz), openjdk 14.0.2 2020-07-14
 
   enum Algo {
     // Pick the first of the remaining choices.
-    // 6/4 game, ~2m comps, 5.0216 avg turns, 8 turns max, ~0.15s
+    // 46,409 comps, 5.0216 avg turns, 8 turns max, ~0.1313s
     FirstOne,
 
     // Pick any of the remaining choices.
-    // ~2m comps, ~4.6-4.7 avg turns, 7 turns max, ~0.15s
+    // ~48k comps, ~4.6-4.7 avg turns, 7 turns max, ~0.1398s
     Random,
 
     // Pick the one that will eliminate the most remaining choices.
-    // ~392m comps, 4.4761 avg turns, 5 turns max, ~1.85s
+    // 4,248,326 comps, 4.4761 avg turns, 5 turns max, ~0.3195s
     Knuth
   }
 
   // Pick which algo to run. If I was cool I'd either make this a command line arg, or have it run
-  // thru all of them.
+  // through all of them.
   private static final Algo algo = Algo.Knuth;
 
   private static long scoreCounter = 0;
   private static final Random rand = new Random();
 
   // Make a list of all codewords for a given number of "colors". Colors are represented by the
-  // digits 1 thru n. This figures out how many codewords there are, which is colorCount ^ pinCount,
+  // digits 1 through n. This figures out how many codewords there are, which is colorCount ^ pinCount,
   // then converts the base-10 number of each codeword to it's base-colorCount representation.
   private static ArrayList<Codeword> allCodewords = null;
 
@@ -88,8 +88,8 @@ public class Mastermind {
       allCodewords = l;
     }
 
-    // This is cached and copied so we save time on each play of the game.
-    return new ArrayList<Codeword>(allCodewords);
+    // This is cached and copied, so we save time on each play of the game.
+    return new ArrayList<>(allCodewords);
   }
 
   // Knuth's initial guess for 4-pin 6-color Mastermind is 1122. Generalize this to any pin count
@@ -111,48 +111,46 @@ public class Mastermind {
   // The core of Knuth's algorithm: find the remaining solution which will eliminate the most
   // possibilities on the next round, favoring, but not requiring, any choice which may still be the
   // final answer.
-  private static final int[][] hitCounts = new int[pinCount + 1][pinCount + 1];
+  private static final int[] scoreCounts = new int[Codeword.winningScore + 1];
 
-  private static Codeword findKnuthGuess(ArrayList<Codeword> remainingCodewords,
+  private static Codeword findKnuthGuess(ArrayList<Codeword> allCodewords,
       ArrayList<Codeword> possibleSolutions, PrintStream p) {
 
     Codeword bestGuess = null;
-    int bestScore = 0;
+    int bestWorstCase = Integer.MAX_VALUE;
     boolean bestIsPossibleSolution = false;
-    for (Codeword g : remainingCodewords) {
+    for (Codeword g : allCodewords) {
       // Compute a score for this guess based on how many possible solutions it will remove.
-      int highestHitCount = 0;
-      boolean isPossbileSolution = false;
+      int maxScoreCount = 0;
+      boolean isPossibleSolution = false;
       for (Codeword possibleSolution : possibleSolutions) {
-        int r = g.score(possibleSolution);
+        int s = g.score(possibleSolution);
         scoreCounter++;
-        hitCounts[r >> 4][r & 0xF]++;
-        if (r == Codeword.winningScore) {
-          isPossbileSolution = true; // Remember if this guess is in the set of possible solutions
+        scoreCounts[s]++;
+        if (s == Codeword.winningScore) {
+          isPossibleSolution = true; // Remember if this guess is in the set of possible solutions
         }
       }
 
-      for (int m = 0; m < pinCount + 1; m++) {
-        for (int n = 0; n < pinCount + 1; n++) {
-          if (hitCounts[m][n] > highestHitCount) {
-            highestHitCount = hitCounts[m][n];
-          }
-          hitCounts[m][n] = 0; // Reset the storage to 0 as we go
+      for (int i = 0; i < scoreCounts.length; i++) {
+        if (scoreCounts[i] > maxScoreCount) {
+          maxScoreCount = scoreCounts[i];
         }
+        scoreCounts[i] = 0; // Reset the storage to 0 as we go
       }
 
-      int score = possibleSolutions.size() - highestHitCount; // Minimum codewords eliminated
-      if (score > bestScore) {
-        bestScore = score;
+      if (maxScoreCount < bestWorstCase) {
+        bestWorstCase = maxScoreCount;
         bestGuess = g;
-        bestIsPossibleSolution = isPossbileSolution;
-      } else if (!bestIsPossibleSolution && isPossbileSolution && score == bestScore) {
+        bestIsPossibleSolution = isPossibleSolution;
+      } else if (!bestIsPossibleSolution && isPossibleSolution && maxScoreCount == bestWorstCase) {
         bestGuess = g;
-        bestIsPossibleSolution = isPossbileSolution;
+        bestIsPossibleSolution = true;
       }
     }
 
-    p.println("Selecting Knuth's best guess: " + bestGuess + "\tscore: " + bestScore);
+    p.println(
+        "Selecting Knuth's best guess: " + bestGuess + "\tworst case PS size: " + bestWorstCase);
     return bestGuess;
   }
 
@@ -163,25 +161,21 @@ public class Mastermind {
 
   // Play the game to find the given secret codeword and return how many turns it took.
   private static int findSecret(Codeword secret, PrintStream p) throws Exception {
+    ArrayList<Codeword> allCodewords = makeAllCodewords();
     ArrayList<Codeword> possibleSolutions;
-    ArrayList<Codeword> remainingCodewords = null; // For Algo.Knuth
 
     // Note: if we're not building a global gameplay strategy as we go, then we start each game
     // fresh with a new set of codewords.
     if (gameStrategy == null || !useStrategy) {
-      possibleSolutions = makeAllCodewords();
-      if (algo == Algo.Knuth) {
-        remainingCodewords = new ArrayList<>(possibleSolutions);
-      }
+      possibleSolutions = new ArrayList<>(allCodewords);
 
       // Start w/ Knuth's first guess for all algorithms.
-      gameStrategy = new Strategy(getKnuthInitialGuess(), possibleSolutions, remainingCodewords);
+      gameStrategy = new Strategy(getKnuthInitialGuess(), possibleSolutions);
     }
 
     Strategy strategy = gameStrategy;
     Codeword guess = strategy.getGuess();
     possibleSolutions = strategy.getPossibleSolutions();
-    remainingCodewords = strategy.getRemainingCodewords();
 
     p.println("Starting with secret " + secret);
     p.format("Solution space contains %d possibilities.\n", possibleSolutions.size());
@@ -190,20 +184,20 @@ public class Mastermind {
     int turns = 0;
 
     while (true) {
-      byte r = secret.score(guess); // Is our guess the winner?
+      byte s = secret.score(guess); // Is our guess the winner?
       scoreCounter++;
       p.println(
-          "\nTried guess " + guess + " against secret " + secret + " => " + Integer.toHexString(r));
+          "\nTried guess " + guess + " against secret " + secret + " => " + Integer.toHexString(s));
       turns++;
 
-      if (r == Codeword.winningScore) {
+      if (s == Codeword.winningScore) {
         p.format("Solution found after %d tries\n", turns);
         break;
       }
 
       // Try to pull the next move from the strategy we're building, and use that when available.
       if (useStrategy) {
-        Strategy nextMove = strategy.getNextMove(r);
+        Strategy nextMove = strategy.getNextMove(s);
         if (nextMove != null) {
           strategy = nextMove;
           guess = strategy.getGuess();
@@ -214,13 +208,9 @@ public class Mastermind {
         }
 
         // The strategy holds data structures needed by various algorithms which are used as a
-        // starting point for multiple next moves. Thus we copy them to ensure they remains a stable
+        // starting point for multiple next moves. Thus, we copy them to ensure they remain a stable
         // starting point for other moves.
         possibleSolutions = new ArrayList<>(strategy.getPossibleSolutions());
-
-        if (algo == Algo.Knuth) {
-          remainingCodewords = new ArrayList<>(strategy.getRemainingCodewords());
-        }
       }
 
       // "5. Otherwise, remove from S any code that would not give the same response if it (the
@@ -234,32 +224,31 @@ public class Mastermind {
       final Codeword g = guess;
       possibleSolutions.removeIf(c -> {
         scoreCounter++;
-        return c.score(g) != r;
+        return c.score(g) != s;
       });
       p.format("Solution space now contains %d possibilities.\n", possibleSolutions.size());
 
-      if (possibleSolutions.size() == 0) {
+      if (possibleSolutions.isEmpty()) {
         // This is only possible if there is a bug in our scoring function.
         throw new Exception("Failed to find solution with secret " + secret);
       } else if (possibleSolutions.size() == 1) {
-        guess = possibleSolutions.remove(0);
-        p.println("Only remainig solution must be correct: " + guess);
+        guess = possibleSolutions.get(0);
+        p.println("Only remaining possibility must be correct: " + guess);
+      } else if (possibleSolutions.size() == 2) {
+        guess = possibleSolutions.get(0); // Fun to work out why this is correct.
+        p.println("Selecting first of the last two remaining: " + guess);
       } else if (algo == Algo.FirstOne) {
-        guess = possibleSolutions.remove(0);
+        guess = possibleSolutions.get(0);
         p.println("Selecting the first possibility blindly: " + guess);
       } else if (algo == Algo.Random) {
-        guess = possibleSolutions.remove(rand.nextInt(possibleSolutions.size()));
+        guess = possibleSolutions.get(rand.nextInt(possibleSolutions.size()));
         p.println("Selecting a random possibility: " + guess);
       } else if (algo == Algo.Knuth) {
-        // Pull out the last guess from the list of all remaining candidates.
-        remainingCodewords.remove(guess);
-
-        guess = findKnuthGuess(remainingCodewords, possibleSolutions, p);
-        possibleSolutions.remove(guess);
+        guess = findKnuthGuess(allCodewords, possibleSolutions, p);
       }
 
       if (useStrategy) {
-        strategy = strategy.addMove(r, guess, possibleSolutions, remainingCodewords);
+        strategy = strategy.addMove(s, guess, possibleSolutions);
       }
     }
 
@@ -306,10 +295,10 @@ public class Mastermind {
         System.out.format("Codeword comparisons: %,d\n\n", scoreCounter);
       }
 
-      // Reset the game strategy so we start fresh after testing.
+      // Reset the game strategy, so we start fresh after testing.
       gameStrategy = null;
 
-      // Run thru all possible secret codewords and keep track of the maximum number of turns it
+      // Run through all possible secret codewords and keep track of the maximum number of turns it
       // takes to find them.
       System.out
           .printf("Playing %d pins %d colors game for every possible secret with algorithm %s...\n",

@@ -1,32 +1,41 @@
+Tests pass
+Run the example from Knuth's paper to compare with his results.
 Starting with secret 3632
-Solution space contains 1295 possibilities.
+Solution space contains 1296 possibilities.
 Initial guess is 1122
 
 Tried guess 1122 against secret 3632 => 10
 Removing solutions that have no chance of being correct...
 Solution space now contains 256 possibilities.
-Selecting a random possibility: 5145
+Selecting a random possibility: 1436
 
-Tried guess 5145 against secret 3632 => 0
+Tried guess 1436 against secret 3632 => 11
 Removing solutions that have no chance of being correct...
-Solution space now contains 16 possibilities.
-Selecting a random possibility: 3323
+Solution space now contains 45 possibilities.
+Selecting a random possibility: 1355
 
-Tried guess 3323 against secret 3632 => 12
+Tried guess 1355 against secret 3632 => 1
 Removing solutions that have no chance of being correct...
-Solution space now contains 2 possibilities.
-Selecting a random possibility: 3632
+Solution space now contains 10 possibilities.
+Selecting a random possibility: 6166
+
+Tried guess 6166 against secret 3632 => 1
+Removing solutions that have no chance of being correct...
+Solution space now contains 1 possibilities.
+Only remaining possibility must be correct: 3632
 
 Tried guess 3632 against secret 3632 => 40
-Solution found after 4 tries
+Solution found after 5 tries
 Done with secret 3632
 
-Codeword comparisons: 1,569
+Codeword comparisons: 1,612
 
-----------
-Playing the game for every possible secret...
-Average number of turns was 4.6466
-Maximum number of turns over all possible secrets was 7 with secret 1111
-Codeword comparisons: 1,981,507
-Elapsed time 0.2743s, average search 0.2117ms
+Playing 4 pins 6 colors game for every possible secret with algorithm Random...
+Total codewords: 1,296
+Average number of turns was 4.7153
+Maximum number of turns over all possible secrets was 7 with secret 1136
+Codeword comparisons: 48,743
+Elapsed time 0.1398s, average search 0.1079ms
+
+Writing strategy to mastermind_strategy_4p6c.gv
 Done

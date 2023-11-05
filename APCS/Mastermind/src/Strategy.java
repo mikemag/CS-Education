@@ -24,20 +24,16 @@ public class Strategy {
   private final TreeMap<Integer, Strategy> nextMoves = new TreeMap<>();
 
   // These extra members are to allow us to build the strategy lazily, as we play games using any
-  // algorithm. Some of these are for specific algorithms only.
+  // algorithm. Some of these may be for specific algorithms only.
   private final ArrayList<Codeword> possibleSolutions;
-  private final ArrayList<Codeword> remainingCodewords;
 
-  public Strategy(Codeword guess, ArrayList<Codeword> possibleSolutions,
-      ArrayList<Codeword> remainingCodewords) {
+  public Strategy(Codeword guess, ArrayList<Codeword> possibleSolutions) {
     this.guess = guess;
     this.possibleSolutions = possibleSolutions;
-    this.remainingCodewords = remainingCodewords;
   }
 
-  public Strategy addMove(int score, Codeword nextGuess, ArrayList<Codeword> possibleSolutions,
-      ArrayList<Codeword> remainingCodewords) {
-    Strategy n = new Strategy(nextGuess, possibleSolutions, remainingCodewords);
+  public Strategy addMove(int score, Codeword nextGuess, ArrayList<Codeword> possibleSolutions) {
+    Strategy n = new Strategy(nextGuess, possibleSolutions);
     nextMoves.put(score, n);
     return n;
   }
@@ -52,10 +48,6 @@ public class Strategy {
 
   public ArrayList<Codeword> getPossibleSolutions() {
     return possibleSolutions;
-  }
-
-  public ArrayList<Codeword> getRemainingCodewords() {
-    return remainingCodewords;
   }
 
   // Output the strategy for visualization with GraphViz. Copy-and-paste the output file to sites
@@ -95,7 +87,7 @@ public class Strategy {
   }
 
   private void dump(FileWriter fw) throws IOException {
-    if (possibleSolutions.size() > 0) {
+    if (!possibleSolutions.isEmpty()) {
       fw.write(String
           .format("%s [label=\"%s - %d\"]\n", hashCode(), guess, possibleSolutions.size() + 1));
     } else {
