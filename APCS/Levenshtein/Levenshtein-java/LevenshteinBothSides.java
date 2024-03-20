@@ -199,8 +199,11 @@ public class LevenshteinBothSides {
     correct &= doPair("dog", "cat", 3, 6);
     correct &= doPair("dog", "smart", 5, 51);
     correct &= doPair("dog", "quack", 7, 107);
-    correct &= doPair("monkey", "business", 13, 1);
     correct &= doPair("vulgates", "gumwood", 0, 0);
+    correct &= doPair("sweetly", "raddles", 10, 39);
+    correct &= doPair("bldr", "rewrote", 11, 4);
+    correct &= doPair("evacuee", "fall", 6, 1);
+    correct &= doPair("monkey", "business", 13, 1);
 
     System.out.println(correct ? "Everything worked." : "Oops!! At least one test failed :(");
   }
@@ -314,6 +317,7 @@ public class LevenshteinBothSides {
   }
 
 
+  // NB: no caching here! Just laziness, but you'll see from the run times it's not needed.
   private static ArrayList<String> findNeighbors(String w) {
     var neighbors = new ArrayList<String>();
     var end = words.size();
