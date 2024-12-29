@@ -1,6 +1,6 @@
-﻿using System;
+﻿using System.Diagnostics;
 
-namespace LevNew
+namespace Levenshtein_cs
 {
     // To remember and build paths we need to know the parents of each word we discover. We'll keep them in a simple
     // dictionary, with a list of parents for each word.
@@ -17,10 +17,10 @@ namespace LevNew
         // frontier alternatively, and stop when frontiers intersect. Then we join up paths from both sides.
         private static (int, List<string> paths) FindPaths(string w1, string w2)
         {
-            var leftFrontier = new WordsToParents() {{w1, new List<string>()}};
+            var leftFrontier = new WordsToParents() { { w1, new List<string>() } };
             var leftExplored = new WordsToParents();
 
-            var rightFrontier = new WordsToParents() {{w2, new List<string>()}};
+            var rightFrontier = new WordsToParents() { { w2, new List<string>() } };
             var rightExplored = new WordsToParents();
 
             int length = 0;
@@ -77,7 +77,7 @@ namespace LevNew
                     }
                     else
                     {
-                        newFrontier[n] = new List<string>() {item.Key};
+                        newFrontier[n] = new List<string>() { item.Key };
                     }
                 }
             }
@@ -163,23 +163,36 @@ namespace LevNew
 
         private static bool DoPair(string w1, string w2, int expectedLength, int expectedPathCount)
         {
-            Console.WriteLine("Finding all shortest paths from '{0}' to '{1}'", w1, w2);
+            Console.WriteLine($"Finding all shortest paths from '{w1}' to '{w2}'");
+            var start = Stopwatch.GetTimestamp();
             var (length, paths) = FindPaths(w1, w2);
+            var end = Stopwatch.GetTimestamp();
 
             bool correct = true;
-            Console.WriteLine("Found {0} paths of length {1} for '{2}' to '{3}", paths.Count, length, w1, w2);
+            Console.WriteLine(
+                $"Found {paths.Count} paths of length {length} for '{w1}' to '{w2}' in {(end - start) / (Stopwatch.Frequency / 1000)}ms");
             if (length != expectedLength || paths.Count != expectedPathCount)
             {
                 correct = false;
-                Console.WriteLine("Whoa!!!! This isn't the right answer! Expected {0} paths of {1} length.",
-                    expectedPathCount, expectedLength);
+                Console.WriteLine(
+                    $"Whoa!!!! This isn't the right answer! Expected {expectedPathCount} paths of {expectedLength} length.");
             }
 
             if (paths.Count > 0)
             {
                 // Copy-paste to http://www.webgraphviz.com/
-                Console.WriteLine("digraph {0}_{1}_{2}{{concentrate=true;", w1, w2, length);
-                Console.WriteLine(string.Join("\n", paths));
+                Console.WriteLine($"digraph {w1}_{w2}_{length}{{concentrate=true;");
+                const int maxPaths = 120;
+                if (paths.Count > maxPaths)
+                {
+                    Console.WriteLine(string.Join("\n", paths.Take(maxPaths)));
+                    Console.WriteLine("...");
+                }
+                else
+                {
+                    Console.WriteLine(string.Join("\n", paths));
+                }
+
                 Console.WriteLine("}");
             }
 
@@ -211,6 +224,8 @@ namespace LevNew
             correct &= DoPair("dog", "quack", 7, 107);
             correct &= DoPair("monkey", "business", 13, 1);
             correct &= DoPair("vulgates", "gumwood", 0, 0);
+            correct &= DoPair("underditch", "toppingly", 55, 4);
+            correct &= DoPair("headwards", "rifflers", 31, 68244);
 
             Console.WriteLine(correct ? "Everything worked." : "Oops!! At least one test failed :(");
         }

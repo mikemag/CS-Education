@@ -3,12 +3,12 @@ Loaded 370103 words from ../../../words_alpha.txt
 
 Finding all shortest paths from 'dog' to 'dog'
 Left frontier: 1, right frontier: 1
-Found 0 paths of length 0 for 'dog' to 'dog
+Found 0 paths of length 0 for 'dog' to 'dog' in 0ms
 
 Finding all shortest paths from 'dog' to 'dot'
 Left frontier: 1, right frontier: 1
 Left frontier: 44, right frontier: 1
-Found 1 paths of length 1 for 'dog' to 'dot
+Found 1 paths of length 1 for 'dog' to 'dot' in 0ms
 digraph dog_dot_1{concentrate=true;
 dog -> dot
 }
@@ -18,7 +18,7 @@ Left frontier: 1, right frontier: 1
 Left frontier: 44, right frontier: 1
 Left frontier: 44, right frontier: 54
 Left frontier: 664, right frontier: 54
-Found 6 paths of length 3 for 'dog' to 'cat
+Found 6 paths of length 3 for 'dog' to 'cat' in 10ms
 digraph dog_cat_3{concentrate=true;
 dog -> dot -> cot -> cat
 dog -> cog -> cot -> cat
@@ -35,7 +35,7 @@ Left frontier: 44, right frontier: 12
 Left frontier: 44, right frontier: 126
 Left frontier: 664, right frontier: 126
 Left frontier: 664, right frontier: 1135
-Found 51 paths of length 5 for 'dog' to 'smart
+Found 51 paths of length 5 for 'dog' to 'smart' in 137ms
 digraph dog_smart_5{concentrate=true;
 dog -> dor -> mor -> mar -> mart -> smart
 dog -> dor -> mor -> mort -> mart -> smart
@@ -99,7 +99,7 @@ Left frontier: 44, right frontier: 56
 Left frontier: 664, right frontier: 56
 Left frontier: 664, right frontier: 236
 Left frontier: 664, right frontier: 1153
-Found 107 paths of length 7 for 'dog' to 'quack
+Found 107 paths of length 7 for 'dog' to 'quack' in 316ms
 digraph dog_quack_7{concentrate=true;
 dog -> do -> du -> qu -> qua -> quaw -> quawk -> quack
 dog -> do -> du -> qu -> qua -> quar -> quark -> quack
@@ -225,7 +225,7 @@ Left frontier: 243, right frontier: 34
 Left frontier: 243, right frontier: 55
 Left frontier: 243, right frontier: 96
 Left frontier: 243, right frontier: 246
-Found 1 paths of length 13 for 'monkey' to 'business
+Found 1 paths of length 13 for 'monkey' to 'business' in 818ms
 digraph monkey_business_13{concentrate=true;
 monkey -> money -> coney -> cones -> cines -> chines -> chinese -> achinese -> achiness -> ashiness -> mashiness -> mushiness -> bushiness -> business
 }
@@ -236,7 +236,230 @@ Left frontier: 1, right frontier: 1
 Left frontier: 3, right frontier: 1
 Left frontier: 3, right frontier: 2
 Left frontier: 3, right frontier: 1
-Found 0 paths of length 0 for 'vulgates' to 'gumwood
+Found 0 paths of length 0 for 'vulgates' to 'gumwood' in 14ms
+
+Finding all shortest paths from 'underditch' to 'toppingly'
+Left frontier: 1, right frontier: 1
+Left frontier: 2, right frontier: 1
+Left frontier: 2, right frontier: 1
+Left frontier: 2, right frontier: 1
+Left frontier: 2, right frontier: 1
+Left frontier: 2, right frontier: 1
+Left frontier: 2, right frontier: 2
+Left frontier: 1, right frontier: 2
+Left frontier: 2, right frontier: 2
+Left frontier: 1, right frontier: 2
+Left frontier: 1, right frontier: 2
+Left frontier: 4, right frontier: 2
+Left frontier: 4, right frontier: 5
+Left frontier: 7, right frontier: 5
+Left frontier: 7, right frontier: 9
+Left frontier: 9, right frontier: 9
+Left frontier: 7, right frontier: 9
+Left frontier: 7, right frontier: 9
+Left frontier: 6, right frontier: 9
+Left frontier: 7, right frontier: 9
+Left frontier: 7, right frontier: 9
+Left frontier: 4, right frontier: 9
+Left frontier: 8, right frontier: 9
+Left frontier: 21, right frontier: 9
+Left frontier: 21, right frontier: 9
+Left frontier: 21, right frontier: 11
+Left frontier: 21, right frontier: 8
+Left frontier: 21, right frontier: 4
+Left frontier: 21, right frontier: 2
+Left frontier: 21, right frontier: 1
+Left frontier: 21, right frontier: 3
+Left frontier: 21, right frontier: 1
+Left frontier: 21, right frontier: 2
+Left frontier: 21, right frontier: 3
+Left frontier: 21, right frontier: 3
+Left frontier: 21, right frontier: 2
+Left frontier: 21, right frontier: 5
+Left frontier: 21, right frontier: 4
+Left frontier: 21, right frontier: 3
+Left frontier: 21, right frontier: 3
+Left frontier: 21, right frontier: 1
+Left frontier: 21, right frontier: 10
+Left frontier: 21, right frontier: 53
+Left frontier: 33, right frontier: 53
+Left frontier: 45, right frontier: 53
+Left frontier: 41, right frontier: 53
+Left frontier: 35, right frontier: 53
+Left frontier: 24, right frontier: 53
+Left frontier: 12, right frontier: 53
+Left frontier: 4, right frontier: 53
+Left frontier: 5, right frontier: 53
+Left frontier: 7, right frontier: 53
+Left frontier: 14, right frontier: 53
+Left frontier: 29, right frontier: 53
+Left frontier: 97, right frontier: 53
+Left frontier: 97, right frontier: 260
+Found 4 paths of length 55 for 'underditch' to 'toppingly' in 1260ms
+digraph underditch_toppingly_55{concentrate=true;
+underditch -> underwitch -> underwatch -> undermatch -> undermath -> undermate -> undereate -> undereat -> underbeat -> underbeam -> underseam -> undersea -> underset -> underlet -> underlit -> underlie -> underline -> underling -> underring -> unerring -> inerring -> interring -> interning -> inturning -> inurning -> inuring -> inring -> iring -> ring -> ding -> dingy -> dingly -> dyingly -> lyingly -> plyingly -> pryingly -> prayingly -> pratingly -> gratingly -> grazingly -> gazingly -> dazingly -> daringly -> duringly -> luringly -> louringly -> pouringly -> poringly -> posingly -> losingly -> lovingly -> movingly -> mopingly -> hopingly -> hoppingly -> toppingly
+underditch -> underwitch -> underwatch -> undermatch -> undermath -> undermate -> undereate -> undereat -> underbeat -> underbeam -> underseam -> undersea -> underset -> underlet -> underlit -> underlie -> underline -> underling -> underring -> unerring -> inerring -> interring -> interning -> inturning -> inurning -> inuring -> inring -> iring -> ring -> ding -> dingy -> dingly -> dyingly -> lyingly -> plyingly -> playingly -> prayingly -> pratingly -> gratingly -> grazingly -> gazingly -> dazingly -> daringly -> duringly -> luringly -> louringly -> pouringly -> poringly -> posingly -> losingly -> lovingly -> movingly -> mopingly -> hopingly -> hoppingly -> toppingly
+underditch -> underwitch -> underwatch -> undermatch -> undermath -> undermate -> undereate -> undereat -> underbeat -> underbeam -> underseam -> undersea -> underset -> underlet -> underlit -> underlie -> underline -> underling -> underring -> unerring -> inerring -> interring -> interning -> inturning -> inurning -> inuring -> inring -> iring -> ring -> ringy -> dingy -> dingly -> dyingly -> lyingly -> plyingly -> pryingly -> prayingly -> pratingly -> gratingly -> grazingly -> gazingly -> dazingly -> daringly -> duringly -> luringly -> louringly -> pouringly -> poringly -> posingly -> losingly -> lovingly -> movingly -> mopingly -> hopingly -> hoppingly -> toppingly
+underditch -> underwitch -> underwatch -> undermatch -> undermath -> undermate -> undereate -> undereat -> underbeat -> underbeam -> underseam -> undersea -> underset -> underlet -> underlit -> underlie -> underline -> underling -> underring -> unerring -> inerring -> interring -> interning -> inturning -> inurning -> inuring -> inring -> iring -> ring -> ringy -> dingy -> dingly -> dyingly -> lyingly -> plyingly -> playingly -> prayingly -> pratingly -> gratingly -> grazingly -> gazingly -> dazingly -> daringly -> duringly -> luringly -> louringly -> pouringly -> poringly -> posingly -> losingly -> lovingly -> movingly -> mopingly -> hopingly -> hoppingly -> toppingly
+}
+
+Finding all shortest paths from 'headwards' to 'rifflers'
+Left frontier: 1, right frontier: 1
+Left frontier: 2, right frontier: 1
+Left frontier: 2, right frontier: 5
+Left frontier: 3, right frontier: 5
+Left frontier: 5, right frontier: 5
+Left frontier: 4, right frontier: 5
+Left frontier: 4, right frontier: 5
+Left frontier: 3, right frontier: 5
+Left frontier: 3, right frontier: 5
+Left frontier: 3, right frontier: 5
+Left frontier: 3, right frontier: 5
+Left frontier: 5, right frontier: 5
+Left frontier: 2, right frontier: 5
+Left frontier: 4, right frontier: 5
+Left frontier: 2, right frontier: 5
+Left frontier: 3, right frontier: 5
+Left frontier: 2, right frontier: 5
+Left frontier: 1, right frontier: 5
+Left frontier: 3, right frontier: 5
+Left frontier: 3, right frontier: 5
+Left frontier: 4, right frontier: 5
+Left frontier: 7, right frontier: 5
+Left frontier: 7, right frontier: 14
+Left frontier: 14, right frontier: 14
+Left frontier: 42, right frontier: 14
+Left frontier: 42, right frontier: 32
+Left frontier: 42, right frontier: 125
+Left frontier: 138, right frontier: 125
+Left frontier: 138, right frontier: 722
+Left frontier: 578, right frontier: 722
+Left frontier: 3213, right frontier: 722
+Left frontier: 3213, right frontier: 3664
+Found 68244 paths of length 31 for 'headwards' to 'rifflers' in 2402ms
+digraph headwards_rifflers_31{concentrate=true;
+headwards -> headward -> headword -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> inworn -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headward -> headword -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> inworn -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headwords -> headword -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> inworn -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headwords -> headword -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> inworn -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headward -> headwark -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> inworn -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headward -> headwark -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> inworn -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headwords -> headworks -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> inworn -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headwords -> headworks -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> inworn -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headwords -> headworks -> leadworks -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> inworn -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headwords -> headworks -> leadworks -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> inworn -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headwords -> headworks -> leadworks -> leadworts -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> inworn -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headwords -> headworks -> leadworks -> leadworts -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> inworn -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headward -> headword -> headwork -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> inworn -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headward -> headword -> headwork -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> inworn -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headwords -> headword -> headwork -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> inworn -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headwords -> headword -> headwork -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> inworn -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headward -> headwark -> headwork -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> inworn -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headward -> headwark -> headwork -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> inworn -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headwords -> headworks -> headwork -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> inworn -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headwords -> headworks -> headwork -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> inworn -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headwords -> headworks -> deadworks -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> inworn -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headwords -> headworks -> deadworks -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> inworn -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headward -> headword -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> inworn -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headward -> headword -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> inworn -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headwords -> headword -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> inworn -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headwords -> headword -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> inworn -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headward -> headwark -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> inworn -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headward -> headwark -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> inworn -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headwords -> headworks -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> inworn -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headwords -> headworks -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> inworn -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headwords -> headworks -> leadworks -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> inworn -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headwords -> headworks -> leadworks -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> inworn -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headwords -> headworks -> leadworks -> leadworts -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> inworn -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headwords -> headworks -> leadworks -> leadworts -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> inworn -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headward -> headword -> headwork -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> inworn -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headward -> headword -> headwork -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> inworn -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headwords -> headword -> headwork -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> inworn -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headwords -> headword -> headwork -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> inworn -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headward -> headwark -> headwork -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> inworn -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headward -> headwark -> headwork -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> inworn -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headwords -> headworks -> headwork -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> inworn -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headwords -> headworks -> headwork -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> inworn -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headwords -> headworks -> deadworks -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> inworn -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headwords -> headworks -> deadworks -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> inworn -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headward -> headword -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> unwork -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headward -> headword -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> unwork -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headwords -> headword -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> unwork -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headwords -> headword -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> unwork -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headward -> headwark -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> unwork -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headward -> headwark -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> unwork -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headwords -> headworks -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> unwork -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headwords -> headworks -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> unwork -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headwords -> headworks -> leadworks -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> unwork -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headwords -> headworks -> leadworks -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> unwork -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headwords -> headworks -> leadworks -> leadworts -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> unwork -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headwords -> headworks -> leadworks -> leadworts -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> unwork -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headward -> headword -> headwork -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> unwork -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headward -> headword -> headwork -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> unwork -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headwords -> headword -> headwork -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> unwork -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headwords -> headword -> headwork -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> unwork -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headward -> headwark -> headwork -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> unwork -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headward -> headwark -> headwork -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> unwork -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headwords -> headworks -> headwork -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> unwork -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headwords -> headworks -> headwork -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> unwork -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headwords -> headworks -> deadworks -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> unwork -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headwords -> headworks -> deadworks -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> unwork -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headward -> headword -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> unwork -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headward -> headword -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> unwork -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headwords -> headword -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> unwork -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headwords -> headword -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> unwork -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headward -> headwark -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> unwork -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headward -> headwark -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> unwork -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headwords -> headworks -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> unwork -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headwords -> headworks -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> unwork -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headwords -> headworks -> leadworks -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> unwork -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headwords -> headworks -> leadworks -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> unwork -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headwords -> headworks -> leadworks -> leadworts -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> unwork -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headwords -> headworks -> leadworks -> leadworts -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> unwork -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headward -> headword -> headwork -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> unwork -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headward -> headword -> headwork -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> unwork -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headwords -> headword -> headwork -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> unwork -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headwords -> headword -> headwork -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> unwork -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headward -> headwark -> headwork -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> unwork -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headward -> headwark -> headwork -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> unwork -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headwords -> headworks -> headwork -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> unwork -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headwords -> headworks -> headwork -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> unwork -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headwords -> headworks -> deadworks -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> unwork -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headwords -> headworks -> deadworks -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> unwork -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headward -> headword -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> unwork -> uncork -> uncore -> encore -> endore -> endere -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headward -> headword -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> unwork -> uncork -> uncore -> encore -> endore -> endere -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headwords -> headword -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> unwork -> uncork -> uncore -> encore -> endore -> endere -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headwords -> headword -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> unwork -> uncork -> uncore -> encore -> endore -> endere -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headward -> headwark -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> unwork -> uncork -> uncore -> encore -> endore -> endere -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headward -> headwark -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> unwork -> uncork -> uncore -> encore -> endore -> endere -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headwords -> headworks -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> unwork -> uncork -> uncore -> encore -> endore -> endere -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headwords -> headworks -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> unwork -> uncork -> uncore -> encore -> endore -> endere -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headwords -> headworks -> leadworks -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> unwork -> uncork -> uncore -> encore -> endore -> endere -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headwords -> headworks -> leadworks -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> unwork -> uncork -> uncore -> encore -> endore -> endere -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headwords -> headworks -> leadworks -> leadworts -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> unwork -> uncork -> uncore -> encore -> endore -> endere -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headwords -> headworks -> leadworks -> leadworts -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> unwork -> uncork -> uncore -> encore -> endore -> endere -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headward -> headword -> headwork -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> unwork -> uncork -> uncore -> encore -> endore -> endere -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headward -> headword -> headwork -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> unwork -> uncork -> uncore -> encore -> endore -> endere -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headwords -> headword -> headwork -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> unwork -> uncork -> uncore -> encore -> endore -> endere -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headwords -> headword -> headwork -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> unwork -> uncork -> uncore -> encore -> endore -> endere -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headward -> headwark -> headwork -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> unwork -> uncork -> uncore -> encore -> endore -> endere -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headward -> headwark -> headwork -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> unwork -> uncork -> uncore -> encore -> endore -> endere -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headwords -> headworks -> headwork -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> unwork -> uncork -> uncore -> encore -> endore -> endere -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headwords -> headworks -> headwork -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> unwork -> uncork -> uncore -> encore -> endore -> endere -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headwords -> headworks -> deadworks -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> unwork -> uncork -> uncore -> encore -> endore -> endere -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headwords -> headworks -> deadworks -> deadwork -> deadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> unwork -> uncork -> uncore -> encore -> endore -> endere -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headward -> headword -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> unwork -> uncork -> uncore -> encore -> endore -> endere -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headward -> headword -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> unwork -> uncork -> uncore -> encore -> endore -> endere -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headwords -> headword -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> unwork -> uncork -> uncore -> encore -> endore -> endere -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headwords -> headword -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> unwork -> uncork -> uncore -> encore -> endore -> endere -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headward -> headwark -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> unwork -> uncork -> uncore -> encore -> endore -> endere -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headward -> headwark -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> unwork -> uncork -> uncore -> encore -> endore -> endere -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headwords -> headworks -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> unwork -> uncork -> uncore -> encore -> endore -> endere -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headwords -> headworks -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> unwork -> uncork -> uncore -> encore -> endore -> endere -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+headwards -> headwords -> headworks -> leadworks -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> unwork -> uncork -> uncore -> encore -> endore -> endere -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
+headwards -> headwords -> headworks -> leadworks -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> tinwork -> inwork -> unwork -> uncork -> uncore -> encore -> endore -> endere -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
+...
+}
 
 Everything worked.
 
