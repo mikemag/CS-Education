@@ -200,8 +200,8 @@ namespace Levenshtein_cs
             return correct;
         }
 
-        private static string[]? _words;
-        private static int[]? _wordLengthStarts;
+        private static string[] _words = null!;
+        private static int[] _wordLengthStarts = null!;
 
         public static void Main(string[] args)
         {
@@ -214,7 +214,7 @@ namespace Levenshtein_cs
             Array.Sort(_words, (x, y) => x.Length.CompareTo(y.Length));
 
             // Find where each word length starts in our dictionary. Now we can quickly find, say, words of length 4.
-            _wordLengthStarts = BuildWordLengthStarts(_words, 32);
+            _wordLengthStarts = BuildWordLengthStarts(_words);
 
             bool correct = true;
             correct &= DoPair("dog", "dog", 0, 0);
@@ -238,18 +238,15 @@ namespace Levenshtein_cs
         //
         // Sure. Since they're the same length the only option to make them equal is substitution, thus we
         // just need to count the number of different letters, and stop after we find more than one.
-        private static int EditDistanceEqual(string w1, string w2)
+        private static bool IsEditDistanceOneEqual(string w1, string w2)
         {
             var w1L = w1.Length;
-            var diffs = 0;
+            var diffs = false;
             for (var i = 0; i < w1L; i++)
             {
                 if (w1[i] == w2[i]) continue;
-                diffs++;
-                if (diffs > 1)
-                {
-                    break;
-                }
+                if (diffs) return false;
+                diffs = true;
             }
 
             return diffs;
@@ -268,17 +265,18 @@ namespace Levenshtein_cs
         //
         // We'll consider the shorter word first and the longer word second, and only allow deletion in
         // the longer word.
-        private static int EditDistanceOffByOne(string w1, string w2)
+        private static bool IsEditDistanceOneOffByOne(string w1, string w2)
         {
-            var diffs = 0;
+            var diffs = false;
             var w1I = 0;
             var w2I = 0;
 
-            while (w1I < w1.Length && diffs < 2)
+            while (w1I < w1.Length)
             {
                 if (w1[w1I] != w2[w2I])
                 {
-                    diffs++;
+                    if (diffs) return false;
+                    diffs =  true;
                     w2I++; // Same as deletion.
                 }
                 else
@@ -290,43 +288,20 @@ namespace Levenshtein_cs
 
             if (w2I < w2.Length)
             {
-                diffs++; // Deletion of the last char of w2.
+                diffs = true; // Deletion of the last char of w2.
             }
 
             return diffs;
         }
 
-        // So let's combine the two to work with words of any length in any order, because you need this
-        // logic somewhere to make use of these.
-        private static int EditDistance(string w1, string w2)
-        {
-            if (w1.Length == w2.Length)
-            {
-                return EditDistanceEqual(w1, w2);
-            }
-            else
-            {
-                var d = w2.Length - w1.Length;
-                if (d == 1)
-                {
-                    return EditDistanceOffByOne(w1, w2);
-                }
-                else if (d == -1)
-                {
-                    return EditDistanceOffByOne(w2, w1);
-                }
-            }
-
-            return 2; // more than 1!
-        }
-
         // --------------------------------------------------------------------------------------------------
         // Finding neighbors
 
-        // Build a map of where each group of words of a given length start. Used by
-        // lazyBuildNeighborMap() to skip the left side of the matrix.
-        private static int[] BuildWordLengthStarts(string[] words, int wordLengthLimit)
+        // Build a map of where each group of words of a given length start.
+        private static int[] BuildWordLengthStarts(string[] words)
         {
+            // Reserve extra entries past the longest word so we can ask for indices for the next longest word size.
+            var wordLengthLimit = words[^1].Length + 3;
             int[] a = new int[wordLengthLimit];
 
             int lastWordLength = 0;
@@ -343,7 +318,7 @@ namespace Levenshtein_cs
             // Fill in gaps, e.g., there are no words 26 letters long.
             if (a[^1] == 0)
             {
-                a[^1] = words.Length - 1;
+                a[^1] = words.Length;
             }
 
             for (int i = a.Length - 1; i > 1; i--)
@@ -360,15 +335,25 @@ namespace Levenshtein_cs
         private static List<string> FindNeighbors(string w)
         {
             var neighbors = new List<string>();
-            var end = _words.Length;
-            if (w.Length + 2 < _wordLengthStarts.Length)
+            for (var j = _wordLengthStarts[w.Length - 1]; j < _wordLengthStarts[w.Length]; j++)
             {
-                end = _wordLengthStarts[w.Length + 2];
+                if (IsEditDistanceOneOffByOne(_words[j], w)) // Shorter vs. w
+                {
+                    neighbors.Add(_words[j]);
+                }
             }
 
-            for (int j = _wordLengthStarts[w.Length - 1]; j < end; j++)
+            for (var j = _wordLengthStarts[w.Length]; j < _wordLengthStarts[w.Length + 1]; j++)
             {
-                if (EditDistance(w, _words[j]) == 1)
+                if (IsEditDistanceOneEqual(_words[j], w)) // Same length as w
+                {
+                    neighbors.Add(_words[j]);
+                }
+            }
+
+            for (var j = _wordLengthStarts[w.Length + 1]; j < _wordLengthStarts[w.Length + 2]; j++)
+            {
+                if (IsEditDistanceOneOffByOne(w, _words[j])) // w vs. longer
                 {
                     neighbors.Add(_words[j]);
                 }
