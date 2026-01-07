@@ -84,11 +84,11 @@ public class NeuralNetwork {
   private void updateMiniBatch(List<Data> miniBatch, double eta) {
     var nablaB = new Matrix2D[biases.length];
     for (int i = 0; i < nablaB.length; i++) {
-      nablaB[i] = new Matrix2D(biases[i].rows, biases[i].cols);
+      nablaB[i] = Matrix2D.zerosLike(biases[i]);
     }
     var nablaW = new Matrix2D[weights.length];
     for (int i = 0; i < nablaW.length; i++) {
-      nablaW[i] = new Matrix2D(weights[i].rows, weights[i].cols);
+      nablaW[i] = Matrix2D.zerosLike(weights[i]);
     }
 
     for (var d : miniBatch) {
@@ -110,11 +110,11 @@ public class NeuralNetwork {
   public void backprop(Matrix2D x, Matrix2D y) {
     deltaNablaB = new Matrix2D[biases.length];
     for (int i = 0; i < deltaNablaB.length; i++) {
-      deltaNablaB[i] = new Matrix2D(biases[i].rows, biases[i].cols);
+      deltaNablaB[i] = Matrix2D.zerosLike(biases[i]);
     }
     deltaNablaW = new Matrix2D[weights.length];
     for (int i = 0; i < deltaNablaW.length; i++) {
-      deltaNablaW[i] = new Matrix2D(weights[i].rows, weights[i].cols);
+      deltaNablaW[i] = Matrix2D.zerosLike(weights[i]);
     }
 
     // feedforward
@@ -167,24 +167,24 @@ public class NeuralNetwork {
   }
 
   // TODO: old eval func for learning simple polynomials
-  private int evaluateSimple(List<Data> testData) {
-    int totalCorrect = 0;
-    for (var d : testData) {
-      var p = feedForward(d.inputs);
-      double err = 0.0;
-      for (int i = 0; i < d.outputs.rows; i++) {
-        var delta = p.data[i][0] - d.outputs.data[i][0];
-        System.out.printf("%f -> %f, d=%f\n", d.inputs.data[i][0], p.data[i][0], delta);
-        err += delta * delta;
-      }
-      err /= d.inputs.rows;
-      if (err < 0.5) {
-        totalCorrect++;
-      }
-    }
-
-    return totalCorrect;
-  }
+//  private int evaluateSimple(List<Data> testData) {
+//    int totalCorrect = 0;
+//    for (var d : testData) {
+//      var p = feedForward(d.inputs);
+//      double err = 0.0;
+//      for (int i = 0; i < d.outputs.rows; i++) {
+//        var delta = p.data[i][0] - d.outputs.data[i][0];
+//        System.out.printf("%f -> %f, d=%f\n", d.inputs.data[i][0], p.data[i][0], delta);
+//        err += delta * delta;
+//      }
+//      err /= d.inputs.rows;
+//      if (err < 0.5) {
+//        totalCorrect++;
+//      }
+//    }
+//
+//    return totalCorrect;
+//  }
 
   private Matrix2D costDerivative(Matrix2D outputActivation, Matrix2D y) {
     return outputActivation.subtract(y);

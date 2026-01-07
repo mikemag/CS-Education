@@ -11,9 +11,9 @@ import java.util.function.DoubleUnaryOperator;
 
 public class Matrix2D {
 
-  double data[][];
-  int rows;
-  int cols;
+  private final double[][] data;
+  private final int rows;
+  private final int cols;
 
   public Matrix2D(int rows, int cols) {
     data = new double[rows][cols];
@@ -27,6 +27,10 @@ public class Matrix2D {
     this.cols = data[0].length;
   }
 
+  public static Matrix2D zerosLike(Matrix2D other) {
+    return new Matrix2D(other.rows, other.cols);
+  }
+
   public Matrix2D gaussianFill(Random r) {
     for (int i = 0; i < data.length; i++) {
       for (int j = 0; j < data[i].length; j++) {
@@ -34,10 +38,6 @@ public class Matrix2D {
       }
     }
     return this;
-  }
-
-  public double[][] data() {
-    return data;
   }
 
   public Matrix2D dotProduct(Matrix2D other) {
