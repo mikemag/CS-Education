@@ -1,4 +1,4 @@
-/Users/mike/dev/CS-Education/APCS/Levenshtein/Levenshtein-cs/Levenshtein-cs/bin/Debug/net7.0/Levenshtein-cs
+/Users/mike/dev/CS-Education/APCS/Levenshtein/Levenshtein-cs/Levenshtein-cs/bin/Release/net9.0/Levenshtein-cs
 Loaded 370103 words from ../../../words_alpha.txt
 
 Finding all shortest paths from 'dog' to 'dog'
@@ -18,7 +18,7 @@ Left frontier: 1, right frontier: 1
 Left frontier: 44, right frontier: 1
 Left frontier: 44, right frontier: 54
 Left frontier: 664, right frontier: 54
-Found 6 paths of length 3 for 'dog' to 'cat' in 10ms
+Found 6 paths of length 3 for 'dog' to 'cat' in 4ms
 digraph dog_cat_3{concentrate=true;
 dog -> dot -> cot -> cat
 dog -> cog -> cot -> cat
@@ -35,7 +35,7 @@ Left frontier: 44, right frontier: 12
 Left frontier: 44, right frontier: 126
 Left frontier: 664, right frontier: 126
 Left frontier: 664, right frontier: 1135
-Found 51 paths of length 5 for 'dog' to 'smart' in 137ms
+Found 51 paths of length 5 for 'dog' to 'smart' in 20ms
 digraph dog_smart_5{concentrate=true;
 dog -> dor -> mor -> mar -> mart -> smart
 dog -> dor -> mor -> mort -> mart -> smart
@@ -99,7 +99,7 @@ Left frontier: 44, right frontier: 56
 Left frontier: 664, right frontier: 56
 Left frontier: 664, right frontier: 236
 Left frontier: 664, right frontier: 1153
-Found 107 paths of length 7 for 'dog' to 'quack' in 316ms
+Found 107 paths of length 7 for 'dog' to 'quack' in 39ms
 digraph dog_quack_7{concentrate=true;
 dog -> do -> du -> qu -> qua -> quaw -> quawk -> quack
 dog -> do -> du -> qu -> qua -> quar -> quark -> quack
@@ -225,7 +225,7 @@ Left frontier: 243, right frontier: 34
 Left frontier: 243, right frontier: 55
 Left frontier: 243, right frontier: 96
 Left frontier: 243, right frontier: 246
-Found 1 paths of length 13 for 'monkey' to 'business' in 818ms
+Found 1 paths of length 13 for 'monkey' to 'business' in 124ms
 digraph monkey_business_13{concentrate=true;
 monkey -> money -> coney -> cones -> cines -> chines -> chinese -> achinese -> achiness -> ashiness -> mashiness -> mushiness -> bushiness -> business
 }
@@ -236,7 +236,7 @@ Left frontier: 1, right frontier: 1
 Left frontier: 3, right frontier: 1
 Left frontier: 3, right frontier: 2
 Left frontier: 3, right frontier: 1
-Found 0 paths of length 0 for 'vulgates' to 'gumwood' in 14ms
+Found 0 paths of length 0 for 'vulgates' to 'gumwood' in 2ms
 
 Finding all shortest paths from 'underditch' to 'toppingly'
 Left frontier: 1, right frontier: 1
@@ -295,7 +295,7 @@ Left frontier: 14, right frontier: 53
 Left frontier: 29, right frontier: 53
 Left frontier: 97, right frontier: 53
 Left frontier: 97, right frontier: 260
-Found 4 paths of length 55 for 'underditch' to 'toppingly' in 1260ms
+Found 4 paths of length 55 for 'underditch' to 'toppingly' in 174ms
 digraph underditch_toppingly_55{concentrate=true;
 underditch -> underwitch -> underwatch -> undermatch -> undermath -> undermate -> undereate -> undereat -> underbeat -> underbeam -> underseam -> undersea -> underset -> underlet -> underlit -> underlie -> underline -> underling -> underring -> unerring -> inerring -> interring -> interning -> inturning -> inurning -> inuring -> inring -> iring -> ring -> ding -> dingy -> dingly -> dyingly -> lyingly -> plyingly -> pryingly -> prayingly -> pratingly -> gratingly -> grazingly -> gazingly -> dazingly -> daringly -> duringly -> luringly -> louringly -> pouringly -> poringly -> posingly -> losingly -> lovingly -> movingly -> mopingly -> hopingly -> hoppingly -> toppingly
 underditch -> underwitch -> underwatch -> undermatch -> undermath -> undermate -> undereate -> undereat -> underbeat -> underbeam -> underseam -> undersea -> underset -> underlet -> underlit -> underlie -> underline -> underling -> underring -> unerring -> inerring -> interring -> interning -> inturning -> inurning -> inuring -> inring -> iring -> ring -> ding -> dingy -> dingly -> dyingly -> lyingly -> plyingly -> playingly -> prayingly -> pratingly -> gratingly -> grazingly -> gazingly -> dazingly -> daringly -> duringly -> luringly -> louringly -> pouringly -> poringly -> posingly -> losingly -> lovingly -> movingly -> mopingly -> hopingly -> hoppingly -> toppingly
@@ -336,7 +336,7 @@ Left frontier: 138, right frontier: 722
 Left frontier: 578, right frontier: 722
 Left frontier: 3213, right frontier: 722
 Left frontier: 3213, right frontier: 3664
-Found 68244 paths of length 31 for 'headwards' to 'rifflers' in 2402ms
+Found 68244 paths of length 31 for 'headwards' to 'rifflers' in 369ms
 digraph headwards_rifflers_31{concentrate=true;
 headwards -> headward -> headword -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> inworn -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riflers -> rifflers
 headwards -> headward -> headword -> headwork -> leadwork -> leadwort -> meadwort -> madwort -> maywort -> waywort -> wayworn -> warworn -> warwork -> warworks -> tarworks -> tanworks -> tinworks -> inworks -> inwork -> inworn -> unworn -> unwon -> undon -> unden -> under -> ender -> eider -> rider -> rifer -> rifler -> riffler -> rifflers
