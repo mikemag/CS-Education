@@ -1,5 +1,3 @@
-using System.Runtime.CompilerServices;
-
 namespace NN_MNIST;
 
 using System;
@@ -7,7 +5,6 @@ using System;
 public class Matrix2D
 {
     private readonly double[,] _values;
-    private CommunityToolkit.HighPerformance.Memory2D<double> v;
 
     public int Rows { get; }
     public int Cols { get; }
@@ -18,7 +15,6 @@ public class Matrix2D
         Rows = values.GetLength(0);
         Cols = values.GetLength(1);
         _values = values;
-        v = _values;
     }
 
     // Constructor from row and column count (initialized to zeros)
@@ -27,7 +23,6 @@ public class Matrix2D
         Rows = rows;
         Cols = cols;
         _values = new double[rows, cols];
-        v = _values;
     }
 
     // Dot product
@@ -87,74 +82,6 @@ public class Matrix2D
                     // Store result without bounds checks
                     *(resultRowStart + j) = sum;
                 }
-            }
-        }
-
-        return new Matrix2D(result);
-    }
-
-    public Matrix2D Dot1(Matrix2D other)
-    {
-        var rows = _values.GetLength(0);
-        var cols = _values.GetLength(1);
-        var otherRows = other._values.GetLength(0);
-        var otherCols = other._values.GetLength(1);
-
-        if (cols != otherRows)
-            throw new InvalidOperationException("Invalid matrix dimensions for dot product.");
-
-        var result = new double[rows, otherCols];
-
-        for (int i = 0; i < rows; i++) // rows
-        {
-            for (int j = 0; j < otherCols; j++) // other.cols
-            {
-                double sum = 0;
-                for (int k = 0; k < cols && k < otherRows; k++) // cols
-                {
-                    ref double a = ref Unsafe.Add(ref _values[i, 0], k);  // _values[i, k]
-                    ref double b = ref Unsafe.Add(ref other._values[k, 0], j);  // other._values[k, j]
-                    sum += a * b;
-                    // sum += _values[i, k] * other._values[k, j];
-                }
-
-                result[i, j] = sum;
-            }
-        }
-
-        return new Matrix2D(result);
-    }
-
-    
-    public Matrix2D Dot3(Matrix2D other)
-    {
-        var ov = other.v;
-        // var rows = v.Height;
-        // var cols = v.Width;
-        // var otherRows = ov.Height;
-        // var otherCols = ov.Width;
-
-        var vv = v.Span;
-        var ovv = ov.Span;
-
-        if (Cols != other.Rows)
-            throw new InvalidOperationException("Invalid matrix dimensions for dot product.");
-
-        var result = new double[Rows, other.Cols];
-        CommunityToolkit.HighPerformance.Memory2D<double> rv = result;
-        var rvv = rv.Span;
-
-        for (int i = 0; i < vv.Height; i++) // rows
-        {
-            for (int j = 0; j < ovv.Width; j++) // other.cols
-            {
-                double sum = 0;
-                for (int k = 0; k < vv.Width; k++) // cols
-                {
-                    sum += vv[i, k] * ovv[k, j];
-                }
-
-                rvv[i, j] = sum;
             }
         }
 
