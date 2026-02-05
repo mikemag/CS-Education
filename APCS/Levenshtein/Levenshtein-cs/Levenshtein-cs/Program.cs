@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Text;
 
 namespace Levenshtein_cs
 {
@@ -202,6 +203,8 @@ namespace Levenshtein_cs
 
         private static string[] _words = null!;
         private static int[] _wordLengthStarts = null!;
+        private static HashSet<string> _wordsSet = null;
+        private static Dictionary<string, List<string>> _deleteIndex = null;
 
         public static void Main(string[] args)
         {
@@ -215,6 +218,10 @@ namespace Levenshtein_cs
 
             // Find where each word length starts in our dictionary. Now we can quickly find, say, words of length 4.
             _wordLengthStarts = BuildWordLengthStarts(_words);
+
+            // These are for FindNeighborsBuildAndCheck() and FindNeighborsDel()
+            // _wordsSet = new HashSet<string>(_words, StringComparer.Ordinal);
+            // BuildDelIndex();
 
             bool correct = true;
             correct &= DoPair("dog", "dog", 0, 0);
@@ -276,7 +283,7 @@ namespace Levenshtein_cs
                 if (w1[w1I] != w2[w2I])
                 {
                     if (diffs) return false;
-                    diffs =  true;
+                    diffs = true;
                     w2I++; // Same as deletion.
                 }
                 else
@@ -295,7 +302,16 @@ namespace Levenshtein_cs
         }
 
         // --------------------------------------------------------------------------------------------------
-        // Finding neighbors
+        // Finding neighbors by checking all words close in size
+        //
+        // This is a straightforward impl of what most people think of first: look at the words in the dictionary
+        // and find the ones which are edit distance one away from the given word. Only look at words the same length,
+        // or one more or less.
+        //
+        // This feels sensible, since of all the possible strings of, say, 5 letters only some of them are real words.
+        // But it turns out this is quite slow, taking ~93s to build the entire word map.
+        //
+        // This is the default method in this example, though, since it's the more common method and easy to understand.
 
         // Build a map of where each group of words of a given length start.
         private static int[] BuildWordLengthStarts(string[] words)
@@ -358,6 +374,131 @@ namespace Levenshtein_cs
                     neighbors.Add(_words[j]);
                 }
             }
+
+            return neighbors;
+        }
+
+
+        // --------------------------------------------------------------------------------------------------
+        // Neighbor finding by building potential words and checking
+        //
+        // This seems crazy, since we just build every possible one-away string (not word, string) then check 
+        // to see if we built a word, then call that a neighbor. It's actually a lot better than one would imagine,
+        // since the number of built strings isn't really that large for each word, and hash lookup is fast. It does
+        // suffer from a ton of temporary allocation, though.
+        //
+        // 5.7s to build the entire neighbor map
+
+        private static HashSet<string> FindNeighborsBuildAndCheck(string w)
+        {
+            var neighbors = new HashSet<string>(StringComparer.Ordinal);
+            var n = w.Length;
+
+            void TryAdd(StringBuilder sb)
+            {
+                var s = sb.ToString();
+                if (_wordsSet.Contains(s))
+                    neighbors.Add(s);
+            }
+
+            // Substitution
+            {
+                var sb = new StringBuilder(w, n);
+                for (var i = 0; i < n; i++)
+                {
+                    var original = sb[i];
+                    for (var c = 'a'; c <= 'z'; c++)
+                    {
+                        if (c == original) continue;
+
+                        sb[i] = c;
+                        TryAdd(sb);
+                    }
+
+                    sb[i] = original;
+                }
+            }
+
+            // Insertion
+            {
+                var sb = new StringBuilder(w, n + 1);
+                for (var i = 0; i <= n; i++)
+                {
+                    sb.Insert(i, '\0'); // placeholder we overwrite
+                    for (var c = 'a'; c <= 'z'; c++)
+                    {
+                        sb[i] = c;
+                        TryAdd(sb);
+                    }
+
+                    sb.Remove(i, 1);
+                }
+            }
+
+            // Deletion
+            {
+                var sb = new StringBuilder(w, n);
+                for (var i = 0; i < n; i++)
+                {
+                    var removed = sb[i];
+                    sb.Remove(i, 1);
+
+                    TryAdd(sb);
+
+                    sb.Insert(i, removed);
+                }
+            }
+
+            neighbors.Remove(w);
+            return neighbors;
+        }
+
+
+        // --------------------------------------------------------------------------------------------------
+        // Deletion-only neighbor finding, inspired by SymSpell (https://github.com/wolfgarbe/SymSpell)
+        //
+        // Surprisingly fast: 1.4s to build the entire neighbor map (BuildIndex + FindNeighborsDel)
+        // Note that allocation here is pretty well minimized vs FindNeighborsBuildAndCheck.
+
+        private static void BuildDelIndex()
+        {
+            _deleteIndex = new Dictionary<string, List<string>>(StringComparer.Ordinal);
+            foreach (var w in _words)
+            {
+                for (var i = 0; i < w.Length; i++)
+                {
+                    var key = string.Concat(w.AsSpan(0, i), w.AsSpan(i + 1)); // one allocation per key
+                    if (!_deleteIndex.TryGetValue(key, out var list))
+                        _deleteIndex[key] = list = new List<string>(1);
+                    list.Add(w);
+                }
+            }
+        }
+
+        private static HashSet<string> FindNeighborsDel(string w)
+        {
+            var neighbors = new HashSet<string>(StringComparer.Ordinal);
+
+            for (var i = 0; i < w.Length; i++)
+            {
+                var del = string.Concat(w.AsSpan(0, i), w.AsSpan(i + 1));
+
+                // Deletion: w with one char removed is a neighbor if it’s a word
+                if (_wordsSet.Contains(del)) neighbors.Add(del);
+
+                // Substitution: candidates via delete keys from w can be subs if they're one away
+                // nb: dog --> og, org --> og, but dog and org aren't edit distance one!
+                if (_deleteIndex.TryGetValue(del, out var cands))
+                    foreach (var cand in cands)
+                        if (cand != w && IsEditDistanceOneEqual(w, cand))
+                            neighbors.Add(cand);
+            }
+
+            // Insertion: everything that reduces to this word is one away
+            if (_deleteIndex.TryGetValue(w, out var cands2))
+                foreach (var cand in cands2)
+                    if (cand != w)
+                        neighbors.Add(cand);
 
             return neighbors;
         }
