@@ -68,7 +68,7 @@ namespace Levenshtein_cs
 
             foreach (var item in frontier)
             {
-                foreach (var n in FindNeighbors(item.Key))
+                foreach (var n in FindNeighborsDel(item.Key))
                 {
                     if (explored.ContainsKey(n)) continue;
 
@@ -164,7 +164,7 @@ namespace Levenshtein_cs
 
         private static bool DoPair(string w1, string w2, int expectedLength, int expectedPathCount)
         {
-            Console.WriteLine($"Finding all shortest paths from '{w1}' to '{w2}'");
+            Console.WriteLine($"\nFinding all shortest paths from '{w1}' to '{w2}'");
             var start = Stopwatch.GetTimestamp();
             var (length, paths) = FindPaths(w1, w2);
             var end = Stopwatch.GetTimestamp();
@@ -196,8 +196,7 @@ namespace Levenshtein_cs
 
                 Console.WriteLine("}");
             }
-
-            Console.WriteLine();
+            
             return correct;
         }
 
@@ -214,14 +213,14 @@ namespace Levenshtein_cs
             Console.WriteLine("Loaded {0} words from {1}\n", _words.Length, dictionaryFilename);
 
             // Sort the dictionary by word length
-            Array.Sort(_words, (x, y) => x.Length.CompareTo(y.Length));
+            TimeIt("Sort word dict", () => Array.Sort(_words, (x, y) => x.Length.CompareTo(y.Length)));
 
             // Find where each word length starts in our dictionary. Now we can quickly find, say, words of length 4.
-            _wordLengthStarts = BuildWordLengthStarts(_words);
+            TimeIt("Find word length starts", () => _wordLengthStarts = BuildWordLengthStarts(_words));
 
             // These are for FindNeighborsBuildAndCheck() and FindNeighborsDel()
-            // _wordsSet = new HashSet<string>(_words, StringComparer.Ordinal);
-            // BuildDelIndex();
+            TimeIt("Build a hash of all words", () => _wordsSet = new HashSet<string>(_words, StringComparer.Ordinal));
+            TimeIt("Build the del index", BuildDelIndex);
 
             bool correct = true;
             correct &= DoPair("dog", "dog", 0, 0);
@@ -502,6 +501,14 @@ namespace Levenshtein_cs
                         neighbors.Add(cand);
 
             return neighbors;
+        }
+
+        private static void TimeIt(string label, Action action)
+        {
+            var start = Stopwatch.GetTimestamp();
+            action();
+            var end = Stopwatch.GetTimestamp();
+            Console.WriteLine($"{label} in {(end - start) / (Stopwatch.Frequency / 1000)}ms");
         }
     }
 }
