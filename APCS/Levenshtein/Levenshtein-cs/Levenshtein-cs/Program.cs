@@ -229,6 +229,7 @@ namespace Levenshtein_cs
             correct &= DoPair("dog", "cat", 3, 6);
             correct &= DoPair("dog", "smart", 5, 51);
             correct &= DoPair("dog", "quack", 7, 107);
+            correct &= DoPair("dog", "puppy", 6, 38);
             correct &= DoPair("monkey", "business", 13, 1);
             correct &= DoPair("vulgates", "gumwood", 0, 0);
             correct &= DoPair("underditch", "toppingly", 55, 4);
