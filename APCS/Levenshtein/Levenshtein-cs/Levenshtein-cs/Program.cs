@@ -171,7 +171,7 @@ namespace Levenshtein_cs
 
             bool correct = true;
             Console.WriteLine(
-                $"Found {paths.Count} paths of length {length} for '{w1}' to '{w2}' in {(end - start) / (Stopwatch.Frequency / 1000)}ms");
+                $"Found {paths.Count} paths of length {length} for '{w1}' to '{w2}' in {(end - start) / (Stopwatch.Frequency / 1000.0):f4}ms");
             if (length != expectedLength || paths.Count != expectedPathCount)
             {
                 correct = false;
@@ -196,7 +196,7 @@ namespace Levenshtein_cs
 
                 Console.WriteLine("}");
             }
-            
+
             return correct;
         }
 
@@ -508,7 +508,7 @@ namespace Levenshtein_cs
             var start = Stopwatch.GetTimestamp();
             action();
             var end = Stopwatch.GetTimestamp();
-            Console.WriteLine($"{label} in {(end - start) / (Stopwatch.Frequency / 1000)}ms");
+            Console.WriteLine($"{label} in {(end - start) / (Stopwatch.Frequency / 1000.0):f4}ms");
         }
     }
 }
