@@ -1,0 +1,11 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run GPU and CPU sample",
+      "type": "dotnet",
+      "request": "launch",
+      "projectPath": "${workspaceFolder}/ILGPU_Verify.csproj"
+    }
+  ]
+}

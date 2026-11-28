@@ -1,0 +1,39 @@
+<Project>
+  <!-- Each ILGPUC backend emits the same wrapper names. Compile the one kernel
+       per backend, then place the generated types in separate namespaces. -->
+  <ItemGroup>
+    <ProbeBackend Include="CPU;Metal;Cuda;OpenCL" />
+  </ItemGroup>
+  <Target Name="EmitProbe" BeforeTargets="CoreCompile" DependsOnTargets="ResolveReferences"
+          Inputs="Kernel.cs;$(MSBuildThisFileFullPath);tooling/PrepareLauncher.cs;tooling/Stamp.ptx;tooling/Stamp.cu;$(PkgILGPUC)/tools/net10.0/ILGPUC.dll"
+          Outputs="$(IntermediateOutputPath)probe/%(ProbeBackend.Identity)/ready">
+    <PropertyGroup>
+      <Backend>%(ProbeBackend.Identity)</Backend>
+      <Work>$(IntermediateOutputPath)probe/$(Backend)</Work>
+      <LanguageOption Condition="'$(Backend)' == 'OpenCL'">--opencl-version 1.2</LanguageOption>
+    </PropertyGroup>
+    <RemoveDir Directories="$(Work)" />
+    <MakeDir Directories="$(Work)" />
+    <ItemGroup>
+      <Arg Include="build;--compile-items;&quot;$(MSBuildProjectDirectory)/Kernel.cs&quot;;--references" />
+      <Arg Include="@(ReferencePath->'&quot;%(FullPath)&quot;')" />
+      <Arg Include="--output-dir;&quot;$(Work)&quot;;--project-dir;&quot;$(MSBuildProjectDirectory)&quot;;-b;$(Backend)" />
+    </ItemGroup>
+    <WriteLinesToFile File="$(Work)/args.rsp" Lines="@(Arg)" Overwrite="true" />
+    <Exec Command="dotnet &quot;$(PkgILGPUC)/tools/net10.0/ILGPUC.dll&quot; @&quot;$(Work)/args.rsp&quot; $(LanguageOption)" />
+    <PrepareLauncher DirectoryPath="$(Work)" Backend="$(Backend)" Assets="$(MSBuildThisFileDirectory)" />
+    <Touch Files="$(Work)/ready" AlwaysCreate="true" />
+  </Target>
+  <Target Name="IncludeProbe" BeforeTargets="CoreCompile" DependsOnTargets="EmitProbe">
+    <ItemGroup>
+      <Compile Remove="Kernel.cs" />
+      <Compile Include="$(IntermediateOutputPath)probe/*/compiled/*.cs" />
+    </ItemGroup>
+  </Target>
+  <UsingTask TaskName="PrepareLauncher" TaskFactory="RoslynCodeTaskFactory"
+             AssemblyFile="$(MSBuildToolsPath)/Microsoft.Build.Tasks.Core.dll">
+    <Task>
+      <Code Type="Class" Language="cs" Source="$(MSBuildThisFileDirectory)PrepareLauncher.cs" />
+    </Task>
+  </UsingTask>
+</Project>

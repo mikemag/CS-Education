@@ -1,0 +1,12 @@
+# Generated .NET output and packaged downloads
+[Bb]in/
+[Oo]bj/
+[Bb]uild/
+
+# Local IDE settings
+.idea/
+.vs/
+*.user
+*.suo
+*.DotSettings.user
+.DS_Store
