@@ -1,5 +1,7 @@
 # Does ILGPU run on my GPU?
 
+**[Download the ILGPU_Verify student ZIP](https://github.com/mikemag/CS-Education/releases/download/ilgpu-verify-v1/ILGPU_Verify.zip)**
+
 Install the .NET 10 SDK. If you downloaded the ZIP, extract it first. Open a terminal in the folder containing `ILGPU_Verify.csproj` and run
 
 ```sh
